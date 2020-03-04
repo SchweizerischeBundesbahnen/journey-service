@@ -32,12 +32,12 @@ In the first section we ask you to provide **electronic contact information**, s
 In the second section we need detailed **information about your application type** (for e.g. backend, browser or mobile App) and what part of the Journey-Service contract you are interested in (see section 2.1 of the questionnaire) and what kind of **use cases** you are going to implement (see section 2.4 questionnaire).
 
 In the third section we need **technical information**. We need this information to assess the integration-impacts of your application related to Journey-Service or its underlying architecture (see section 3.1 of the questionnaire).
-To gain a better understanding on the capabilities provided by Journey-Service, please consult the swagger-apidoc for detailed information about request parameters or response models (see https://developer.sbb.ch/apis/33/journey-service/documentation) and select your desired APIs (see section 3.2). 
+To gain a better understanding on the capabilities provided by Journey-Service, please consult the swagger-apidoc for detailed information about request parameters or response models (see https://developer.sbb.ch/apis/journey-service/documentation) and select your desired APIs (see section 3.2). 
 
 ### Step 2: Signing-up on the specific usage plan on the developer site 
 
 If you are ready to sign-up, please visite the site developer-sbb for [PROD](developer.sbb.ch) or [INT](developer-int.sbb.ch) to sign-up for the integration. 
-See page https://developer.sbb.ch/apis/33/journey-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
+See page https://developer.sbb.ch/apisjourney-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
 Note: integrate the INT-environment first and afterwards the PROD environment.  
 
 For detailed information on getting around on the developer-site, please read the available information in section **Finding your way around on the developer site***  carefully. 
@@ -56,7 +56,7 @@ Please note that you need to apply separately for each of your journey-planning 
 Use Postman or the like to get a bearer token and request a query (/v2/info is any easy API without request parameters)
 
 ## Technical Details 
-A good start is our Developer-Manual (see https://confluence-ext.sbb.ch/display/JAD/J-S%3A%3AB2C+Developer+Manual).
+A good start is our Developer-Manual (see https://github.com/SchweizerischeBundesbahnen/journey-service-b2c/blob/master/Developer-Manual.md).
 
 # Operation
 ## RSS-feed
