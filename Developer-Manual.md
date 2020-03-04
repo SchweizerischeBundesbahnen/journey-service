@@ -1,4 +1,6 @@
 
+**SBB internal users:** temporarily use https://confluence-ext.sbb.ch/display/JAD/J-S%3A%3AB2C+Developer+Manual for better readablibity (FPLJS-369 work in progress)
+
 # Journey-Service::B2C Developer Manual
 Support: journey-service@sbb.ch
 
