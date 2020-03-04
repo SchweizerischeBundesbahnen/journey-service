@@ -20,12 +20,16 @@ The registration consists of *two steps*:
 * **register at the API-Management (2 separate credentials: https://developer.sbb.ch/home PRODuction, https://developer-int.sbb.ch/home INTegration)**
 
 ## Step 1: Completion of the questionaire
-==**You can find the Questionnaire [here](https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Operation%20Management/Consumer-Mgmt/Questionnaire-ConsumerRegistration.docx?d=w79205a803e234d4ca190dbed259ed1ed&csf=1&e=BXEkdk).**== 
+==**You can find the Questionnaire [here](https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Operation%20Management/Consumer-Mgmt/Questionnaire-Consumer-Registration.docx?d=w428d517cb852420085a4744662ff7b10&csf=1&e=Plsp0W).**== 
  
 The questionnaire contains three sections:
 1. company/personal information (generally we do not grant access to private persons (such as trial users, students,..) or non-SBB related companies,..)
-2. journey-planner use cases by your application. Please think about a unique application-name, to be distinguished by SBB devOps team ("My Journey-Service-Client" would be a bad sample).
+2. journey-planner use cases by your application. Please think about a unique application-name, to be distinguished by SBB devOps team ("My Journey-Service-Client" would be a bad example).
 3. technical information (non functional requirements)
+
+> We recommend the following pages for private persons, where you can get transportation data:  https://opentransportdata.swiss/de/dataset or https://transport.opendata.ch/ . In most cases these pages are more suitable for your applications.
+> 
+
 
 In the first section we ask you to provide **electronic contact information**, such as telephone number and e-mail to contact (see section 1.3 of the questionnaire) to get in touch with your officials or devOps members. In addition we need a general mail (e.g. team mailbox) to which we can send our release notes, which will provide you with an overview of new functionalities (see section 1.4 of the questionnaire) or address breaking  changes.
 
