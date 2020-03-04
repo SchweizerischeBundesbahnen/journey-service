@@ -4,47 +4,6 @@
 # Journey-Service::B2C Developer Manual
 Support: journey-service@sbb.ch
 
-
-Abstract
-URL
-Backward compatibility
-URL versioning
-Deprecated stuff
-Testing your APIM access
-journey-service-client
-API Doc
-Choosing the right service definition
-End-user consistency (de:KI)
-Request
-Response
-Error-handling
-/v2/*
-Error body
-200 for emptyList, 404 for not found Object?
-400
-Business data aspects
-Business logic aspects
-*Formatted fields
-Realtime analysis
-Most typical use case
-Info API
-/v2/info (GET)
-/v2/traffic
-Locations API
-/v2/locations (GET)
-Journey-Planning services
-Stationboard API
-/v2/departures (GET)
-/v2/arrivals (GET)
-Trips API
-/v2/trips (GET)
-/v2/trips/{reconstructionContext} (GET)
-Train-Formation
-/v2/trainFormation/{reconstructionContext} (GET)
-Routes API
-/v2/routes/{journeyReference} (GET)
-Reports API
-
 ## Abstract
 The Journey-Service is a RESTful facade abstracting public transportation routing and planning for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, FOS, PLABE, OccupancyPrognosis.
 
@@ -281,18 +240,18 @@ Some properties resp. their value-expressions might be translated according to r
 * Station-Names in request accept all 4 languages, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
 * Note::value is sometimes translated by SBB P Data-Mgmt
 * Translations with a standard and short-translation:
-** TransportProductV2::trackTranslation as a SBB-KI standard text
-** TransportProductV2::trackTranslationShort with an appropriate abbreviation if available
+ * TransportProductV2::trackTranslation as a SBB-KI standard text
+ * TransportProductV2::trackTranslationShort with an appropriate abbreviation if available
 * other texts are translated by SBB BR, like StopV2::*DelayText
 
 J-S uses some Enum's which relate typically to business defined values, for e.g.:
 * TransportProductV2::category
-** relates to SBB P Data-Mgmt (config-file "Zugart") and refers to 10 classes from 0..9
+ * relates to SBB P Data-Mgmt (config-file "Zugart") and refers to 10 classes from 0..9
 
 
 There are also specific extensions for developer convenience, such as:
 * TransportProductV2::vehicleIconName showing the appropriate name in SBB Corporate-Identity resources (though the resource itself must be allocated by the consumer)
-** the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType or uses the J-A given short cut to ::vehicleIconName
+ * the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType or uses the J-A given short cut to ::vehicleIconName
 
 #### Business logic aspects
 ##### Formatted fields
@@ -306,11 +265,11 @@ StopV2 contains pre-calculated fields to inform about relevant realtime status o
 * ::boardingAlightingStatus
 * ::stopStatus
 * About any *Rt properties:
-** Ideally these fields are always null, means transport organisations are operating as planned
-** If any vehicle (TransportProduct) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
-** Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
-** *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
-** If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
+ * Ideally these fields are always null, means transport organisations are operating as planned
+ * If any vehicle (TransportProduct) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
+ * Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
+ * *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
+ * If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
 
 Remark:
 * based on /display/FAHRPLAN/Haltestellen-Status
@@ -363,12 +322,12 @@ Concepts:
 * All journeys rely on a yearly plan (de:Soll-Fahrplan).
 * However in reality not all transport-products may be operated in time, therefore realtime changes happen to the plan, see J-A: Trip-Analyse
 * Trip's are tailored traveling routes for a specific passenger. 
-** Each Leg means a separate transport-product (by means passengers need to change at the ending Stop of a Leg).
-** The underlying system provides a default change time when passengers need to switch transport-products. However these values may be customized as well.
+ * Each Leg means a separate transport-product (by means passengers need to change at the ending Stop of a Leg).
+ * The underlying system provides a default change time when passengers need to switch transport-products. However these values may be customized as well.
 * JourneyDetails cover the whole scope of a single transport-product. They might be identified by the JourneyReference (which is not a physical vehicle-ID).
 * Time aspects:
-** The underlying system handles timetables in Swiss timezone "Europe/Zurich". 
-** J-S supports other timezones in requests, however they will be transformed to CH local time and replied in UTC. 
+ * The underlying system handles timetables in Swiss timezone "Europe/Zurich". 
+ * J-S supports other timezones in requests, however they will be transformed to CH local time and replied in UTC. 
 Seconds are irrelevant.
 
 #### Stationboard API
@@ -402,19 +361,19 @@ de:Verbindungen
 
 #### /v2/trips (GET)
 Für "stopBehaviour" sind folgende Werte möglich
-- "ORIGIN_DESTINATION_ONLY" -> liefert nur Abgangs- und Ankunftsort
-- "REAL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte wo man tatsächlich ein - und aussteigen kann
-- "ALL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte inkl. den virtuellen wie "Bahn-2000-Strecke"
+* "ORIGIN_DESTINATION_ONLY" -> liefert nur Abgangs- und Ankunftsort
+* "REAL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte wo man tatsächlich ein - und aussteigen kann
+* "ALL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte inkl. den virtuellen wie "Bahn-2000-Strecke"
  
 Auf Station's und Leg's kann es Note's geben die bspw. auf Leg::attributes und Leg::infos resultieren.
-- für ATTRIBUTE kann eingeschränkt werden (Use Case Casa), z.B. "attributes":["GROUPS_ADMITTED"]
-- für INFOTEXTS kann zwar nicht aktiv gesucht werden, aber im nachhinein die Antwort gefiltert werden (Use Case Kabenas), z.B. "infos":["RN"]
+* für ATTRIBUTE kann eingeschränkt werden (Use Case Casa), z.B. "attributes":["GROUPS_ADMITTED"]
+* für INFOTEXTS kann zwar nicht aktiv gesucht werden, aber im nachhinein die Antwort gefiltert werden (Use Case Kabenas), z.B. "infos":["RN"]
  
 Falls nach Barrierefreiheit eingeschränkt werden soll (Achtung: es gibt hier eine Hierarchie, d.h. die Codes sind in dem Sinne nicht als gleichwertig zu verstehen):
-- "barrierFree": "ALL"
-- "barrierFree": "BOARDING_ALIGHTING_SELF"
-- "barrierFree": "BOARDING_ALIGHTING_BY_CREW"
-- "barrierFree": "BOARDING_ALIGHTING_BY_NOTIFICATION"
+* "barrierFree": "ALL"
+* "barrierFree": "BOARDING_ALIGHTING_SELF"
+* "barrierFree": "BOARDING_ALIGHTING_BY_CREW"
+* "barrierFree": "BOARDING_ALIGHTING_BY_NOTIFICATION"
  
  
 Fall vorwärts oder rückwärts scrollen:
