@@ -23,45 +23,19 @@ Journey-Service logic and backend interfering is heavily based on the (SBB inter
 If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
 ## URL
-We currently support 4 Openshift (OTC) environments:
+We currently support 3 Openshift (OTC) environments for testing and operation:
 * (DEV J-S Team only)
-* TEST via https://developer-int.sbb.ch/
-* INT via https://developer-int.sbb.ch/
-* PROD via https://developer.sbb.ch/
+* by APIM 'Customer information -> Journey-Service'
+ * TEST via APIM https://developer-int.sbb.ch/ (early tests of newest features)
+ * INT via APIM https://developer-int.sbb.ch/ (solid state, release-candidates)
+ * PROD via APIM https://developer.sbb.ch/ (production state, well scaled and hopefully stable)
 
 Important:
+* all consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
+* **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
-==Data per environment is completely detached from other environment==, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 
-
-J-S::B2C
-
-DEV:
-
-https://ki-journey-service-dev.app.ose.sbb-cloud.net/swagger-ui.html
-
-TEST:
-
-https://ki-journey-service-test.app.ose.sbb-cloud.net/swagger-ui.html#/sbb-trip-controller/getTripsUsingPOST
-
-INT:
-
-neutrale Route: https://ki-journey-service-int.app.ose.sbb-cloud.net/swagger-ui.html#/
-green: https://ki-journey-service-int-green.app.ose.sbb-cloud.net/swagger-ui.html#/
-blue: https://ki-journey-service-int-blue.app.ose.sbb-cloud.net/swagger-ui.html#/
-PROD:
-
-neutrale Route: https://ki-journey-service.app.ose.sbb-cloud.net/swagger-ui.html
-green: https://ki-journey-service-green.app.ose.sbb-cloud.net/swagger-ui.html
-blue: https://ki-journey-service-blue.app.ose.sbb-cloud.net/swagger-ui.html
-DEV: <N.A>
-
-TEST: <N.A>
-
-INT: https://sso-int.sbb.ch resp. https://developer-int.sbb.ch/api/76/journey-service
-
-PROD: https://sso.sbb.ch resp. https://sso.sbb.chhttps://developer.sbb.ch/api/33/journey-service
 
 
 
