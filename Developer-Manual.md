@@ -35,17 +35,17 @@ Important:
 We have different concepts to maintain backward compatibility:
 
 #### URL versioning
-All **/b2c/v2/* APIs -without- `INCUBATOR` ** in their URL may be considered as **stable**. Any breaking changes will be signaled by our Release-Manager (to the e-Mail you registered at APIM registration process)!
+All `/b2c/v2/*` APIs **without** `INCUBATOR` in their URL may be considered as **stable**. Any breaking changes will be signaled by our Release-Manager (to the e-Mail you registered at APIM registration process)!
 
 Any **APIs with `/b2c/v2/INCUBATOR/*` in their URL are highly @Experimental and might be changed on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with journey-service@sbb.ch) .
 
 #### Deprecated stuff
-Any APIs to be removed soon, will have a `@Deprecated annotation` and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
+Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
 
 Some **properties in response models might have a "description" like "@Deprecated use ... instead"**. Unfortunately such marks are not optically supported by Swagger and you have to go through each model-property description carefully.
 
 Important:
-* The generated journey-service-client (see below) does not show any @Deprecated fields, therefore you have to check the Swagger Doc carefully for your cases.
+* The **generated journey-service-client (see below) does not show any `@Deprecated` fields**, therefore you have to check the Swagger Doc carefully for your cases.
 * Such deprecated code will be removed in future versions finally
 
 ### Testing your APIM access
@@ -55,10 +55,11 @@ Please check our [Testing hints](Test%20your%20access.pdf)
 
 ## journey-service-client
 Be aware that the J-S::B2C Team provides a **generated  response-model and an ApiClient** to perform requests for convenience reasons:
-* [SBB Bitbucket](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
+* SBB Bitbucket [journey-service-client](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
 * A [showcase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client) demonstrates its usage with minimal developing effort.
 
 SBB Artifactory dependency:
+
     <dependency>
         <groupId>ch.sbb.ki.journey-service</groupId>
         <artifactId>journey-service-client</artifactId>
@@ -66,12 +67,10 @@ SBB Artifactory dependency:
     </dependency>
 
 
-However, if the provided client does not work for you (for e.g. wrong Spring/SpringFox/Swagger-Annotation versions, ..) you may generate it yourself according to the json-definitions related to the given contract:
+However, if the provided client does not work for you (for e.g. wrong Spring/SpringFox/Swagger-Annotation versions, ..) you may generate it yourself according to the [json-definitions](https://ki-journey-service.app.idefix.otc.sbb.ch/v2/api-docs?group=journey-service-api-2.0) related to the given contract:
 1. Create a [TestCase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-boot/src/test/java/ch/sbb/ki/journeyservice/web/SwaggerDefinitionModelGeneratorTest.java) instantiating J-S and download the swagger-json-definition, for e.g. like 
 2. Generate client (we use `swagger-codegen-maven-plugin` in [pom.xml](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/pom.xml) for e.g.)
-3. Be aware of known bugs we fixed:
-3.1 [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21)
-3.2 [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
+3. Be aware of known bugs we fixed: [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21), [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
 ## API Doc
 All Services (short abstract, parameters, models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 APIs in most cases.
