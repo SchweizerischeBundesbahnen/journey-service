@@ -5,28 +5,33 @@
 Support: journey-service@sbb.ch
 
 ## Abstract
-The Journey-Service is a RESTful facade abstracting public transportation routing and planning for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, FOS, PLABE, OccupancyPrognosis.
+The Journey-Service is a RESTful facade abstracting **public transportation routing and planning** for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, FOS, PLABE, OccupancyPrognosis.
 
-The main use cases are:
+The main ==use cases== are:
 
-Finding locations, such as Stations (trains, busses, tramways, ..), Addresses and Points of Interest (POI).
-Finding concrete journeys (Trip's) for a traveling passenger
-Finding concrete Transport-Product journeys
-Providing details about Trainformations, sections, wagons and their occupancy
-A set of implemented Business Rules (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
+* Finding locations, such as Stations (trains, busses, tramways, ..), Addresses and Points of Interest (POI).
+* Finding concrete journeys (Trip's) for a traveling passenger
+* Finding concrete Transport-Product journeys
+* Providing details about Trainformations, sections, wagons and their occupancy
 
-Lots of convenient utilities provide easy interpretable models.
+A set of implemented **Business Rules** (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
 
-Journey-Service logic and backend interfering is heavily based on the library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
+Lots of convenient utilities provide **easy interpretable models**.
 
-If you are new to journey-planning with SBB, the OpenJourneyPlanner Standard might give you a broader picture, what commonly is understood by this context.
+Journey-Service logic and backend interfering is heavily based on the (SBB internal) library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
+
+If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
 ## URL
-We currently support 4 environments, where DEV and TEST are available for SBB internal consumers only. INT and PROD are accessable by APIM for www consumers as well.
+We currently support 4 Openshift (OTC) environments:
+* (DEV J-S Team only)
+* TEST via https://developer-int.sbb.ch/
+* INT via https://developer-int.sbb.ch/
+* PROD via https://developer.sbb.ch/
 
 Important:
 
-Data per environment is completely detached from other environment, by means results on DEV, TEST, INT and PROD may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore not comparable among 2 environments.
+==Data per environment is completely detached from other environment==, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 
 
@@ -125,6 +130,7 @@ Remark:
 
 if accessing by APIM, some APIs may not be visible or accessable, especially those who are meant for Intranet SBB users only.
 
+![Version JSON-definition](J-S_version.png)
 
 API-Path	
 /b2c/v2/* 
