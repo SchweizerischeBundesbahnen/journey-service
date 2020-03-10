@@ -22,50 +22,43 @@ Journey-Service logic and backend interfering is heavily based on the (SBB inter
 If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
 ## URL
-We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM 'Customer information -> Journey-Service'**
+We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM `Customer information -> Journey-Service`**
  * TEST via APIM https://developer-int.sbb.ch/ (early tests of newest features)
  * INT via APIM https://developer-int.sbb.ch/ (solid state, release-candidates)
  * PROD via APIM https://developer.sbb.ch/ (production state, well scaled and hopefully stable)
 
 Important:
-* all consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
+* All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
-
-Be aware:
-
-INT and PROD is secured by APIM /pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM
-Not all described APIs below are available by API-Mgmt, but might be restricted to SBB internal access only.
-API-Resources might by executed by SwaggerFox-UI by browser (external consumers must go through the enabling process J-S: Consumer Registration SBB API-Management)
-
 ### Backward compatibility
-We live different concepts to maintain backward compatibility:
+We have different concepts to maintain backward compatibility:
 
 #### URL versioning
-All /b2c/v2/* APIs without "INCUBATOR" in their URL may be considered as stable. Any breaking changes will be signaled by our Release-Manager (to the e-Mail you registered at APIM registration process)!
+All **/b2c/v2/* APIs -without- `INCUBATOR` ** in their URL may be considered as **stable**. Any breaking changes will be signaled by our Release-Manager (to the e-Mail you registered at APIM registration process)!
 
-Any APIs with "INCUBATOR" in their URL are highly @Experimental and might be changed on a daily basis (if you use it, make sure you keep frequent communication with the journey-service@sbb.ch) or might even be deleted without further notice.
+Any **APIs with `/b2c/v2/INCUBATOR/*` in their URL are highly @Experimental and might be changed on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with journey-service@sbb.ch) .
 
 #### Deprecated stuff
-Any APIs to be removed soon, will have a @Deprecated  annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
+Any APIs to be removed soon, will have a `@Deprecated annotation` and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
 
-Some properties in response models might have a "description" like "@Deprecated use ... instead". Unfortunately such marks are not optically supported by Swagger and you have to go through each model-property description carefully.
+Some **properties in response models might have a "description" like "@Deprecated use ... instead"**. Unfortunately such marks are not optically supported by Swagger and you have to go through each model-property description carefully.
 
-Remark:
-* such deprecated code will be removed in future versions finally
+Important:
+* The generated journey-service-client (see below) does not show any @Deprecated fields, therefore you have to check the Swagger Doc carefully for your cases.
+* Such deprecated code will be removed in future versions finally
 
 ### Testing your APIM access
 See [Getting started with APIM](https://confluence.sbb.ch/pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM)
 
-Please check our [Testing hints](https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Testing/Test%20your%20access.docx?d=wbe3f5fa01f2b43c495c1b7cf61920f1a&csf=1&e=OjRFQb)
+Please check our [Testing hints](Test%20your%20access.pdf)
 
 ## journey-service-client
-Be aware that the J-S::B2C Team provides a generated  response-model and an ApiClient to perform requestsfor convenience reasons
+Be aware that the J-S::B2C Team provides a **generated  response-model and an ApiClient** to perform requests for convenience reasons:
+* [SBB Bitbucket](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
+* A [showcase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client) demonstrates its usage with minimal developing effort.
 
-GIT/Artifactory dependency: https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client
-A showcase demonstrates its usage with minimal developing effort: https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client
-
-
+SBB Artifactory dependency:
     <dependency>
         <groupId>ch.sbb.ki.journey-service</groupId>
         <artifactId>journey-service-client</artifactId>
@@ -73,21 +66,12 @@ A showcase demonstrates its usage with minimal developing effort: https://code.s
     </dependency>
 
 
-However, if the provided client does not work for you (for e.g. wrong Spring version, ..) you may generate it yourself according to the json-definitions related to the given contract.
-
-However the generated client depends on the Spring, SpringFox, Swagger-Annotation versions used by J-S, see properties in https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/pom.xml
-
-If you want to create your own client-version, you might copy our approach:
-
-create a TestCase instantiating J-S and download the swagger-json-definition, for e.g. like 
-https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-boot/src/test/java/ch/sbb/ki/journeyservice/web/SwaggerDefinitionModelGeneratorTest.java
-
-generate client by swagger-codegen-maven-plugin, for e.g. like https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/pom.xml
-
-Be aware of known bugs we fixed:
-
-OffsetDateTime problem: https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21
-Encoding https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d
+However, if the provided client does not work for you (for e.g. wrong Spring/SpringFox/Swagger-Annotation versions, ..) you may generate it yourself according to the json-definitions related to the given contract:
+1. Create a [TestCase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-boot/src/test/java/ch/sbb/ki/journeyservice/web/SwaggerDefinitionModelGeneratorTest.java) instantiating J-S and download the swagger-json-definition, for e.g. like 
+2. Generate client (we use `swagger-codegen-maven-plugin` in [pom.xml](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/pom.xml) for e.g.)
+3. Be aware of known bugs we fixed:
+3.1 [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21)
+3.2 [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
 ## API Doc
 All Services (short abstract, parameters, models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 APIs in most cases.
