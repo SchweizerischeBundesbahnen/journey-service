@@ -97,11 +97,11 @@ GIT/Artifactory dependency: https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journ
 A showcase demonstrates its usage with minimal developing effort: https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client
 
 
-<dependency>
-    <groupId>ch.sbb.ki.journey-service</groupId>
-    <artifactId>journey-service-client</artifactId>
-    <version>${journey-service.version}</version>
-</dependency>
+    <dependency>
+        <groupId>ch.sbb.ki.journey-service</groupId>
+        <artifactId>journey-service-client</artifactId>
+        <version>${journey-service.version}</version>
+    </dependency>
 
 
 However, if the provided client does not work for you (for e.g. wrong Spring version, ..) you may generate it yourself according to the json-definitions related to the given contract.
