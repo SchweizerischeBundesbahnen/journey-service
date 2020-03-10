@@ -7,8 +7,7 @@ Support: journey-service@sbb.ch
 ## Abstract
 The Journey-Service is a RESTful facade abstracting **public transportation routing and planning** for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, FOS, PLABE, OccupancyPrognosis.
 
-The main ==use cases== are:
-
+The main **use cases** are:
 * Finding locations, such as Stations (trains, busses, tramways, ..), Addresses and Points of Interest (POI).
 * Finding concrete journeys (Trip's) for a traveling passenger
 * Finding concrete Transport-Product journeys
@@ -23,9 +22,7 @@ Journey-Service logic and backend interfering is heavily based on the (SBB inter
 If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
 ## URL
-We currently support 3 Openshift (OTC) environments for testing and operation:
-* (DEV J-S Team only)
-* by APIM 'Customer information -> Journey-Service'
+We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM 'Customer information -> Journey-Service'**
  * TEST via APIM https://developer-int.sbb.ch/ (early tests of newest features)
  * INT via APIM https://developer-int.sbb.ch/ (solid state, release-candidates)
  * PROD via APIM https://developer.sbb.ch/ (production state, well scaled and hopefully stable)
@@ -33,10 +30,6 @@ We currently support 3 Openshift (OTC) environments for testing and operation:
 Important:
 * all consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
-
-
-
-
 
 
 Be aware:
@@ -62,7 +55,9 @@ Remark:
 * such deprecated code will be removed in future versions finally
 
 ### Testing your APIM access
-Please check our Testing hints: https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Testing/Test%20your%20access.docx?d=wbe3f5fa01f2b43c495c1b7cf61920f1a&csf=1&e=OjRFQb
+See [Getting started with APIM](https://confluence.sbb.ch/pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM)
+
+Please check our [Testing hints](https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Testing/Test%20your%20access.docx?d=wbe3f5fa01f2b43c495c1b7cf61920f1a&csf=1&e=OjRFQb)
 
 ## journey-service-client
 Be aware that the J-S::B2C Team provides a generated  response-model and an ApiClient to perform requestsfor convenience reasons
