@@ -73,6 +73,8 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 3. Be aware of known bugs we fixed: [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21), [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
 ### Good to know
+#### Release Notes
+See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md)
 
 #### Model with version suffix
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
