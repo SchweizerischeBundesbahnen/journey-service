@@ -21,7 +21,8 @@ Journey-Service logic and backend interfering is heavily based on the (SBB inter
 
 If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
-## URL
+## Technical aspects
+### URLs
 We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM `Customer information -> Journey-Service`**
  * TEST via APIM https://developer-int.sbb.ch/ (early tests of newest features)
  * INT via APIM https://developer-int.sbb.ch/ (solid state, release-candidates)
@@ -53,8 +54,9 @@ See [Getting started with APIM](https://confluence.sbb.ch/pages/viewpage.action?
 
 Please check our [Testing hints](Test%20your%20access.pdf)
 
-## journey-service-client
-Be aware that the J-S::B2C Team provides a **generated  response-model and an ApiClient** to perform requests for convenience reasons:
+### journey-service-client (SBB staff only)
+
+Be aware that the J-S::B2C team provides a **generated  response-model and an ApiClient to perform requests** for convenience reasons:
 * SBB Bitbucket [journey-service-client](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
 * A [showcase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client) demonstrates its usage with minimal developing effort.
 
@@ -73,14 +75,13 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 3. Be aware of known bugs we fixed: [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21), [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
 ## API Doc
-All Services (short abstract, parameters, models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 APIs in most cases.
+All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
 
 ### Choosing the right service definition
-Select the version of J-S REST-API: currently v2
+Select the version of J-S REST-API: currently **v2**
 
 Remark:
-
-if accessing by APIM, some APIs may not be visible or accessable, especially those who are meant for Intranet SBB users only.
+* If accessing by APIM, some APIs may not be visible (compared to SBB internal access) or accessable (based on your "plan per API").
 
 ![Version JSON-definition](J-S_version.png)
 
@@ -88,8 +89,8 @@ API-Path
 /b2c/v2/* 
 
 Remark:
+* For APIs with "INCUBATOR" in the URL →  indicates ongoing (sometimes breaking) changes and design aspects, the final API without "INCUBATOR" might not have (see chapter "URL versionining above).
 
-some APIs might have "INCUBATOR" in the URL →  indicates ongoing (sometimes breaking) changes and design aspects, the final API without "INCUBATOR" might not have.
 Request-Header	
 "Accept-Language" → de, fr, it, en (SBB supports those 4 languages currently)
 
