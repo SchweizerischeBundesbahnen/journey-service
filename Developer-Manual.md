@@ -262,74 +262,38 @@ Accessibility is supported on some transport-products (depends on given operator
 * "BOARDING_ALIGHTING_BY_CREW"
 * "BOARDING_ALIGHTING_BY_NOTIFICATION"
  
-Scrolling: any /trips request returns a set within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT"
-Fall vorwärts oder rückwärts scrollen:
-1. /trips inital Trip suchen -> Response enthält die Felder "scroll*" im Header
-2. gleichen Request (identische Parameter) ausfüllen und zusätzlich in Header scrollContext= gewünschten "scroll*" Wert einfügen
+Scrolling: any /trips request returns a set of TripV2 within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT":
+1. /trips inital search -> Response with "scroll*" Header-fields
+2. execute very same Request (identical parameters) and set Header scrollContext= with SCROLL-FORWARD or -BACKWARD value
  
-Öko-Bilanz zwischen Zug und Privat-Auto (Indiviualverkehr):
-"calculateEco":"true" -> liefert EcoBalance Werte
-Parameters:
+Eco calculation comparing public transportation vs private car or airplane:
+* set request param "calculateEco":"true" -> check response for EcoBalance
 
-&vias={<JSON-Object>}
+Vias are optional routing points to be included or avoided for trips.
 
- Represents a List<String>, where each single Via is represented by a  JSON Object, with the following properties:
-"uic": Integer (Mandatory)
-"status":  enum
- "transportProducts": list of product-categories
-"waittime": Integer in minutes
-"direct": boolean, by means no change on the Via 
-"couchette": boolean, searches for Couchette on the Via
-"sleepingCar": boolean, searches for Sleeping-Car on the Via
-Samples
-{\"uic\":8507000,\"transportProducts\":[\"FASTTRAIN_REGIOEXPRESS\",\"INTERREGIO\",\"ICE_EN_CNL_CIS_ES_MET_NZ_PEN_TGV_THA_X2\",\"EUROCITY_INTERCITY_ICN_INTERCITYNIGHT_SUPERCITY\"],\"waittime\":20}
-
-{\"uic\":8507000,\"status\":\"ALIGHTING_NOT_NECESSARY\",\"transportProducts\":[\"EUROCITY_INTERCITY_ICN_INTERCITYNIGHT_SUPERCITY\"]}
-
-{\"uic\":8789023,\"direct\":true,\"couchette\":true,\"sleepingCar\":true}
-
-&notVias=
-
- Analog &vias with "uic" and "status"
-
-&noChangesAt=
-
-Analog &vias with "uic" and "status"
-
-
-&trainFormationType=
-
-For performance reasons keep the default, if you are not interested in Train-Formations!
+&trainFormationType= for performance reasons keep the default, if you are not interested in Train-Formations!
 By default no Train-Formation hints are given. You may then call /v2/trainFormation anyway, but to get an early hint specify HINT_ORIGIN_DESTINATION to get such an info on each TripV2::LegV2::formationHint
 
 
-&createSummary=
-
-Will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
+&createSummary= will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
 /v2/trips/{reconstructionContext} (GET)
 Parameter "reconstructionContext" is given in any previous TripV2::reconstructionContext response by /v2/trips request.
 
 Be aware:
-
-the goal is to recreate the origin TripV2 where the reconstructionContext is taken from
+* The goal is to recreate the origin TripV2 where the reconstructionContext is taken from
 if your interested in accessibility (de:Barriere frei) data, make sure the previous /v2/trips request called for &accessibility=
 however reconstruction is not guranteed for various reasons (realtime changes, ..) -> catch 404 therefore
 
-#### Train-Formation
-TrainFormation may be requested for Legs with LegType.PUBLIC_JOURNEY by this API.
+##### /v2/trainFormation/{reconstructionContext}
+TrainFormation (de:Zugformation) may be requested for Legs with LegType.PUBLIC_JOURNEY by this API.
 
 Returns details about train-compositions their wagons, sections and Occupancy at origin and destination of a Leg.
 
-de:Zug-Formation
-
-See J-A: Zug-Formationen
+See [J-A: Zug-Formationen](https://confluence-ext.sbb.ch/display/JAD/J-A%3A+Zug-Formationen)
 
 Be aware:
+* Train-Formations are considered realtime data, therefore they are only available today! Do not request in the past or in the future, those will be lost requests.
 
-Train-Formations are considered realtime data, therefore they are only available today! Do not request in the past or in the future, those will be lost requests.
-
-
-##### /v2/trainFormation/{reconstructionContext} (GET)
 Request a desired trip by /v2/trips, if you are interested in formations consider setting &trainFormationType=HINT_ORIGIN_DESTINATION
 will give you a TripV2::legs → LegV2::formationHint whether it is worth to request for TrainFormation's at all by this service
 Call this API if FormationHint is given (or just by chance if you like)
@@ -341,10 +305,8 @@ FUTURE USE:
 #### Routes API
 About JourneyDetail (de:Zuglauf).
 
-##### /v2/routes/{journeyReference} (GET)
-Die JourneyReference erhält man bspw. auf Trip::Leg::journeyReference oder Departure/Arrival::journeyReference
-
-Optional kann der gleiche Zuglauf für ein anderes Datum angefragt werden.
+##### /v2/routes/{journeyReference}
+Such JourneyReference values may be obtained by Trip::Leg::journeyReference oder Departure/Arrival::journeyReference
 
 #### Reports API
 SBB dedicated usage for FZF (Fahrplan-Zusatz-Funktionen)
