@@ -81,7 +81,7 @@ See  [Support stricter encoding](https://github.com/spring-projects/spring-frame
 OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
 
 
-## API Doc
+## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
 
 ### Choosing the right service definition
@@ -99,7 +99,7 @@ Remark:
 |Request-Header	|like "Accept-Language" is used for standard or meta aspects (which are not in)|
 |Request-Params|GET ?param1=..&param2=..
 |Response-Header|like "Content-Language" (relates to "Accept-Language" or fallback-language by J-S)
-|Response-Body|200 → returns declared model; 204 → returns "{}"; 4xx/5xx → returns error JSON, s. [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)|
+|Response-Body|returns HttpStatus and declared model|
 |arg defaulting|better defaulting (for minimal performance)|
 |Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|
 
@@ -116,50 +116,48 @@ For each Request to J-S set the mandatory header-fields and body fields.
 
 ### Response
 #### Error-handling
-See Swagger API doc concerning known HttpStatus (for e.g. 400 BAD_REQUEST)
+See Swagger API doc concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST)
 
-##### /v2/*
-###### Error body
-In most cases the body will contain a detailed error, according to https://tools.ietf.org/html/rfc7807:
+In most cases the body will contain a detailed error, according to [RFC-7807](https://tools.ietf.org/html/rfc7807):
 * Header: HttpStatus resp. high-level error class
 * Body: finer-grained details of the problem (machine-readable format, the client can treat it appropriately) ** section 3.1 declares members of a Problem Details (problem+json) Object: status, type, title, detail, instance
-Error texts in "title" or "detail" will be given in english (en) only and:
+Error texts in "title" or "detail" will be given according to "CONTENT-LANGUAGE" (though mostly in english) and:
 * are not meant to display to end-users 1:1, proper error handling and displaying is the responsibility of the UI developer
 * can be used for consumer logging and might be helpful in postponed analysis tasks
 * the contents of such errors relate to underlying system and what J-S thinks is appropriate from the viewpoint of its layer
 
-
 For example, an HTTP response carrying JSON problem details:
-HTTP/1.1 204 Not Found
-Content-Type: application/problem+json
-Content-Language: en
-Log-Context: <your value replied>
- 
-{
- "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips",
- "title": "No hits",
- "detail": "There were no trips found for your query arguments.",
- "instance": "/v2/trips"
-}
+    HTTP/1.1 204 Not Found
+    Content-Type: application/problem+json
+    Content-Language: en
+    Log-Context: <your value replied>
+    {
+      "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips",
+      "title": "No hits",
+      "detail": "There were no trips found for your query arguments.",
+      "instance": "/v2/trips"
+    }
 
-###### 200 for emptyList, 404 for not found Object?
-v2 is based completely on HTTP GET, therefore various variants are technically possible to signal "No hits found"!
+SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
 
-According to https://medium.com/@santhoshkumarkrishna/http-get-rest-api-no-content-404-vs-204-vs-200-6dd869e3af1d the J-S team thinks it is best to return:
+##### 200 for emptyList, 404 for not found Object?
+v2 is based mostly on HTTP GET (idempotent), therefore various variants are technically possible to signal "No hits found"!
 
-200 with an emptyList body "{}" for API's returning List<T> where no hits were found
-404 with an optional Error body as described above if an expected object cannot be found, for e.g. /v2/trips/{reconstructionContext} which may not resolve
-400
-Swagger annotations are heavily used to validate the API. In such cases no error-body is returned mostly. Please check the Swagger-UI carefully.
+The J-S team thinks it is best to return:
+* 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
+* 404 with an optional Error body as described above if an expected object cannot be found, for e.g. /v2/trips/{reconstructionContext} which may not resolve
+
+##### 400
+Swagger annotations are heavily used to validate the API. In such cases no error-body is returned sometimes. Please check the Swagger-UI carefully.
 
 #### Business data aspects
-Some properties resp. their value-expressions might be translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en) for e.g.:
-* Station-Names in request accept all 4 languages, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
+Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
+* Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
 * Note::value is sometimes translated by SBB P Data-Mgmt
 * Translations with a standard and short-translation:
  * TransportProductV2::trackTranslation as a SBB-KI standard text
  * TransportProductV2::trackTranslationShort with an appropriate abbreviation if available
-* other texts are translated by SBB BR, like StopV2::*DelayText
+* other texts are translated by SBB Business Rules, like StopV2::*DelayText
 
 J-S uses some Enum's which relate typically to business defined values, for e.g.:
 * TransportProductV2::category
