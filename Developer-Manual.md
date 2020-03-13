@@ -89,6 +89,7 @@ Select the version of J-S REST-API: currently **v2**
 
 Remark:
 * If accessing by APIM, some APIs may not be visible (compared to SBB internal access) or accessable (based on your "plan per API").
+* v1 is deprecated and for reserved SBB internal usage
 
 ![Version JSON-definition](J-S_version.png)
 
@@ -98,37 +99,20 @@ Remark:
 |Request-Header	|like "Accept-Language" is used for standard or meta aspects (which are not in)|
 |Request-Params|GET ?param1=..&param2=..
 |Response-Header|like "Content-Language" (relates to "Accept-Language" or fallback-language by J-S)
-|Response-Body|200 → returns List<Model>
-    204 → returns "{}"
-    4xx/5xx → returns error JSON, s. [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)|
+|Response-Body|200 → returns declared model; 204 → returns "{}"; 4xx/5xx → returns error JSON, s. [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)|
 |arg defaulting|better defaulting (for minimal performance)|
 |Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|
 
+### End-user consistency
+According to **SBB KI strategy (de:Kundeninformation)** it is a **declared goal to communicate consistent public transport information**! 
+**J-S plays an important role** to provide such consistency **to any passengers on any end-user API resp. UI-channel**.
 
-Remark about v1:
+**J-S consumers must be aware that they might violate these SBB business rules by ignoring, manipulating or redefining given values and may impact unwanted end-user or public media critics**.
 
- /api/sbb/v1/extXmlCrutch is for dedicated SBB internal use only
-
-### End-user consistency (de:KI)
-According to SBB KI strategy (de:Kundeninformation) it is very important to communicate consistent travel information to all our passengers on any end-user API resp. -UI.
-
-J-S works hard to provide such consistent end-user information and therefore J-S consumers must be aware that they might violate this SBB top strategy by ignoring or redefining relevant values and impact end-user or public media critics.
-
-Some expressions are even related to conventions by BAV, SBB Infrastructure, SBB Personenverkehr or public transport in general.
-
-Further details s. chapters: 
-
-S::B2CDeveloperManual-Businessdataaspects
-S::B2CDeveloperManual-Businesslogicaspects
-S::B2CDeveloperManual-Error-handling
+Some expressions are even related to **conventions by [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html), SBB Infrastructure, SBB Personenverkehr or public transport Switzerland** in general.
 
 ### Request
-For each Request to J-S set the header-fields:
-
-WSG-Credentials":
-for SBB Intranet acces → "FUserId:FUserPwd" (FUser for WSG,  SBB Users ask xfpl001@sbb.ch)
-for APIM 3rd Party access →  see J-S::B2C Consumer Registration SBB API-Management
-Optional: "Log-Context":"mySematext/Splunk logText" → useful to log your Use Case or transaction-Id if you have (will be returned appropriately in v2 response header field)
+For each Request to J-S set the mandatory header-fields and body fields.
 
 ### Response
 #### Error-handling
