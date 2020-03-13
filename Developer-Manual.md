@@ -38,7 +38,7 @@ We have different concepts to maintain backward compatibility:
 #### URL versioning
 All `/b2c/v2/*` APIs **without** `INCUBATOR` in their URL may be considered as **stable**. Any breaking changes will be signaled by our Release-Manager (to the e-Mail you registered at APIM registration process)!
 
-Any **APIs with `/b2c/v2/INCUBATOR/*` in their URL are highly @Experimental and might be changed on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with journey-service@sbb.ch) .
+Any **APIs with `/b2c/v2/INCUBATOR/*` in their URL are highly @Experimental and might be changed breakingly on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with journey-service@sbb.ch).
 
 #### Deprecated stuff
 Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
@@ -74,6 +74,13 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 2. Generate client (we use `swagger-codegen-maven-plugin` in [pom.xml](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/pom.xml) for e.g.)
 3. Be aware of known bugs we fixed: [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21), [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
+### Good to know
+#### OffsetDateTime encoding
+See  [Support stricter encoding](https://github.com/spring-projects/spring-framework/issues/21577)
+400: ..?dateTime=2019-04-23T14:56:14+00:00
+OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
+
+
 ## API Doc
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
 
@@ -88,48 +95,14 @@ Remark:
 | Aspect | /v2 (current version) |
 |--------|-----------------------|
 |API-Path|/b2c/v2/*              |
-
-Remark:
-* For APIs with "INCUBATOR" in the URL →  indicates ongoing (sometimes breaking) changes and design aspects, the final API without "INCUBATOR" might not have (see chapter "URL versionining above).
-
-Request-Header	
-"Accept-Language" → de, fr, it, en (SBB supports those 4 languages currently)
-
-For e.g. Trip-ScrollContextForward/Backward
-
-"Log-Context" logs technical traces into Sematext by J-S und Splunk by underlying Hafas (set your traceId if relevant for you)
-
-Request-Params	
-GET ?param1=..&param2=..
-
-return ResponseEntity<List<?>>
-
-Known Problems:
-
-OffsetDateTime encoding, see  https://github.com/spring-projects/spring-framework/issues/21577
-400: ..?dateTime=2019-04-23T14:56:14+00:00
-OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
-Response-Header	
-"Content-Language" (relates to "Accept-Language" or fallback-language)
-
-For e.g. Trip → "ScrollContext"
-
-"Log-Context" relates to your given "Log-Context" in appropriate request
-
-Response-Body	
-200 → returns List<Model>
-
-204 → returns "{}"
-
-4xx/5xx → returns error JSON, s. https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md
-
-journey-service-client	
-jar in Artifactory or
-
-download http://<ENVIRONMENT>/v2/api-docs?group=journey-service-api-2.0 and generate yourself
-
-arg defaulting	better defaulting (for minimal performance)
-Realtime handling	less but well calculated attributes → consumer needs to analyze much less or nothing at all
+|Request-Header	|like "Accept-Language" is used for standard or meta aspects (which are not in)|
+|Request-Params|GET ?param1=..&param2=..
+|Response-Header|like "Content-Language" (relates to "Accept-Language" or fallback-language by J-S)
+|Response-Body|200 → returns List<Model>
+    204 → returns "{}"
+    4xx/5xx → returns error JSON, s. [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)|
+|arg defaulting|better defaulting (for minimal performance)|
+|Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|
 
 
 Remark about v1:
