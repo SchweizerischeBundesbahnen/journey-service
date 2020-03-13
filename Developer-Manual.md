@@ -75,11 +75,17 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 3. Be aware of known bugs we fixed: [OffsetDateTime problem](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/312479191d4d500922a533fbdd4e357d7d139e21), [Encoding](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/commits/b7934e8c54ef2c83b7a9a8d03d38ff0a78697b4d)
 
 ### Good to know
+
+#### Model with version suffix
+Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
+
+Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version) though Swagger would support such a concept by grouping.
+Therefore we melt classes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
+
 #### OffsetDateTime encoding
 See  [Support stricter encoding](https://github.com/spring-projects/spring-framework/issues/21577)
 400: ..?dateTime=2019-04-23T14:56:14+00:00
 OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
-
 
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
@@ -154,143 +160,109 @@ Swagger annotations are heavily used to validate the API. In such cases no error
 Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
 * Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
 * Note::value is sometimes translated by SBB P Data-Mgmt
-* Translations with a standard and short-translation:
- * TransportProductV2::trackTranslation as a SBB-KI standard text
- * TransportProductV2::trackTranslationShort with an appropriate abbreviation if available
+* Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
 * other texts are translated by SBB Business Rules, like StopV2::*DelayText
 
 J-S uses some Enum's which relate typically to business defined values, for e.g.:
 * TransportProductV2::category
- * relates to SBB P Data-Mgmt (config-file "Zugart") and refers to 10 classes from 0..9
-
+* VehicleType
+* LegType
+* ...
 
 There are also specific extensions for developer convenience, such as:
-* TransportProductV2::vehicleIconName showing the appropriate name in SBB Corporate-Identity resources (though the resource itself must be allocated by the consumer)
- * the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType or uses the J-A given short cut to ::vehicleIconName
+* TransportProductV2::vehicleIconName showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
+* the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType or uses the J-A given short cut to ::vehicleIconName
 
 #### Business logic aspects
 ##### Formatted fields
-J-S sometimes provides fields with a "*Formatted" suffix which contain values, that must be showed to public end-users. Alternatively the very same field might be given without the suffix for SBB internal usage only, for e.g.
-
-TransportProductV2::number → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
-TransportProductV2::numberFormatted → B2C or B2P: BR impacted value for end-users (for e.g. to display in SBB Webshop)
+J-S sometimes provides fields with a "*Formatted" suffix which contain values, that must be showed to public end-users instead of alternatively declared field without the suffix for SBB internal usage only, for e.g.
+* TransportProductV2::number → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
+* TransportProductV2::numberFormatted → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
 
 ##### Realtime analysis
-StopV2 contains pre-calculated fields to inform about relevant realtime status of a TransportProduct at a specific StopV2:
+Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
+
+StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
 * ::boardingAlightingStatus
 * ::stopStatus
-* About any *Rt properties:
- * Ideally these fields are always null, means transport organisations are operating as planned
- * If any vehicle (TransportProduct) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
- * Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
- * *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
- * If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
+
+About any *Rt properties:
+* Ideally these fields are always null, means transport organisations are operating as planned
+* If any vehicle (TransportProductV2) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
+* *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
+* If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
+
+Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
 
 Remark:
-* based on /display/FAHRPLAN/Haltestellen-Status
+* SBB staff see [STATION state]( based on /display/FAHRPLAN/Haltestellen-Status)
 
-### Most typical use case
+### Most typical use cases
 Most consumers will probably be interested in a simple train-connection from A to B. This scenario is supported in 2 steps usually:
 
-use /b2c/v2/locations to find A=origin (start) and B=destination (end) Location's → any Location hit with type=STATION will have a concrete UIC standardized ID as given in the "uicOrId" field (for e.g. 8507000 for "Bern").
-use /b2c/v2/trips to find a set of trips (usually between 4..7 hits) and interprete the best case in your case. The reponse TripV2 object will contain Leg's (segments operated by a specific transport-company (for e.g. "SBB") and a list of Stop's where A=stops[0] and B=stops[last], each Stop has various data such as departureDateTime, stopStatus, ...
+1. use /b2c/v2/locations to find A=origin (start) and B=destination (end) Location's → any Location hit with type=STATION will have a concrete UIC standardized ID as given in the "uicOrId" field (for e.g. 8507000 for "Bern").
+2. use /b2c/v2/trips to find a set of trips (usually between 4..7 hits) and interprete the best case in your case. The reponse TripV2 object will contain Leg's (segments operated by a specific transport-company (for e.g. "SBB") and a list of Stop's where A=stops[0] and B=stops[last], each Stop has various data such as departureDateTime, stopStatus, ...
 
 ### Info API
 Concepts:
-* The timetables for all public transportation products are renewed on a yearly base (de: Fahrplanwechsel). There is typically a change about 1st decade of December.
+* The **timetables for all public transportation products are renewed on a yearly base** (de: Fahrplanwechsel). There is typically a change about 1st decade of December.
 
 Remark:
 * For most users this service will not be relevant. J-S will navigate in the current pool automatically or throw errors if your queries do not match the current period.
-* Provides data-pool infos
 
-### /v2/info (GET)
+#### /v2/info
 Returns "PoolInfo":
+* declaring the current service-days period (usually current year between first decade of december)
+* STATION data-pools (validity periods of operation)
 
-declaring the current service-days period (usually current year between first decade of december)
-STATION data-pools
-
-### /v2/traffic
+#### /v2/traffic
 Allows search for active HIM-Messages about disruptions, construction sites, events,..
 
 Be aware:
 * HimMessageV2 objects related to concrete journeys are returned by /v2/trips in LegV2::messages or JourneyDetail::himMessages directly
 
-### Locations API
+### Location API
 Useful to query for locations (stations, addresses, POIs).
 
 Concepts:
-* Switzerland uses UIC codes for station IDs, see J-A: Haltestellen
+* Switzerland uses UIC codes for station IDs, DiDok maps other countries to UIC as well and therefore troughout J-S such values like 8507000 for "Bern" are consistent.
 * Addresses are postal addresses imported from Swiss POST in regular phases.
 * Points of Interest (POI) are licenced data such as Museums, Shopping mall etc.
 
-#### /v2/locations (GET)
-Returns a non-inherited structure of a Location. Discriminator Location::type
-
-STATION (known Stop, routed by Hafas routes or trips)
-ADDRESS (postal addresses)
-POI (points of interest, like Museum, ..)
+#### /v2/locations
+Returns a generic structure of a Location. Discriminator Location::type specifies a Locationas:
+* **STATION** (known Stop, routed by Hafas)
+* **ADDRESS** (postal addresses)
+* **POI** (points of interest, like Museum, ..)
 
 ### Journey-Planning services
 There are various ways to query for vehicle (transport-product) routes or tailored passenger trips from A to B.
 
 Concepts:
 * All journeys rely on a yearly plan (de:Soll-Fahrplan).
-* However in reality not all transport-products may be operated in time, therefore realtime changes happen to the plan, see J-A: Trip-Analyse
-* Trip's are tailored traveling routes for a specific passenger. 
- * Each Leg means a separate transport-product (by means passengers need to change at the ending Stop of a Leg).
- * The underlying system provides a default change time when passengers need to switch transport-products. However these values may be customized as well.
-* JourneyDetails cover the whole scope of a single transport-product. They might be identified by the JourneyReference (which is not a physical vehicle-ID).
-* Time aspects:
- * The underlying system handles timetables in Swiss timezone "Europe/Zurich". 
- * J-S supports other timezones in requests, however they will be transformed to CH local time and replied in UTC. 
-Seconds are irrelevant.
+* However in reality not all transport-products may be operated in time, therefore realtime changes happen to the plan, see [J-A: Trip-Analyse](https://confluence-ext.sbb.ch/display/JAD/J-A%3A+Trip-Analyse)
+* Trip's are tailored traveling routes for a specific passenger. They do not have a unique ID, rather a reconstruction- or Trip-Context. Each Leg means a separate transport-product (by means passengers need to change at the ending Stop of a Leg). The underlying system provides a default change time when passengers need to switch transport-products. However these values may be customized as well.
+* JourneyDetails cover the whole scope of a single transport-product from the very start to the very end. They might be identified by a unique JourneyReference (which is not a physical vehicle-ID).
+* Time aspects: For Switzerland most date/time data is given in Swiss timezone "Europe/Zurich" (however check OffsetDateTime UTC values for foreign Locations).
 
 #### Stationboard API
-##### /v2/departures (GET)
-Departureboard (de:Abfahrtstabelle)
+##### /v2/departures
+Departureboard (de:Abfahrtstabelle) at STATION showing departures leaving from there with optional directions.
 
-DeapartureBoard
-Falls nur abfahrende Fahrzeuge mit einer bestimmten Richtung gewünscht sind:
- 
-  "directionUIC": 8508005
- 
- 
-"dateTime" Feld kann man angeben, wenn man nicht den aktuellen Zeitpunkt anfragen will:
- 
- 
-In der products Liste können gewünschte Kategorien gefiltert werden.
- 
- 
-Weitere Felder:
-- "duration": 30, "limit": 10 (beschränken Interval und Anzahl Ergebnisse)
-- "filterEquivalentStops": false|true (Filter für als equivalent bezeichnete Halte)
-- "resolveDirectionUIC" : Boolean @deprecated (nur false)
+##### /v2/arrivals
+Arrivalboard (de:Ankunftstabelle) at STATION showing arrivals.
 
-##### /v2/arrivals (GET)
-Arrivalboard (de:Ankunftstabelle)
+#### Trips API
+Complex Journey-Planning (connections or de:Verbindungen) for travelling passengers.
 
-Trips API
-Journey-Planning for travelling passengers.
-
-de:Verbindungen
-
-#### /v2/trips (GET)
-Für "stopBehaviour" sind folgende Werte möglich
-* "ORIGIN_DESTINATION_ONLY" -> liefert nur Abgangs- und Ankunftsort
-* "REAL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte wo man tatsächlich ein - und aussteigen kann
-* "ALL_BOARDING_ALIGHTING" -> liefert zusätzlich alle Zwischenhalte inkl. den virtuellen wie "Bahn-2000-Strecke"
+#### /v2/trips
  
-Auf Station's und Leg's kann es Note's geben die bspw. auf Leg::attributes und Leg::infos resultieren.
-* für ATTRIBUTE kann eingeschränkt werden (Use Case Casa), z.B. "attributes":["GROUPS_ADMITTED"]
-* für INFOTEXTS kann zwar nicht aktiv gesucht werden, aber im nachhinein die Antwort gefiltert werden (Use Case Kabenas), z.B. "infos":["RN"]
+Accessibility is supported on some transport-products (depends on given operator-data). The following Enum's have a Business Rule related hierarchy which is handled by response:
+* "BOARDING_ALIGHTING_SELF"
+* "BOARDING_ALIGHTING_BY_CREW"
+* "BOARDING_ALIGHTING_BY_NOTIFICATION"
  
-Falls nach Barrierefreiheit eingeschränkt werden soll (Achtung: es gibt hier eine Hierarchie, d.h. die Codes sind in dem Sinne nicht als gleichwertig zu verstehen):
-* "barrierFree": "ALL"
-* "barrierFree": "BOARDING_ALIGHTING_SELF"
-* "barrierFree": "BOARDING_ALIGHTING_BY_CREW"
-* "barrierFree": "BOARDING_ALIGHTING_BY_NOTIFICATION"
- 
- 
+Scrolling: any /trips request returns a set within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT"
 Fall vorwärts oder rückwärts scrollen:
 1. /trips inital Trip suchen -> Response enthält die Felder "scroll*" im Header
 2. gleichen Request (identische Parameter) ausfüllen und zusätzlich in Header scrollContext= gewünschten "scroll*" Wert einfügen
