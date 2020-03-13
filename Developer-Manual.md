@@ -85,8 +85,9 @@ Remark:
 
 ![Version JSON-definition](J-S_version.png)
 
-API-Path	
-/b2c/v2/* 
+| Aspect | /v2 (current version) |
+|--------|-----------------------|
+|API-Path|/b2c/v2/*              |
 
 Remark:
 * For APIs with "INCUBATOR" in the URL →  indicates ongoing (sometimes breaking) changes and design aspects, the final API without "INCUBATOR" might not have (see chapter "URL versionining above).
