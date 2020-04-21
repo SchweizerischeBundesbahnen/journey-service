@@ -22,7 +22,7 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 ## Technical aspects
 ### URLs
 We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM `Customer information -> Journey-Service`**
- * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test/ (early tests of newest features)
+ * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
  * **INT** via APIM https://developer-int.sbb.ch/apis/journey-service (solid state, release-candidates)
  * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
 
