@@ -82,7 +82,10 @@ Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
 Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version) though Swagger would support such a concept by grouping.
 Therefore we melt classes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
 
-#### OffsetDateTime encoding
+#### About parameter encoding
+* TripV2::reconstructionContext must not be encoded -> pass it as received
+* do not encode JSON Lists resp. '[' or ']'
+* OffsetDateTime 
 See  [Support stricter encoding](https://github.com/spring-projects/spring-framework/issues/21577)
 400: ..?dateTime=2019-04-23T14:56:14+00:00
 OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
