@@ -54,11 +54,12 @@ Please check our [Testing hints](Test%20your%20access.pdf)
 
 ### Generating your own Client to access the REST-API
 
-Usually each Consumer will implement its own caller client classes for:
+Usually each Consumer will implement its own caller client classes for out of the downloaded **json-definitions** [API Specification File](https://developer.sbb.ch/apis/journey-service/documentation) for:
 * Model deserialization
 * Request support
 
 In case you are using a framework, please check:
+* support of Header-fields (needed for e.g. "v2/trips Scroll-Context")
 * OffsetDateTime handling especially for journey-planner aspects: 
     * <ins>We highly recommend requesting serialized instances as **UTC with a recognizable offset**</ins> for e.g. "2020-12-18T14:55:00**+01:00**" or "2020-07-21T14:55:00**+02:00**" (where both correspond to Switzerland once in wintertime and once in summertime)
     * If you use "Z"(ulu) notation the same samples above would serialize to "2020-12-18T13:55:00**Z**" or "2020-07-21T12:55:00**Z**". In such a case Journey-Service has no chance to determine the intended timezone and as a fallback we interprete all such data as "Europe/Zurich" timezone and might lead to unexpected results on the caller side!
@@ -69,7 +70,7 @@ Remark:
 
 #### journey-service-client (SBB staff only)
 
-Be aware that the J-S::B2C team provides a **generated  response-model and an ApiClient to perform requests** for convenience reasons:
+Be aware that the devOps team provides a **generated ApiClient to perform requests and map response models** for convenience reasons:
 * SBB Bitbucket [journey-service-client](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
 * A [showcase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-integration/src/test/java/ch/sbb/ki/journeyservice/showcase/client) demonstrates its usage with minimal developing effort.
 
@@ -90,6 +91,9 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 ### Good to know
 #### Release Notes
 See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md)
+
+#### Blog announcements
+Check the blog: https://developer.sbb.ch/apis/journey-service/blog
 
 #### Model with version suffix
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
