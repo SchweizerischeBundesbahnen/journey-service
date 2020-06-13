@@ -189,7 +189,7 @@ StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime
 * ::boardingAlightingStatus
 * ::stopStatus
 
-About any *Rt properties:
+About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
 * If any vehicle (TransportProductV2) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
 * *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
