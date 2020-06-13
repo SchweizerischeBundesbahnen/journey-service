@@ -91,6 +91,7 @@ However, if the provided client does not work for you (for e.g. wrong Spring/Spr
 ### Good to know
 #### Release Notes
 See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md)
+Because J-S heavily relies on the Journey-Assistant library, also those [J-A Release-Notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-assistant/browse/ReleaseNotes.md) might reveal some important updates.
 
 #### Blog announcements
 Check the blog: https://developer.sbb.ch/apis/journey-service/blog
