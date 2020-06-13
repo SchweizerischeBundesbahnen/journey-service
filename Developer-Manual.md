@@ -52,7 +52,18 @@ See [Getting started with APIM](https://confluence.sbb.ch/pages/viewpage.action?
 
 Please check our [Testing hints](Test%20your%20access.pdf)
 
-### journey-service-client (SBB staff only)
+### Generating your own Client to access the REST-API
+
+Usually each Consumer will implement its own caller client classes for:
+* Model deserialization
+* Request support
+
+In case you are using a framework, please check:
+* OffsetDateTime handling especially for journey-planner aspects: 
+    * _We highly recommend requesting serialized instances with a **UTC with a recognizable offset**_ for e.g. "2020-12-18T14:55:00**+01:00**" or "2020-07-21T14:55:00**+02:00**" (where both correspond to Switzerland once in wintertime and once in summertime)
+    * If you use "Z"(ulu) notation the same samples above would serialize to "2020-12-18T13:55:00**Z**" or "2020-07-21T12:55:00**Z**". In such a case Journey-Service has no chance to determine the intended timezone and as a fallback we interprete all such data as "Europe/Zurich" timezone and might lead to unexpected results on the caller side!
+
+#### journey-service-client (SBB staff only)
 
 Be aware that the J-S::B2C team provides a **generated  response-model and an ApiClient to perform requests** for convenience reasons:
 * SBB Bitbucket [journey-service-client](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client)
