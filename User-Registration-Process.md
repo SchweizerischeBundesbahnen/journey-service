@@ -60,7 +60,7 @@ A good start is our Developer-Manual (see https://github.com/SchweizerischeBunde
 
 # Operation
 ## RSS-feed
-To stay up to date about new features or occurring disturbances we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
+To stay up to date about new features or adjustments we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
 
 
 
