@@ -156,15 +156,15 @@ Error texts in "title" or "detail" will be given according to "CONTENT-LANGUAGE"
 * the contents of such errors relate to underlying system and what J-S thinks is appropriate from the viewpoint of its layer
 
 For example, an HTTP response carrying JSON problem details:
-    HTTP/1.1 204 Not Found
+    HTTP/1.1 404 Not Found
     Content-Type: application/problem+json
     Content-Language: en
     Log-Context: <your value replied>
     {
-      "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips",
-      "title": "No hits",
-      "detail": "There were no trips found for your query arguments.",
-      "instance": "/v2/trips"
+      "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips/{reconstructionContext}",
+      "title": "No entity/resource found (in Backend)",
+      "detail": "There was no trip found for your query arguments.",
+      "instance": "/v2/trips/{reconstructionContext}"
     }
 
 SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
