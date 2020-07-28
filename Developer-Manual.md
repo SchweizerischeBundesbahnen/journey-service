@@ -48,7 +48,8 @@ Important:
 * Such deprecated code will be removed in future versions finally
 
 ### Testing your APIM access
-See [Getting started with APIM](https://confluence.sbb.ch/pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM)
+See: [getting started](https://developer-int.sbb.ch/getting-started)
+[Getting started with APIM (for Intranet users only)](https://confluence.sbb.ch/pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM)
 
 Please check our [Testing hints](Test%20your%20access.pdf)
 
