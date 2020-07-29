@@ -41,7 +41,7 @@ To gain a better understanding on the capabilities provided by Journey-Service, 
 ### Step 2: Signing-up on the specific usage plan on the developer site 
 
 If you are ready to sign-up, please visite the site developer-sbb for [PROD](developer.sbb.ch) or [INT](developer-int.sbb.ch) to sign-up for the integration. 
-See page https://developer.sbb.ch/apisjourney-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
+See page https://developer.sbb.ch/apis/journey-service to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
 Note: integrate the INT-environment first and afterwards the PROD environment.  
 
 For detailed information on getting around on the developer-site, please read the available information in section **Finding your way around on the developer site***  carefully. 
