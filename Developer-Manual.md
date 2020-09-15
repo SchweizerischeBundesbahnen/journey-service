@@ -204,6 +204,8 @@ J-S sometimes provides fields with a "*Formatted" suffix which contain values, t
 * TransportProductV2::numberFormatted → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
 
 ##### Realtime analysis
+The SBB underlying systems may **provide realtime-data, typically TODAY only (~ +/-4h from now)**.
+
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
 
 StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
