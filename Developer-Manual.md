@@ -114,6 +114,8 @@ OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
 
+Further on consider our [Routing-basics](https://github.com/SchweizerischeBundesbahnen/journey-service-b2c/blob/master/Journey-Service_Routing-Basics.pdf)
+
 ### Choosing the right service definition
 Select the version of J-S REST-API: currently **v2**
 
