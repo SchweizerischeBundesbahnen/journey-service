@@ -68,6 +68,24 @@ In case you are using a framework, please check:
 Remark:
 * We customize our Jackson-Mapper for OffsetDateTime like:
     ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_WITH_ZONE_ID}).featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_AS_TIMESTAMPS}).featuresToDisable(new Object[]{DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE}).build();
+* if you use the generated ApiClient declare something like this:
+    @Bean
+    public ApiClient apiClient() {
+        //TODO replace by WebClient
+        RestTemplate apiClientRestTemplate = new RestTemplate();
+        apiClientRestTemplate.getInterceptors().add(new ApimRequestInterceptor(this));
+        // make sure TIMEZONE offset is not Z(ulu) resp. UTC
+        MappingJackson2HttpMessageConverter mappingConverter = new MappingJackson2HttpMessageConverter();
+        mappingConverter.setObjectMapper(Jackson2ObjectMapperBuilder
+            .json()
+            .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+            .build());
+        apiClientRestTemplate.getMessageConverters().add(0, mappingConverter);
+
+        ApiClient client = new ApiClient(apiClientRestTemplate);
+        client.setBasePath(this.getEndpoint());
+        return client;
+    }
 
 #### journey-service-client (SBB staff only)
 
