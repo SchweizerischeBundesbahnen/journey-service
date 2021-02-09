@@ -69,6 +69,7 @@ Remark:
 * We customize our Jackson-Mapper for OffsetDateTime like:
     ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_WITH_ZONE_ID}).featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_AS_TIMESTAMPS}).featuresToDisable(new Object[]{DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE}).build();
 * if you use the generated ApiClient declare something like this:
+
     @Bean
     public ApiClient apiClient() {
         //TODO replace by WebClient
@@ -81,7 +82,6 @@ Remark:
             .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             .build());
         apiClientRestTemplate.getMessageConverters().add(0, mappingConverter);
-
         ApiClient client = new ApiClient(apiClientRestTemplate);
         client.setBasePath(this.getEndpoint());
         return client;
