@@ -1,6 +1,43 @@
 # Problems
-## J-S::B2C v2
-Error JSON object
 
-## J-S v3
-Problem JSON object
+## J-S::B2C v2
+**Error** JSON object
+
+See [J-S Swagger2 API](https://developer.sbb.ch/apis/journey-service/documentation) of each API concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST).
+
+In most cases the body will contain a detailed error, according to [RFC-7807](https://tools.ietf.org/html/rfc7807):
+* Header: HttpStatus resp. high-level error class
+* Body: finer-grained details of the problem (machine-readable format, the client can treat it appropriately) ** section 3.1 declares members of a Problem Details (problem+json) Object: status, type, title, detail, instance
+Error texts in "title" or "detail" will be given according to "CONTENT-LANGUAGE" (though mostly in english) and:
+* are not meant to display to end-users 1:1, proper error handling and displaying is the responsibility of the UI developer
+* can be used for consumer logging and might be helpful in postponed analysis tasks
+* the contents of such errors relate to underlying system and what J-S thinks is appropriate from the viewpoint of its layer
+
+For example, an HTTP response carrying JSON problem details:
+    HTTP/1.1 404 Not Found
+    Content-Type: application/problem+json
+    Content-Language: en
+    Log-Context: <your value replied>
+    {
+      "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips/{reconstructionContext}",
+      "title": "No entity/resource found (in Backend)",
+      "detail": "There was no trip found for your query arguments.",
+      "instance": "/v2/trips/{reconstructionContext}"
+    }
+
+SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
+
+### 200 for emptyList, 404 for not found Object?
+v2 is based mostly on HTTP GET (idempotent), therefore various variants are technically possible to signal "No hits found"!
+
+The J-S team thinks it is best to return:
+* 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
+* 404 with an optional Error body as described above if an expected object cannot be found, for e.g. /v2/trips/{reconstructionContext} which may not resolve
+
+### 400
+Swagger annotations are heavily used to validate the API. In such cases no error-body is returned sometimes. Please check the Swagger-UI carefully.
+
+## J-S v3 (TODO coming soon)
+**Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
+
+[HttpStatus](https://opensource.zalando.com/restful-api-guidelines/#150)
