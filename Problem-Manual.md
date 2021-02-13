@@ -1,4 +1,25 @@
 # Problems
+**Error-handling** is an important topic.
+
+It is part of the service-contract to define how an underlying system should provide further information in case of an erroneous request or backend action.
+
+**https://tools.ietf.org/html/rfc7807** says:
+* **Header**: HttpStatus resp. high-level error class
+* **Body**:  finer-grained details of the problem (machine-readable format, the client can treat it appropriately)
+** section 3.1 declares members of a Problem Details (**problem+json**) Object: **status, type, title, detail, instance**
+
+For example, an HTTP response carrying JSON problem details:
+
+    HTTP/1.1 404 Not Found
+    Content-Type: application/problem+json
+    Content-Language: en
+    
+    {
+     "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips",
+     "title": "Not supported: EVA",
+     "detail": "The underlying system maintains UIC station codes only.",
+     "instance": "/location"
+    }
 
 ## J-S::B2C v2
 **Error** JSON object
