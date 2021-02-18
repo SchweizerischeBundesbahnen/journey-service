@@ -118,6 +118,8 @@ Because J-S heavily relies on the Journey-Assistant library, also those [J-A Rel
 #### Blog announcements
 Check the blog: https://developer.sbb.ch/apis/journey-service/blog
 
+To stay up to date about new features or adjustments we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
+
 #### Model with version suffix
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
 
