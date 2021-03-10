@@ -21,13 +21,14 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 
 ## Technical aspects
 ### URLs
-We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM `Customer information -> Journey-Service`**
+We currently support **3 APIM accessible Openshift environments** for `Customer information/journey`
  * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
  * **INT** via APIM https://developer-int.sbb.ch/apis/journey-service (solid state, release-candidates)
  * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
 
 Important:
 * All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
+    * we recommend to register for both SSO Token provider Services **redHatSSO** and **AzureAD** and **implement a fallback if one of them fails, switch to the other one**
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ### Backward compatibility
