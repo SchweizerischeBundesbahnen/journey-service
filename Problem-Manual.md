@@ -22,6 +22,7 @@ For example, an HTTP response carrying JSON problem details:
     }
 
 ## J-S::B2C v2
+### properly handled errors by J-S
 **Error** JSON object
 
 See [J-S Swagger2 API](https://developer.sbb.ch/apis/journey-service/documentation) of each API concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST).
@@ -48,15 +49,22 @@ For example, an HTTP response carrying JSON problem details:
 
 SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
 
-### 200 for emptyList, 404 for not found Object?
+#### 200 for emptyList, 404 for not found Object?
 v2 is based mostly on HTTP GET (idempotent), therefore various variants are technically possible to signal "No hits found"!
 
 The J-S team thinks it is best to return:
 * 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
 * 404 with an optional Error body as described above if an expected object cannot be found, for e.g. /v2/trips/{reconstructionContext} which may not resolve
 
-### 400
+#### 400
 Swagger annotations are heavily used to validate the API. In such cases no error-body is returned sometimes. Please check the Swagger-UI carefully.
+
+### Errors given by APIM
+If there is an error by the "security-layer" errors might result directly from APIM.
+
+#### Too many calls
+If the assigned plan limit is reached (requests/minute) an error like this might result:
+    {"timestamp":"2021-03-17T06:39:51.654+0000","status":429,"error":"Too Many Requests","message":"Limit exceeded: Path: '/b2c/v2/info', Query: 'null', Method: 'GET'","path":"/b2c/v2/info"}
 
 ## J-S v3 (TODO coming soon)
 **Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
