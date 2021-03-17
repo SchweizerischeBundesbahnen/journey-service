@@ -22,7 +22,7 @@ For example, an HTTP response carrying JSON problem details:
     }
 
 ## J-S::B2C v2
-### properly handled errors by J-S
+### Properly handled errors by J-S
 **Error** JSON object
 
 See [J-S Swagger2 API](https://developer.sbb.ch/apis/journey-service/documentation) of each API concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST).
