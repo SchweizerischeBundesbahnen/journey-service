@@ -36,13 +36,16 @@ In the first section we ask you to provide **electronic contact information**, s
 In the second section we need detailed **information about your application type** (for e.g. backend, browser or mobile App) and what part of the Journey-Service contract you are interested in (see section 2.1 of the questionnaire) and what kind of **use cases** you are going to implement (see section 2.4 questionnaire).
 
 In the third section we need **technical information**. We need this information to assess the integration-impacts of your application related to Journey-Service or its underlying architecture (see section 3.1 of the questionnaire).
-To gain a better understanding on the capabilities provided by Journey-Service, please consult the swagger-apidoc for detailed information about request parameters or response models (see https://developer.sbb.ch/apis/journey-service/documentation) and select your desired APIs (see section 3.2). 
+To gain a better understanding on the capabilities provided by Journey-Service, please consult the OpenApi 3 apidoc for detailed information about each provided operation and its request parameters or response models (see https://developer.sbb.ch/apis/journey-service/documentation) and select your desired APIs (see section 3.2). 
 
 ### Step 2: Signing-up on the specific usage plan on the developer site 
 
 If you are ready to sign-up, please visite the site developer-sbb for [PROD](developer.sbb.ch) or [INT](developer-int.sbb.ch) to sign-up for the integration. 
-See page https://developer.sbb.ch/apisjourney-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
-Note: integrate the INT-environment first and afterwards the PROD environment.  
+See page https://developer.sbb.ch/apisjourney-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which authenticates certain APIs and the number of requests/minute allowed (throtteling).
+**Terms of usage:**
+* Always **choose "Azure AD" as primary JWT Token-Service provider**. If you run an extremely business critical Consumer-Application, we recommend you to register also for "redHat-SSO" as an alternate fallback scenario (but that is up to you).
+* **Integrate and test against (TEST)/INT-environment first** and afterwards the PROD environment. If we implement new features and nobody complains after a while on INT, we usually deploy to PROD without further communication in a non-breaking manner. 
+* **NEVER generate stress- or performance against neither TEST nor PROD.** Please let us know in advance if you plan performance-test on INT within a certain time window, thanks!
 
 For detailed information on getting around on the developer-site, please read the available information in section **Finding your way around on the developer site***  carefully. 
 
