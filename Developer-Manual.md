@@ -104,6 +104,9 @@ SBB Artifactory dependency:
         <version>${journey-service.version}</version>
     </dependency>
 
+Important versions:
+* until v2.19.12: Swagger2 ApiClient
+* from v2.20.x OpenAPI 3 ApiClient (consumers using Swagger2 ApiClient will have some code adaptions when upgrading)
 
 However, if the provided client does not work for you (for e.g. wrong Spring/SpringFox/Swagger-Annotation versions, ..) you may generate it yourself according to the [json-definitions](https://ki-journey-service.app.idefix.otc.sbb.ch/v2/api-docs?group=journey-service-api-2.0) related to the given contract:
 1. Create a [TestCase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-boot/src/test/java/ch/sbb/ki/journeyservice/web/SwaggerDefinitionModelGeneratorTest.java) instantiating J-S and download the swagger-json-definition, for e.g. like 
@@ -276,32 +279,47 @@ Complex Journey-Planning (connections or de:Verbindungen) for travelling passeng
 
 #### /v2/trips
  
-Accessibility is supported on some transport-products (depends on given operator-data). The following Enum's have a Business Rule related hierarchy which is handled by response:
+##### Accessibility
+is supported on some transport-products (depends on given operator-data). The following Enum's have a Business Rule related hierarchy which is handled by response:
 * "BOARDING_ALIGHTING_SELF"
 * "BOARDING_ALIGHTING_BY_CREW"
 * "BOARDING_ALIGHTING_BY_NOTIFICATION"
- 
-Scrolling: any /trips request returns a set of TripV2 within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT":
-1. /trips inital search -> Response with "scroll*" Header-fields
-2. execute very same Request (identical parameters) and set Header scrollContext= with SCROLL-FORWARD or -BACKWARD value
- 
-Eco calculation comparing public transportation vs private car or airplane:
-* set request param "calculateEco":"true" -> check response for EcoBalance
-
-Vias are optional routing points to be included or avoided for trips.
-
-&trainFormationType= for performance reasons keep the default, if you are not interested in Train-Formations!
-By default no Train-Formation hints are given. You may then call /v2/trainFormation anyway, but to get an early hint specify HINT_ORIGIN_DESTINATION to get such an info on each TripV2::LegV2::formationHint
-
-
-&createSummary= will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
-/v2/trips/{reconstructionContext} (GET)
-Parameter "reconstructionContext" is given in any previous TripV2::reconstructionContext response by /v2/trips request.
 
 Be aware:
 * The goal is to recreate the origin TripV2 where the reconstructionContext is taken from
 if your interested in accessibility (de:Barriere frei) data, make sure the previous /v2/trips request called for &accessibility=
 however reconstruction is not guranteed for various reasons (realtime changes, ..) -> catch 404 therefore
+ 
+##### Scrolling
+any /trips request returns a set of TripV2 within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT":
+1. /trips inital search -> Response with "scroll*" Header-fields
+2. execute very same Request (identical parameters) and set Header scrollContext= with SCROLL-FORWARD or -BACKWARD value
+ 
+##### Eco calculation
+comparing public transportation vs private car or airplane:
+* set request param "calculateEco":"true" -> check response for EcoBalance
+
+##### Vias
+are optional routing points to be included or avoided for trip requests as a JSON Object parameter:
+
+&vias
+{"uic":mandatory Integer,"status":"BOARDING_ALIGHTING_NECESSARY","transportProducts":[list of TransportProduct-Category],"waittime":Integer in min.,"direct":true|false,"couchette":true|false,"sleepingCar":true|false}
+
+&notVias
+{"uic":mandatory Integer,"status":"NO_PASS_THROUGH"}  where possible status are: NO_PASS_THROUGH_META_STATION, NO_PASS_THROUGH
+
+&noChangesAt
+{"uic":mandatory Integer,"status":"NO_CHANGE"} where possible status are: NO_CHANGE_META_STATION, NO_CHANGE
+
+##### trainFormationType
+for performance reasons keep the default, if you are not interested in Train-Formations!
+By default no Train-Formation hints are given. You may then call /v2/trainFormation anyway, but to get an early hint specify HINT_ORIGIN_DESTINATION to get such an info on each TripV2::LegV2::formationHint
+
+
+##### createSummary
+will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
+/v2/trips/{reconstructionContext} (GET)
+Parameter "reconstructionContext" is given in any previous TripV2::reconstructionContext response by /v2/trips request.
 
 ##### /v2/trainFormation/{reconstructionContext}
 TrainFormation (de:Zugformation) may be requested for Legs with LegType.PUBLIC_JOURNEY by this API.
