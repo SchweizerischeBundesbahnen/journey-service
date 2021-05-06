@@ -206,7 +206,7 @@ Getting the right realtime conclusions can be tricky, therefore J-S provides con
 
 StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
 * ::boardingAlightingStatus
-* ::stopStatus
+* ::stopStatus s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
 
 About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
