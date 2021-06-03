@@ -21,13 +21,13 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 
 ## Technical aspects
 ### URLs
-We currently support 3 Openshift (OTC) environments for testing and operation by by **APIM `Customer information -> Journey-Service`**
+We currently support **3 APIM accessible Openshift environments** for `Customer information/journey`
  * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
  * **INT** via APIM https://developer-int.sbb.ch/apis/journey-service (solid state, release-candidates)
  * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
 
 Important:
-* All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM.
+* All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM. We recommend to **register for AzureAD** (SBB IAM confirmed high availability) as a primary SSO Token Service Provider. It is up to you if you register additionally for "redHat-SSO" (there were some known incidents in the past) as a fallback Token-Provider if AzureAD should fail temporarily (might be a good scenario for extremely business critical applications).
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ### Backward compatibility
@@ -68,6 +68,27 @@ In case you are using a framework, please check:
 Remark:
 * We customize our Jackson-Mapper for OffsetDateTime like:
     ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_WITH_ZONE_ID}).featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_AS_TIMESTAMPS}).featuresToDisable(new Object[]{DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE}).build();
+* if you use the generated ApiClient declare something like this:
+
+    ```
+    @Bean
+    public ApiClient apiClient() {
+        //TODO replace by WebClient
+        RestTemplate apiClientRestTemplate = new RestTemplate();
+        apiClientRestTemplate.getInterceptors().add(new ApimRequestInterceptor(this));
+        // make sure TIMEZONE offset is not Z(ulu) resp. UTC
+        MappingJackson2HttpMessageConverter mappingConverter = new MappingJackson2HttpMessageConverter();
+        mappingConverter.setObjectMapper(Jackson2ObjectMapperBuilder
+            .json()
+            .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+            .build());
+        apiClientRestTemplate.getMessageConverters().add(0, mappingConverter);
+        ApiClient client = new ApiClient(apiClientRestTemplate);
+        client.setBasePath(this.getEndpoint());
+        return client;
+    }
+    ```
+    
 
 #### journey-service-client (SBB staff only)
 
@@ -83,6 +104,9 @@ SBB Artifactory dependency:
         <version>${journey-service.version}</version>
     </dependency>
 
+Important versions:
+* until v2.19.12: Swagger2 ApiClient
+* from v2.20.x OpenAPI 3 ApiClient (consumers using Swagger2 ApiClient will have some code adaptions when upgrading)
 
 However, if the provided client does not work for you (for e.g. wrong Spring/SpringFox/Swagger-Annotation versions, ..) you may generate it yourself according to the [json-definitions](https://ki-journey-service.app.idefix.otc.sbb.ch/v2/api-docs?group=journey-service-api-2.0) related to the given contract:
 1. Create a [TestCase](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-boot/src/test/java/ch/sbb/ki/journeyservice/web/SwaggerDefinitionModelGeneratorTest.java) instantiating J-S and download the swagger-json-definition, for e.g. like 
@@ -96,6 +120,8 @@ Because J-S heavily relies on the Journey-Assistant library, also those [J-A Rel
 
 #### Blog announcements
 Check the blog: https://developer.sbb.ch/apis/journey-service/blog
+
+To stay up to date about new features or adjustments we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
 
 #### Model with version suffix
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ..?
@@ -113,6 +139,8 @@ OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B
 
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
+
+Further on consider our [Routing-basics](https://github.com/SchweizerischeBundesbahnen/journey-service-b2c/blob/master/Journey-Service_Routing-Basics.pdf)
 
 ### Choosing the right service definition
 Select the version of J-S REST-API: currently **v2**
@@ -146,39 +174,7 @@ For each Request to J-S set the mandatory header-fields and body fields.
 
 ### Response
 #### Error-handling
-See Swagger API doc concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST)
-
-In most cases the body will contain a detailed error, according to [RFC-7807](https://tools.ietf.org/html/rfc7807):
-* Header: HttpStatus resp. high-level error class
-* Body: finer-grained details of the problem (machine-readable format, the client can treat it appropriately) ** section 3.1 declares members of a Problem Details (problem+json) Object: status, type, title, detail, instance
-Error texts in "title" or "detail" will be given according to "CONTENT-LANGUAGE" (though mostly in english) and:
-* are not meant to display to end-users 1:1, proper error handling and displaying is the responsibility of the UI developer
-* can be used for consumer logging and might be helpful in postponed analysis tasks
-* the contents of such errors relate to underlying system and what J-S thinks is appropriate from the viewpoint of its layer
-
-For example, an HTTP response carrying JSON problem details:
-    HTTP/1.1 404 Not Found
-    Content-Type: application/problem+json
-    Content-Language: en
-    Log-Context: <your value replied>
-    {
-      "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips/{reconstructionContext}",
-      "title": "No entity/resource found (in Backend)",
-      "detail": "There was no trip found for your query arguments.",
-      "instance": "/v2/trips/{reconstructionContext}"
-    }
-
-SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
-
-##### 200 for emptyList, 404 for not found Object?
-v2 is based mostly on HTTP GET (idempotent), therefore various variants are technically possible to signal "No hits found"!
-
-The J-S team thinks it is best to return:
-* 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
-* 404 with an optional Error body as described above if an expected object cannot be found, for e.g. /v2/trips/{reconstructionContext} which may not resolve
-
-##### 400
-Swagger annotations are heavily used to validate the API. In such cases no error-body is returned sometimes. Please check the Swagger-UI carefully.
+See [Problem-Manual](Problem-Manual.md)
 
 #### Business data aspects
 Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
@@ -204,11 +200,13 @@ J-S sometimes provides fields with a "*Formatted" suffix which contain values, t
 * TransportProductV2::numberFormatted → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
 
 ##### Realtime analysis
+The SBB underlying systems may **provide realtime-data, typically TODAY only (~ NOW..+4h)**.
+
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
 
 StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
 * ::boardingAlightingStatus
-* ::stopStatus
+* ::stopStatus s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
 
 About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
@@ -281,32 +279,47 @@ Complex Journey-Planning (connections or de:Verbindungen) for travelling passeng
 
 #### /v2/trips
  
-Accessibility is supported on some transport-products (depends on given operator-data). The following Enum's have a Business Rule related hierarchy which is handled by response:
+##### Accessibility
+is supported on some transport-products (depends on given operator-data). The following Enum's have a Business Rule related hierarchy which is handled by response:
 * "BOARDING_ALIGHTING_SELF"
 * "BOARDING_ALIGHTING_BY_CREW"
 * "BOARDING_ALIGHTING_BY_NOTIFICATION"
- 
-Scrolling: any /trips request returns a set of TripV2 within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT":
-1. /trips inital search -> Response with "scroll*" Header-fields
-2. execute very same Request (identical parameters) and set Header scrollContext= with SCROLL-FORWARD or -BACKWARD value
- 
-Eco calculation comparing public transportation vs private car or airplane:
-* set request param "calculateEco":"true" -> check response for EcoBalance
-
-Vias are optional routing points to be included or avoided for trips.
-
-&trainFormationType= for performance reasons keep the default, if you are not interested in Train-Formations!
-By default no Train-Formation hints are given. You may then call /v2/trainFormation anyway, but to get an early hint specify HINT_ORIGIN_DESTINATION to get such an info on each TripV2::LegV2::formationHint
-
-
-&createSummary= will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
-/v2/trips/{reconstructionContext} (GET)
-Parameter "reconstructionContext" is given in any previous TripV2::reconstructionContext response by /v2/trips request.
 
 Be aware:
 * The goal is to recreate the origin TripV2 where the reconstructionContext is taken from
 if your interested in accessibility (de:Barriere frei) data, make sure the previous /v2/trips request called for &accessibility=
 however reconstruction is not guranteed for various reasons (realtime changes, ..) -> catch 404 therefore
+ 
+##### Scrolling
+any /trips request returns a set of TripV2 within 0..7 hits. To get previous or next hits use the Header field "SCROLL-CONTEXT":
+1. /trips inital search -> Response with "scroll*" Header-fields
+2. execute very same Request (identical parameters) and set Header scrollContext= with SCROLL-FORWARD or -BACKWARD value
+ 
+##### Eco calculation
+comparing public transportation vs private car or airplane:
+* set request param "calculateEco":"true" -> check response for EcoBalance
+
+##### Vias
+are optional routing points to be included or avoided for trip requests as a JSON Object parameter:
+
+&vias
+{"uic":mandatory Integer,"status":"BOARDING_ALIGHTING_NECESSARY","transportProducts":[list of TransportProduct-Category],"waittime":Integer in min.,"direct":true|false,"couchette":true|false,"sleepingCar":true|false}
+
+&notVias
+{"uic":mandatory Integer,"status":"NO_PASS_THROUGH"}  where possible status are: NO_PASS_THROUGH_META_STATION, NO_PASS_THROUGH
+
+&noChangesAt
+{"uic":mandatory Integer,"status":"NO_CHANGE"} where possible status are: NO_CHANGE_META_STATION, NO_CHANGE
+
+##### trainFormationType
+for performance reasons keep the default, if you are not interested in Train-Formations!
+By default no Train-Formation hints are given. You may then call /v2/trainFormation anyway, but to get an early hint specify HINT_ORIGIN_DESTINATION to get such an info on each TripV2::LegV2::formationHint
+
+
+##### createSummary
+will add a "TripV2::summary" as an overview with realtime and him-messages about the trip. Further on, in StopV2::stopStatus according to SBB Business Rule a state will be calculated
+/v2/trips/{reconstructionContext} (GET)
+Parameter "reconstructionContext" is given in any previous TripV2::reconstructionContext response by /v2/trips request.
 
 ##### /v2/trainFormation/{reconstructionContext}
 TrainFormation (de:Zugformation) may be requested for Legs with LegType.PUBLIC_JOURNEY by this API.
