@@ -41,7 +41,9 @@ To gain a better understanding on the capabilities provided by Journey-Service, 
 ### Step 2: Signing-up on the specific usage plan on the developer site 
 
 If you are ready to sign-up, please visite the site developer-sbb for [PROD](developer.sbb.ch) or [INT](developer-int.sbb.ch) to sign-up for the integration. 
-See page https://developer.sbb.ch/apisjourney-service.sbb.ch to find further information for the registration of the API Management. Different **usage plans** are available, which authenticates certain APIs and the number of requests/minute allowed (throtteling).
+
+See page https://developer.sbb.ch/apis/journey-service/information to find further information for the registration of the API Management. Different **usage plans** are available, which differ in the number of requests/minute per API.
+Note: integrate the TEST and/or INT-environment first and afterwards the PROD environment.  
 
 **Terms of usage:**
 * Always **choose "Azure AD" as primary JWT Token-Service provider**. If you run an extremely business critical Consumer-Application, we recommend you to register also for "redHat-SSO" as an alternate fallback scenario (but that is up to you).
