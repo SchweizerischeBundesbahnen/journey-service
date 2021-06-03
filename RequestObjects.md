@@ -11,6 +11,7 @@ CONTRA:
 
 ## v2 JSON Request Objects
 ### ViaStop
+Each ViaStop is a JSON object with the following Structure:
     {
       uic:mandatory Integer,
       status:BOARDING_ALIGHTING_NECESSARY,
@@ -20,7 +21,12 @@ CONTRA:
       couchette:true|false,
       sleepingCar:true|false
     }
-    
+
+
+* transportProducts="All" is default and may be ommited. Be aware that these transport-products will be considered at the start of this via until the next via (if given) or final destination (related to parameter transportProducts between origin and 1. via).
+* Possible status are: "BOARDING_ALIGHTING_NECESSARY" (default and may be omitted), "BOARDING_NOT_NECESSARY", "ALIGHTING_NOT_NECESSARY", "BOARDING_ALIGHTING_NOT_NECESSARY"
+* Direct has an impact from the Via to the next Via or until destination if no more vias.
+
 Examples:
 * `{"value":8507000,"transportProducts":["INTERREGIO"],"waittime":3}`
     
