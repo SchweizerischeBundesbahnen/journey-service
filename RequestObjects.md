@@ -1,4 +1,29 @@
-# J-S API
+# J-S API Request Params
+Journey-Service introduces by definition some JSON-Objects for single GET params with strongly related aspects.
+
+PRO:
+* easier understanding of releated params
+* changes are easier to maintain because of String "with outer format"
+* 
+CONTRA:
+* long params
+* perhaps more coding effort for Consumers
+
+## v2 JSON Request Objects
+### ViaStop
+    {
+      uic:mandatory Integer,
+      status:BOARDING_ALIGHTING_NECESSARY,
+      transportProducts:[list of TransportProduct-Category],
+      waittime:Integer in min.,
+      direct:true|false,
+      couchette:true|false,
+      sleepingCar:true|false
+    }
+    
+Examples:
+* `{"value":8507000,"transportProducts":["INTERREGIO"],"waittime":3}`
+    
 ## v3 JSON Request Objects
 
 Be aware:
@@ -23,3 +48,12 @@ Examples:
 ### ScheduledStopPointReference
 
 ### ViaReference
+    {
+      uic:mandatory Integer,
+      status:BOARDING_ALIGHTING_NECESSARY,
+      transportProducts:[list of TransportProduct-Category],
+      waittime:Integer in min.,
+      direct:true|false,
+      couchette:true|false,
+      sleepingCar:true|false
+    }
