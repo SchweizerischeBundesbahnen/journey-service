@@ -12,6 +12,7 @@ CONTRA:
 ## v2 JSON Request Objects
 ### ViaStop
 Each ViaStop is a JSON object with the following Structure:  
+
     {
       uic:mandatory Integer,
       status:BOARDING_ALIGHTING_NECESSARY,
