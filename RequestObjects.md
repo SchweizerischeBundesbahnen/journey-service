@@ -54,13 +54,16 @@ Examples:
 
 ### ScheduledStopPointReference
 
-### ViaReference
+### PTViaReference
     {
-      uic:mandatory Integer,
-      status:BOARDING_ALIGHTING_NECESSARY,
-      transportProducts:[list of TransportProduct-Category],
-      waittime:Integer in min.,
-      direct:true|false,
-      couchette:true|false,
-      sleepingCar:true|false
+      stopPlaceValue: <Integer(mandatory)>,
+      status: BOARDING_ALIGHTING_NECESSARY|,
+      vehicleModes:[<list of VehicleMode>],
+      waittime: <Integer (in min. >=0)>,
+      direct: true|false,
+      couchette: true|false,
+      sleepingCar: true|false
     }
+
+Examples:
+* `"{\"stopPlaceValue\":8507000,\"status\":\"" + ViaStatus.BOARDING_ALIGHTING_NECESSARY.name() + "\",\"vehicleModes\":[\"" + VehicleModeHelper.SBB_RAIL_MODE_IR + "\"],\"waittime\":3,\"direct\":true,\"couchette\":false,\"sleepingCar\":false}"`
