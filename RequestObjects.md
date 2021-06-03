@@ -9,10 +9,10 @@ Be aware:
 ### LineBlocked
 
 ### PlaceReference
-{
+`{
   "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
   "value":"<AbstractPlace::id>"|"<latitude>,<longitude>"
-}
+}`
   
 Examples:
 * {"type":"StopPlace","value":"8507000"}
