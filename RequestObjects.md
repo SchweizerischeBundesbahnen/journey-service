@@ -39,17 +39,32 @@ Be aware:
 ### LineReference
     {
         "productCategoryShortName":"<String>",
-        "lineValue":"<String>,
-        "number":"<String>,
-        "origin":"<ScheduledStopPointReference>,
-        "destination":"<ScheduledStopPointReference>,
+        "line":"<String>",
+        "number":"<String>",
+        "origin":"<ScheduledStopPointReference>",
+        "destination":"<ScheduledStopPointReference>",
     }
 
 Hint:
 * origin/destination is only relevant for &excludeLines params
 
 Examples:
-* `{"productCategoryShortName":"IC","lineValue":"1","number":"753"}`
+* `{"productCategoryShortName":"IC","line":"1","number":"753"}`
+
+### OperatorReference
+    {
+        "type":"OpentransportData"|"PLAIN",
+        "value":"<String>",
+    }
+
+Hint:
+* type=OpentransportData: Operator-numbers (de:Transportunternehmen) according to ['Business organisations' column 'Nummer'](https://opentransportdata.swiss/en/dataset/goch).
+* type="PLAIN": add Hafas translation of Operator as given in replies by Journey-Service or any other plain text for e.g. "LEX" or '10____'
+
+Examples:
+* `{"OpentransportData":"11"}`
+* `{"PLAIN":"Schweizerische Bundesbahnen SBB"}`
+* `{"PLAIN":"LEX"}`
 
 ### PlaceReference
     {
