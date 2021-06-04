@@ -53,18 +53,18 @@ Examples:
 
 ### OperatorReference
     {
-        "type":"OpentransportData"|"PLAIN",
+        "type":"PLAIN"(default) | "OpentransportData",
         "value":"<String>",
     }
 
 Hint:
-* type=OpentransportData: Operator-numbers (de:Transportunternehmen) according to ['Business organisations' column 'Nummer'](https://opentransportdata.swiss/en/dataset/goch).
-* type="PLAIN": add Hafas translation of Operator as given in replies by Journey-Service or any other plain text for e.g. "LEX" or '10____'
+* type="OpentransportData": Operator-numbers (de:Transportunternehmen) according to ['Business organisations' column 'Nummer'](https://opentransportdata.swiss/en/dataset/goch).
+* type="PLAIN": add Hafas translation of Operator as given in replies by Journey-Service or any other plain text for e.g. "LEX"
 
 Examples:
-* `{"OpentransportData":"11"}`
-* `{"PLAIN":"Schweizerische Bundesbahnen SBB"}`
-* `{"PLAIN":"LEX"}`
+* `{"type":"OpentransportData","value":"11"}`
+* `{"type":"PLAIN","value":"Schweizerische Bundesbahnen SBB"}`
+* `"LEX"` defaults to PLAIN
 
 ### PlaceReference
     {
