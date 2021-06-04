@@ -78,6 +78,12 @@ Examples:
 * `{"stopPlaceValue":"8507000"}`
 * `{"stopPlaceValue":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
 
+### PTViaNotReference
+TODO
+
+### PTNoChangesAtReference
+TODO
+
 ### ScheduledStopPointReference
     {
         "stopPlaceValue: "<StopPlace::id(mandatory)>",
