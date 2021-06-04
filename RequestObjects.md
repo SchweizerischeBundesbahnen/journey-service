@@ -37,8 +37,24 @@ Be aware:
 * Use URL encoding for GET params containing JSON-Objects!
 
 ### LineReference
+    {
+        "productCategoryShortName":"<String>",
+        "lineValue":"<String>,
+        "number":"<String>
+    }
+
+Examples:
+* `{"productCategoryShortName":"IC","lineValue":"1","number":"753"}`
 
 ### LineBlocked
+    {
+        "lineReference":"<LineReference>",
+        "origin":"<ScheduledStopPointReference>,
+        "destination":"<ScheduledStopPointReference>,
+    }
+
+Examples:
+* `{"lineReference"{"productCategoryShortName":"IC","lineValue":"1","number":"753"}, "origin"{..}, "destinatiopn"{..}}`
 
 ### PlaceReference
     {
@@ -53,10 +69,17 @@ Examples:
 * `"8507000"` (numeric) is a short convenience form defaulting to "StopPlace
 
 ### ScheduledStopPointReference
-
+    {
+        "stopPlaceValue: "<StopPlace::id(mandatory)>",
+        "dateTime":"<OffsetDateTime>
+    }
+    
+Examples:
+* `{"stopPlaceValue":"8507000","2021-06-14T15:01:00+02:00"}`
+* 
 ### PTViaReference
     {
-      stopPlaceValue: <Integer(mandatory)>,
+      stopPlaceValue: <StopPlace::id(mandatory)>,
       status: "BOARDING_ALIGHTING_NECESSARY" (default and may be omitted) | "BOARDING_NOT_NECESSARY" | "ALIGHTING_NOT_NECESSARY" | "BOARDING_ALIGHTING_NOT_NECESSARY",
       vehicleModes:[<list of VehicleMode>],
       waittime: <Integer (in min. >=0)>,
@@ -66,5 +89,5 @@ Examples:
     }
 
 Examples:
-* `"{\"stopPlaceValue\":8507000}`
-* `"{\"stopPlaceValue\":8507000,\"status\":\"" + ViaStatus.BOARDING_ALIGHTING_NECESSARY.name() + "\",\"vehicleModes\":[\"" + VehicleModeHelper.SBB_RAIL_MODE_IR + "\"],\"waittime\":3,\"direct\":true,\"couchette\":false,\"sleepingCar\":false}"`
+* `{"stopPlaceValue":"8507000"}`
+* `{"stopPlaceValue":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
