@@ -40,21 +40,16 @@ Be aware:
     {
         "productCategoryShortName":"<String>",
         "lineValue":"<String>,
-        "number":"<String>
-    }
-
-Examples:
-* `{"productCategoryShortName":"IC","lineValue":"1","number":"753"}`
-
-### LineBlocked
-    {
-        "lineReference":"<LineReference>",
+        "number":"<String>,
         "origin":"<ScheduledStopPointReference>,
         "destination":"<ScheduledStopPointReference>,
     }
 
+Hint:
+* origin/destination is only relevant for &excludeLines params
+
 Examples:
-* `{"lineReference"{"productCategoryShortName":"IC","lineValue":"1","number":"753"}, "origin"{..}, "destinatiopn"{..}}`
+* `{"productCategoryShortName":"IC","lineValue":"1","number":"753"}`
 
 ### PlaceReference
     {
@@ -68,15 +63,6 @@ Examples:
 * `{"type":"COORDINATES","value":"46.948658,7.437406"}`
 * `"8507000"` (numeric) is a short convenience form defaulting to "StopPlace
 
-### ScheduledStopPointReference
-    {
-        "stopPlaceValue: "<StopPlace::id(mandatory)>",
-        "dateTime":"<OffsetDateTime>
-    }
-    
-Examples:
-* `{"stopPlaceValue":"8507000","2021-06-14T15:01:00+02:00"}`
-* 
 ### PTViaReference
     {
       stopPlaceValue: <StopPlace::id(mandatory)>,
@@ -91,3 +77,12 @@ Examples:
 Examples:
 * `{"stopPlaceValue":"8507000"}`
 * `{"stopPlaceValue":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
+
+### ScheduledStopPointReference
+    {
+        "stopPlaceValue: "<StopPlace::id(mandatory)>",
+        "dateTime":"<OffsetDateTime>
+    }
+    
+Examples:
+* `{"stopPlaceValue":"8507000","2021-06-14T15:01:00+02:00"}`
