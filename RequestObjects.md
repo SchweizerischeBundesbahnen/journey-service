@@ -81,7 +81,7 @@ Examples:
 ### PTViaNotReference
 TODO
 
-### PTNoChangesAtReference
+### PTNoChangeAtReference
 TODO
 
 ### ScheduledStopPointReference
