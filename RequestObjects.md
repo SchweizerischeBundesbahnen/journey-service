@@ -70,13 +70,16 @@ Examples:
 ### PlaceReference
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
-      "value":"<AbstractPlace::id>"|"<latitude>,<longitude>"
+      "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
     }
+    
+Remark:
+* For COORDINATES GeoJSON lon/lat order is evaluated (vice versa of J-S v2!).
   
 Examples:
 * `{"type":"StopPlace","value":"8507000"}`
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
-* `{"type":"COORDINATES","value":"46.948658,7.437406"}`
+* `{"type":"COORDINATES","value":"7.437406,46.948658"}`
 * `"8507000"` (numeric) is a short convenience form defaulting to "StopPlace
 
 ### PTViaReference
