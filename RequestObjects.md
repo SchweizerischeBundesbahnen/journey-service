@@ -10,6 +10,18 @@ CONTRA:
 * perhaps more coding effort for Consumers
 
 ## v2 JSON Request Objects
+### CarReference
+{
+      "type":"UIC"|"BEACON",
+      "value":"<carUic>"|"<Beacon.MajorId>"
+    }
+    
+  
+Examples:
+* `94 85 123 123 - 2` or `94851231232` is a short convenience form defaulting to type="CAR_UIC"
+* `{"type":"UIC","value":"94 85 123 123 - 2"}` or value like 94851231232
+* `{"type":"BEACON","value":"15011"}`
+
 ### ViaStop
 Each ViaStop is a JSON object with the following Structure:  
 
@@ -80,7 +92,7 @@ Examples:
 * `{"type":"StopPlace","value":"8507000"}`
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
 * `{"type":"COORDINATES","value":"7.437406,46.948658"}`
-* `"8507000"` (numeric) is a short convenience form defaulting to "StopPlace
+* `"8507000"` (numeric) is a short convenience form defaulting to type="StopPlace"
 
 ### PTViaReference
     {
