@@ -6,7 +6,7 @@ PRO:
 * changes are easier to maintain because of String "with outer format"
 * 
 CONTRA:
-* long params
+* long params -> leads rather to POST 
 * perhaps more coding effort for Consumers
 
 ## v2 JSON Request Objects
@@ -18,8 +18,8 @@ CONTRA:
     
   
 Examples:
-* `94 85 123 123 - 2` or `94851231232` is a short convenience form defaulting to type="CAR_UIC"
-* `{"type":"UIC","value":"94 85 123 123 - 2"}` or value like 94851231232
+* `94 85 123 123 - 2` or `94851231232` is a short convenience form defaulting to type="UIC", variations with or without whitespaces and hyphen
+* `{"type":"UIC","value":"94 85 123 123 - 2"}` or value like "94851231232"
 * `{"type":"BEACON","value":"15011"}`
 
 ### ViaStop
