@@ -11,7 +11,7 @@ CONTRA:
 
 ## v2 JSON Request Objects
 ### CarReference
-{
+    {
       "type":"UIC"|"BEACON",
       "value":"<carUic>"|"<Beacon.MajorId>"
     }
