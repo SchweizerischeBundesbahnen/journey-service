@@ -58,7 +58,9 @@ Be aware:
     }
 
 Hint:
-* origin/destination is only relevant for &excludeLines params
+* origin/destination is relevant for
+    * &excludeLines params
+    * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
 
 Examples:
 * `{"productCategoryShortName":"IC","line":"1","number":"753"}`
