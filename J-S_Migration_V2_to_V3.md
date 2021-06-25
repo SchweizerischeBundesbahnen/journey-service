@@ -8,5 +8,9 @@ Remark:
 
 | V3                    | V2                              | J-A                           |
 | --------------------- | ------------------------------- |-----------------------------  |
-| ServiceJourneyPattern | see J-A     --------------------| JourneySegment                |
+| ServiceJourneyPattern | see J-A                         | JourneySegment                |
 | PTRideLeg             | LegV2 (::type=PUBLIC_TRANSPORT) | Leg (::type=PUBLIC_TRANSPORT) |
+| AccessLeg             | LegV2 (::type=FOOTPATH)         | Leg (::type=FOOTPATH)         |
+| PTConnectionLeg       | LegV2 (::type=TRANSFER)         | Leg (::type=TRANSFER)         |
+| Notice                | see J-A                         | Note                          |
+| PTSituationMessage    | HimMessageV2                    | Message                       |
