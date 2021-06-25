@@ -41,6 +41,8 @@ Remark:
 |                          | /routes                         | RouteAssistant                |
 |                          | /traffic                        | HimAssistant                  |
 |                          | /info                           | TimetableAssistant            |
+| see /trips               | /trainFormation                 | TrainFormationFacade          |
+
 
 ## Generated ApiClient
 OpenApi 3 based, see [Swagger2 -> OpenAPI 3](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/SwitchingSwagger2ToOpenApi3.md)
