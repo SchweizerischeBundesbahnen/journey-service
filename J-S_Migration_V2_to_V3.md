@@ -36,6 +36,11 @@ Remark:
 | J-S v3                   | J-S v2                          | J-A                           |
 | ------------------------ | ------------------------------- |-----------------------------  |
 | /places                  | /locations                      | LocationAssistant             |
+| /trips                   | /trips                          | TripAssistant                 |
+|                          | /departures, /arrivals          | StationboardAssistant         |
+|                          | /routes                         | RouteAssistant                |
+|                          | /traffic                        | HimAssistant                  |
+|                          | /info                           | TimetableAssistant            |
 
 ## Generated ApiClient
 OpenApi 3 based, see [Swagger2 -> OpenAPI 3](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/SwitchingSwagger2ToOpenApi3.md)
