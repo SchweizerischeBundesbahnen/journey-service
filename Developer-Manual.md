@@ -31,6 +31,7 @@ Important:
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ### Backward compatibility
+Considering [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md): 
 We have different concepts to maintain backward compatibility:
 
 #### URL versioning
