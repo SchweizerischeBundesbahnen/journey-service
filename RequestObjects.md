@@ -89,9 +89,11 @@ Examples:
     
 Remark:
 * For COORDINATES GeoJSON lon/lat order is evaluated (vice versa of J-S v2!).
+* type "StopPlace" is default, specificatin is optional
   
 Examples:
 * `{"type":"StopPlace","value":"8507000"}`
+* `{"value":"8507000"}` will be interpreted as StopPlace
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
 * `{"type":"COORDINATES","value":"7.437406,46.948658"}`
 * `"8507000"` (numeric) is a short convenience form defaulting to type="StopPlace"
