@@ -127,3 +127,10 @@ TODO
     
 Examples:
 * `{"stopPlaceValue":"8507000","2021-06-14T15:01:00+02:00"}`
+
+# J-S API Response Params
+## J-S  v2
+
+## J-S v3
+
+Notice::text contains a special Object
