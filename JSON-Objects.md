@@ -54,7 +54,7 @@ Be aware:
         "line":"<String>",
         "number":"<String>",
         "origin":"<ScheduledStopPointReference>",
-        "destination":"<ScheduledStopPointReference>",
+        "destination":"<ScheduledStopPointReference>"
     }
 
 Hint:
@@ -69,7 +69,7 @@ Examples:
 ### OperatorReference
     {
         "type":"PLAIN"(default) | "OpentransportData",
-        "value":"<String>",
+        "value":"<String>"
     }
 
 Hint:
