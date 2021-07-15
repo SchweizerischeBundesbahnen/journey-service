@@ -50,7 +50,7 @@ Be aware:
 
 ### LineReference
     {
-        "productCategoryShortName":"<String>",
+        "productCategoryShortName":"<String(mandatory)>",
         "line":"<String>",
         "number":"<String>",
         "origin":"<ScheduledStopPointReference>",
@@ -58,7 +58,8 @@ Be aware:
     }
 
 Hint:
-* origin/destination is relevant for
+* line and/or number must be given
+*  origin/destination is relevant for
     * &excludeLines params
     * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
 
