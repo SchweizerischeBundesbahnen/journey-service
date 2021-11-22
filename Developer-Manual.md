@@ -171,7 +171,12 @@ According to **SBB KI strategy (de:Kundeninformation)** it is a **declared goal 
 Some expressions are even related to **conventions by [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html), SBB Infrastructure, SBB Personenverkehr or public transport Switzerland** in general.
 
 ### Request
-For each Request to J-S set the mandatory header-fields and body fields.
+For each Request to J-S set the mandatory header-fields (especially "Authorization", "Request-Id", Accept-Language) and body fields as given in the [Service-Contract per API](https://developer.sbb.ch/apis/journey-service/documentation).
+
+A word about GET and POST:
+* J-S offers **genererally idempotent GET** requests (since "Journey-Planners" are mostly information providing systems). However for technical reasons (like very long URL) a few APIs are specificied according to [SBB RESTful Principles: GET with BODY](https://schweizerischebundesbahnen.github.io/api-principles/restful/principles/#get-with-body) or [Zalando RESTful](https://opensource.zalando.com/restful-api-guidelines/#get-with-body). Both variants are implemented according to this rule:
+1. **GET** with **complex parameters enforce JSON-Objects** (as consumer you will have to URL encode such JSON objects to prevent transmitting marshalling faults)
+2. **POST** replacements like /v3/trips/* are still to be understood as an **idempotent** GET request, the API description contains a hint like _Idempotent GET with Body_.
 
 ### Response
 #### Error-handling
