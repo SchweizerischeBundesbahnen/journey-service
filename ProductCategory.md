@@ -3,7 +3,7 @@
 The underlying Public-Transportation Router may distinct 10 Product categories which are described by **SBB P Data-Management** below (Data may change over time, consider this as guideline and not as current exact match).
 
 Important:
-* relates to v580 [FIScommun 06 Harmonisierung Verkehrsmittel](https://www.allianceswisspass.ch/de/asp/Downloadsindex.php?section=downloads&download=14462)
+* relates to [v580 de:06 Harmonisierung Verkehrsmittel](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1) resp.  [FIScommun 06 Harmonisierung Verkehrsmittel (download)](https://www.allianceswisspass.ch/de/asp/Downloadsindex.php?section=downloads&download=14462)
 * relates to Opentransportdata.swiss [**Transportmodes** (de:Verkehrsmittel) and **Transport Subomodes**](https://opentransportdata.swiss/de/dataset/verkehrsmittellisten)
 
 ## Routable Product-categories
