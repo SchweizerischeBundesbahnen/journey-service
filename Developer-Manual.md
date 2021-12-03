@@ -42,7 +42,7 @@ Any **APIs with `/b2c/v2/INCUBATOR/*` in their URL are highly @Experimental and 
 #### Deprecated stuff
 Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
 
-Some **properties in response models might have a "description" like "@Deprecated use ... instead"**. Unfortunately such marks are not optically supported by Swagger and you have to go through each model-property description carefully.
+Some **properties in response models might have a "description" like "@Deprecated use ... instead"**, to lead you into correcting steps.
 
 Important:
 * The **generated journey-service-client (see below) does not show any `@Deprecated` fields**, therefore you have to check the Swagger Doc carefully for your cases.
