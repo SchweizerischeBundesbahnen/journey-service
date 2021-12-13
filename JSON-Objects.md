@@ -75,7 +75,7 @@ Examples:
 
 Hint:
 * type="NUMBER": Operator-number (de:Transportunternehmen) according to ['Business organisations' column 'Nummer'](https://opentransportdata.swiss/en/dataset/goch).
-* type="TEXT": add Hafas translation of Operator::name as given in replies by Journey-Service or any other plain text for e.g. "LEX" (which are not defined in opentransportdata.swiss)
+* type="TEXT": add ['Business organisations' column 'BEZEICHNUNG_DE'](https://opentransportdata.swiss/en/dataset/goch) or Hafas translation of Operator::name as given in replies  by Journey-Service or any other foreign plain text for e.g. "LEX" (which are not defined in opentransportdata.swiss)
 
 Examples:
 * `{"type":"NUMBER","value":"11"}`
