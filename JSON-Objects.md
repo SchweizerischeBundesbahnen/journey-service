@@ -87,6 +87,10 @@ We support 2 variants:
 #### Plain value
 As given in **AbstractPlace::id** (StopPlace::id, AddressPlace::id or PoiPlace::id) returned by J-S responses:
 
+Examples:
+* `"8507000"` (StopPlace::id or UIC) is a short convenience form defaulting to type="StopPlace"
+* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience for an AddressPlace or PoiPlace
+
 #### Explicite JSON Object "PlaceReference":
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
@@ -98,8 +102,6 @@ Remark:
 * type "StopPlace" is default, specificatin is optional
   
 Examples:
-* `"8507000"` (StopPlace::id or UIC) is a short convenience form defaulting to type="StopPlace"
-* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience for an AddressPlace or PoiPlace
 * `{"type":"StopPlace","value":"8507000"}`
 * `{"value":"8507000"}` will be interpreted as StopPlace
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
