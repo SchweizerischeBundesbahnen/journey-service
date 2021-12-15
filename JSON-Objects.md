@@ -83,22 +83,28 @@ Examples:
 * `"LEX"` defaults to TEXT
 
 ### PlaceReference
+We support 2 variants:
+#### Plain value
+As given in **AbstractPlace::id** (StopPlace::id, AddressPlace::id or PoiPlace::id) returned by J-S responses:
+
+#### Explicite JSON Object "PlaceReference":
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
     }
     
 Remark:
-* For COORDINATES GeoJSON lon/lat order is evaluated (vice versa of J-S v2!).
+* For COORDINATES **GeoJSON lon/lat order** is evaluated (unfortunately vice versa of J-S v2!).
 * type "StopPlace" is default, specificatin is optional
   
 Examples:
+* `"8507000"` (StopPlace::id or UIC) is a short convenience form defaulting to type="StopPlace"
+* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience for an AddressPlace or PoiPlace
 * `{"type":"StopPlace","value":"8507000"}`
 * `{"value":"8507000"}` will be interpreted as StopPlace
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
 * `{"type":"PoiPlace","value":"A=4@O=Pontresina, Polizei@X=9904773@Y=46489423@U=104@L=980045242@B=1@p=1603115030@"}`
 * `{"type":"COORDINATES","value":"7.437406,46.948658"}`
-* `"8507000"` (numeric) is a short convenience form defaulting to type="StopPlace"
 
 ### PTViaReference
     {
