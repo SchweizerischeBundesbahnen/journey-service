@@ -88,8 +88,8 @@ We support 2 variants:
 As given in **AbstractPlace::id** (StopPlace::id, AddressPlace::id or PoiPlace::id) returned by J-S responses:
 
 Examples:
-* `"8507000"` (StopPlace::id or UIC) is a short convenience form defaulting to type="StopPlace"
-* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience for an AddressPlace or PoiPlace
+* `"8507000"` (StopPlace::id or UIC) is a short convenience form for PlaceReference::type="StopPlace"
+* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience form for PlaceReference::type="AddressPlace" or "PoiPlace"
 
 #### Explicite JSON Object "PlaceReference":
     {
