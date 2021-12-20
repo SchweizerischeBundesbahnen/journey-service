@@ -64,7 +64,10 @@ Hint:
     * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
 
 Examples:
-* `{"productCategoryShortName":"IC","line":"1","number":"753"}`
+* `"IC-1-753"` // 
+* `"IC-1"`   // productCategoryShort - line
+* `"--753"`  // number only, in CH unique (implicites time and direction)
+*  `{"productCategoryShortName":"IC","line":"1","number":"753"}`
 * `{"productCategoryShortName":"IC","line":"1","number":"711","start":{"stopPlaceValue":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceValue":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
 
 ### OperatorReference
@@ -80,7 +83,9 @@ Hint:
 Examples:
 * `{"type":"NUMBER","value":"11"}`
 * `{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`
-* `"LEX"` defaults to TEXT
+* `"LEX"` or `"Schweizerische Bundesbahnen SBB"` defaults to TEXT
+* **`"11"` or `"000011"`** defaults to NUMBER CH (in this case SBB)
+* `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
 
 ### PlaceReference
 We support 2 variants:
@@ -90,6 +95,7 @@ As given in **AbstractPlace::id** (StopPlace::id, AddressPlace::id or PoiPlace::
 Examples:
 * `"8507000"` (StopPlace::id or UIC) is a short convenience form for PlaceReference::type="StopPlace"
 * `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience form for PlaceReference::type="AddressPlace" or "PoiPlace"
+* `"[7.435194,46.945679]"` // WGS84 [lon, lat] ~Bern
 
 #### Explicite JSON Object "PlaceReference":
     {
