@@ -88,16 +88,18 @@ Examples:
 * `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
 
 ### PlaceReference
-We support 2 variants:
+
 #### Plain value
-As given in **AbstractPlace::id** (StopPlace::id, AddressPlace::id or PoiPlace::id) returned by J-S responses:
+As given in **AbstractPlace::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses:
 
 Examples:
-* `"8507000"` (StopPlace::id or UIC) is a short convenience form for PlaceReference::type="StopPlace"
-* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` is a short convenience form for PlaceReference::type="AddressPlace" or "PoiPlace"
-* `"[7.435194,46.945679]"` // WGS84 [lon, lat] ~Bern
+* `"8507000"` (official station UIC)
+* `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` as returned by J-S `AddressPlace::id` or `PoiPlace::id`
 
-#### Explicite JSON Object "PlaceReference":
+Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
+* `"[7.435194,46.945679]"` ~Bern, CH
+
+#### ~~Explicite JSON Object "PlaceReference"~~
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
@@ -105,7 +107,7 @@ Examples:
     
 Remark:
 * For COORDINATES **GeoJSON lon/lat order** is evaluated (unfortunately vice versa of J-S v2!).
-* type "StopPlace" is default, specificatin is optional
+* type "StopPlace" is default, specification is optional
   
 Examples:
 * `{"type":"StopPlace","value":"8507000"}`
