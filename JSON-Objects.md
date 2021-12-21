@@ -100,12 +100,12 @@ Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
 * `"[7.435194,46.945679]"` ~Bern, CH
 
 #### ~~Explicite JSON Object "PlaceReference"~~
-    ~~{
+    {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
-    }~~
+    }
     
-~~Remark:
+Remark:
 * For COORDINATES **GeoJSON lon/lat order** is evaluated (unfortunately vice versa of J-S v2!).
 * type "StopPlace" is default, specification is optional
   
