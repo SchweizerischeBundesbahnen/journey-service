@@ -99,7 +99,7 @@ Examples:
 Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
 * `"[7.435194,46.945679]"` ~Bern, CH
 
-#### ~~Explicite JSON Object "PlaceReference"~~
+#### ~~Explicite JSON Object "PlaceReference"
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
@@ -114,7 +114,7 @@ Examples:
 * `{"value":"8507000"}` will be interpreted as StopPlace
 * `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
 * `{"type":"PoiPlace","value":"A=4@O=Pontresina, Polizei@X=9904773@Y=46489423@U=104@L=980045242@B=1@p=1603115030@"}`
-* `{"type":"COORDINATES","value":"7.437406,46.948658"}`
+* `{"type":"COORDINATES","value":"7.437406,46.948658"}`~~
 
 ### PTViaReference
     {
