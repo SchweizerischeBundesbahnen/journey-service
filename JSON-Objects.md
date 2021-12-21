@@ -99,7 +99,7 @@ Examples:
 Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
 * `"[7.435194,46.945679]"` ~Bern, CH
 
-#### ~~Explicite JSON Object "PlaceReference"~~
+#### DEPRECATED ~~Explicite JSON Object "PlaceReference"~~
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
