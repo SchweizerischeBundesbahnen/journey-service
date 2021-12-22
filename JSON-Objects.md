@@ -81,10 +81,7 @@ Hint:
     * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
 
 Examples:
-* `"IC-1-753"` // 
-* `"IC-1"`   // productCategoryShort - line
-* `"--753"`  // number only, in CH unique (implicites time and direction)
-*  `{"productCategoryShortName":"IC","line":"1","number":"753"}`
+* `{"productCategoryShortName":"IC","line":"1","number":"753"}`
 * `{"productCategoryShortName":"IC","line":"1","number":"711","start":{"stopPlaceValue":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceValue":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
 
 ### OperatorReference
