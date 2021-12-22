@@ -12,7 +12,7 @@ Allocation to the different classes:
 ### Train categories (NeTEx "rail", J-S VehicleMode "TRAIN")
 v580 de:Verkehrsträger Schiene
 
-#### Class "ICE/TGV/RJX" 
+#### Class "ICE/TGV/RJX" (SBB class=0)
 Contains Transport Submodes:
 * ARC - Arco
 * ATR - Altaria
@@ -34,7 +34,7 @@ Contains Transport Submodes:
 * UUU - Unbekannte Art
 * X2 - X2000 tilting train
 
-#### Class "EC/IC" (SBB category(0))
+#### Class "EC/IC" (SBB class=1)
 Contains Transport Submodes:
 * EC - EuroCity
 * IC - InterCity
@@ -42,12 +42,12 @@ Contains Transport Submodes:
 * IN - InterCityNight
 * TAL - Talgo
 
-#### Class "IR/PE" (SBB category(1))
+#### Class "IR/PE" (SBB class=2)
 Contains Transport Submodes:
 * IR - InterRegio
 * PE - PanoramaExpress
 
-#### Class "RE"
+#### Class "RE" (SBB class=3)
 Contains Transport Submodes:
 * AIR - aircraft
 * CAT - City Airport Train
@@ -56,7 +56,7 @@ Contains Transport Submodes:
 * RB - Regionalbahn
 * RE - RegioExpress
 
-#### Class "S/SN/R"
+#### Class "S/SN/R" (SBB class=5)
 Contains Transport Submodes:
 * E - Semi fast train
 * R - Regio
@@ -65,7 +65,7 @@ Contains Transport Submodes:
 * STB - Stadtbahn
 * TER - Train Express Regional
 
-#### Class "Car Train/Special event train" 
+#### Class "Car Train/Special event train" (SBB class=8)
 Contains Transport Submodes:
 * AG - Agencytrain
 * ARZ - Car-carrying train
@@ -74,16 +74,20 @@ Contains Transport Submodes:
 * WB - Westbahn
 * ZUG - Train category unknown
 
-### Tram category (NeTEx "tram")
+### Tram category (NeTEx "tram") 
 v580 de:Verkehrsträger Tram
 
-#### Class Tram
+#### Class Tram (SBB class=9)
 * T - Tramway
+
+(At SBB might contain METRO as well.)
 
 ### Metro category (NeTEx "metro")
 v580 de:Verkehrsträger Metro
 
-#### Class Metro
+(Not available yet, see "Tram")
+
+#### Class Metro (SBB not supported as own class)
 * M - Metro
 	
 #### Class Cog railway
@@ -94,7 +98,7 @@ By definition **use category Funicular** to search for such journeys within Jour
 ### Road categories (NeTEx "bus")
 v580 de:Verkehrsträger Strasse
 
-#### Class "Bus"
+#### Class "Bus" (SBB class=6)
 Contains Transport Submodes:
 * B - Bus
 * BN - Nightbus
@@ -108,10 +112,13 @@ Contains Transport Submodes:
 * RUB - On-call bus
 * TX - Taxi
 
+#### Class "Taxi"
+(Not available yet, see "Bus")
+
 ### Cableway (NeTEx "cableway, funicular")
 v580 de:Verkehrsträger Seil(-bahn)
 
-#### Class Cableway/Funicular 
+#### Class Cableway/Funicular (SBB class=7)
 Contains Transport Submodes:
 * ASC - Lift
 * CC - Rack-railroad
@@ -128,7 +135,7 @@ v580 de:Verkehrsmittelkategorie Aufzug
 ### Water categories (NeTEx "water")
 v580 de:Verkehrsträger Wasser
 
-#### Class "Ship"
+#### Class "Ship" (SBB class=4)
 Contains Transport Submodes:
 * BAT - Ship
 * FAE - Ferry-boat
