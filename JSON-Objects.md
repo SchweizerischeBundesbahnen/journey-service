@@ -49,6 +49,23 @@ Be aware:
 * Use URL encoding for GET params containing JSON-Objects!
 
 ### LineReference
+
+#### Plain value
+
+`<productCategoryShortName> <line> <number>`
+
+Various content is possible:
+* typically either productCategoryShortName AND (line AND/OR number)
+* just number
+
+For semantic parsing, specify always all 3 elements, if one is unknown use '-'.
+Examples:
+* `"IC 1 753"`  
+* `"IC 1 -"`   // productCategoryShort - line
+* `"IC - 753"`   // productCategoryShort - line
+* `"--753"`    // number only, in CH unique (implicites time and direction)
+
+#### DEPRECATED ~~JSON Object Explicite JSON Object `LineReference`~~
     {
         "productCategoryShortName":"<String(mandatory)>",
         "line":"<String>",
@@ -99,7 +116,7 @@ Examples:
 Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
 * `"[7.435194,46.945679]"` ~Bern, CH
 
-#### DEPRECATED ~~Explicite JSON Object "PlaceReference"~~
+#### DEPRECATED ~~Explicite JSON Object `PlaceReference`~~
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
       "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
