@@ -9,7 +9,7 @@ Important:
 ## Routable Product-categories
 Allocation to the different classes:
 
-### Train categories (NeTEx "rail")
+### Train categories (NeTEx "rail", J-S VehicleMode "TRAIN")
 v580 de:Verkehrsträger Schiene
 
 #### Class "ICE/TGV/RJX" 
@@ -34,7 +34,7 @@ Contains Transport Submodes:
 * UUU - Unbekannte Art
 * X2 - X2000 tilting train
 
-#### Class "EC/IC"
+#### Class "EC/IC" (SBB category(0))
 Contains Transport Submodes:
 * EC - EuroCity
 * IC - InterCity
@@ -42,7 +42,7 @@ Contains Transport Submodes:
 * IN - InterCityNight
 * TAL - Talgo
 
-#### Class "IR/PE"
+#### Class "IR/PE" (SBB category(1))
 Contains Transport Submodes:
 * IR - InterRegio
 * PE - PanoramaExpress
