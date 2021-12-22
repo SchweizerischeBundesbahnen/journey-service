@@ -52,18 +52,21 @@ Be aware:
 
 #### Plain value
 
-`<productCategoryShortName> <line> <number>`
+Analog returned `Line::name`.
+
+`<productCategoryShortName>SPACE<line>SPACE<number>`
 
 Various content is possible:
 * typically either productCategoryShortName AND (line AND/OR number)
 * just number
 
-For semantic parsing, specify always all 3 elements, if one is unknown use '-'.
+For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.
 Examples:
-* `"IC-1-753"`  
-* `"IC-1-"`     // productCategoryShort - line
-* `"IC--753"`   // productCategoryShort - line
-* `"--753"`     // number only, in CH unique (implicites time and direction)
+
+* `"IC 1 753"`  
+* `"IC 1 -"`     // productCategoryShort - line
+* `"IC - 753"`   // productCategoryShort - line
+* `"- - 753"`    // number only, in CH unique (implicites time and direction)
 
 #### DEPRECATED ~~JSON Object Explicite JSON Object `LineReference`~~
     {
@@ -110,8 +113,8 @@ Examples:
 * `"8507000"` (official station UIC)
 * `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` as returned by J-S `AddressPlace::id` or `PoiPlace::id`
 
-Or **GeoJSON `Point`** given in WGS84 decimal-degrees "[<lon>, <lat>]"
-* `"[7.435194,46.945679]"` ~Bern, CH
+Or **[GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) `Point`** given _`"[<lon>,<lat>]"`_ in WGS84 decimal-degrees:
+* `"[7.43519,46.94567]"` ~Bern, CH
 
 #### DEPRECATED ~~Explicite JSON Object `PlaceReference`~~
     {
