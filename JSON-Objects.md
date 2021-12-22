@@ -60,10 +60,10 @@ Various content is possible:
 
 For semantic parsing, specify always all 3 elements, if one is unknown use '-'.
 Examples:
-* `"IC 1 753"`  
-* `"IC 1 -"`   // productCategoryShort - line
-* `"IC - 753"`   // productCategoryShort - line
-* `"--753"`    // number only, in CH unique (implicites time and direction)
+* `"IC-1-753"`  
+* `"IC-1-"`     // productCategoryShort - line
+* `"IC--753"`   // productCategoryShort - line
+* `"--753"`     // number only, in CH unique (implicites time and direction)
 
 #### DEPRECATED ~~JSON Object Explicite JSON Object `LineReference`~~
     {
