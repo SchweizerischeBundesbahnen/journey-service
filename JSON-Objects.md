@@ -101,7 +101,7 @@ Examples:
 * `"Schweizerische Bundesbahnen SBB"` as `BEZEICHNUNG_DE` in Business Organisation and defaults to TEXT (and can also be found with "NUMMER=11")
 * `"11"` as `NUMMER`or `"000011"` as returned by J-S `Operator::id` defaults to NUMBER CH (J-S will make a lookup itself to access underlying systems)
 * `LEX`or `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
-* 
+
 #### DEPRECATED ~~Explicite JSON Object `OperatorReference`~~
 
     {
