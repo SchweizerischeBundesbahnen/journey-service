@@ -88,21 +88,30 @@ Examples:
 * `{"productCategoryShortName":"IC","line":"1","number":"711","start":{"stopPlaceValue":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceValue":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
 
 ### OperatorReference
+
+For **Switzerland**, see managed Transport-Organsiations in **['Business organisations](https://opentransportdata.swiss/en/dataset/goch)**:
+* type="NUMBER" corresponds to **column 'NUMMER'**
+* type="TEXT" corresponds **column `BEZEICHNUNG_DE`**, be aware other translations are not supported at request time
+
+For international Transport-Organisations there is no such managed list, check and reuse what J-S returns as `Operator::name`.
+
+#### Plain value
+
+Examples:
+* `"Schweizerische Bundesbahnen SBB"` as `BEZEICHNUNG_DE` in Business Organisation and defaults to TEXT (and can also be found with "NUMMER=11")
+* `"11"` as `NUMMER`or `"000011"` as returned by J-S `Operator::id` defaults to NUMBER CH (J-S will make a lookup itself to access underlying systems)
+* `LEX`or `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
+* 
+#### DEPRECATED ~~Explicite JSON Object `OperatorReference`~~
+
     {
         "type":"TEXT"(default) | "NUMBER",
         "value":"<String>"
     }
 
-Hint:
-* type="NUMBER": Operator-number (de:Transportunternehmen) according to ['Business organisations' column 'Nummer'](https://opentransportdata.swiss/en/dataset/goch).
-* type="TEXT": add ['Business organisations' column 'BEZEICHNUNG_DE'](https://opentransportdata.swiss/en/dataset/goch) or Hafas translation of Operator::name as given in replies  by Journey-Service or any other foreign plain text for e.g. "LEX" (which are not defined in opentransportdata.swiss)
-
 Examples:
 * `{"type":"NUMBER","value":"11"}`
 * `{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`
-* `"LEX"` or `"Schweizerische Bundesbahnen SBB"` defaults to TEXT
-* **`"11"` or `"000011"`** defaults to NUMBER CH (in this case SBB)
-* `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
 
 ### PlaceReference
 
