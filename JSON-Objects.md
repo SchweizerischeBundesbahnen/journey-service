@@ -54,7 +54,7 @@ Be aware:
 
 Analog returned `Line::name`.
 
-`<productCategoryShortName>SPACE<line>SPACE<number>`
+Related to `TransportProductV2` -> `<productCategoryShortName>SPACE<line>SPACE<number>`
 
 Various content is possible:
 * typically either productCategoryShortName AND (line AND/OR number)
@@ -68,24 +68,17 @@ Examples:
 * `"IC - 753"`   // productCategoryShort - line
 * `"- - 753"`    // number only, in CH unique (implicites time and direction)
 
-#### DEPRECATED ~~JSON Object Explicite JSON Object `LineReference`~~
-    {
-        "productCategoryShortName":"<String(mandatory)>",
-        "line":"<String>",
-        "number":"<String>",
-        "origin":"<ScheduledStopPointReference>",
-        "destination":"<ScheduledStopPointReference>"
-    }
+#### JSON object
 
 Hint:
-* line and/or number must be given
-*  origin/destination is relevant for
+* `name` must be given
+*  `ScheduledStopPointReference` start/end is optional but relevant for e.g.:
     * &excludeLines params
     * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
 
 Examples:
-* `{"productCategoryShortName":"IC","line":"1","number":"753"}`
-* `{"productCategoryShortName":"IC","line":"1","number":"711","start":{"stopPlaceValue":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceValue":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
+* `{"name":"IC 1 753"}`
+* `{"name":"IC 1 711","start":{"stopPlaceId":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceId":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
 
 ### OperatorReference
 
@@ -128,7 +121,7 @@ Or **[GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) `Point`** given _`
 #### DEPRECATED ~~Explicite JSON Object `PlaceReference`~~
     {
       "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
-      "value":"<AbstractPlace::id>"|"<longitude>,<latitude>"
+      "placeId":"<AbstractPlace::id>"|"<longitude>,<latitude>"
     }
     
 Remark:
@@ -136,15 +129,15 @@ Remark:
 * type "StopPlace" is default, specification is optional
   
 Examples:
-* `{"type":"StopPlace","value":"8507000"}`
-* `{"value":"8507000"}` will be interpreted as StopPlace
-* `{"type":"AddressPlace","value":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
-* `{"type":"PoiPlace","value":"A=4@O=Pontresina, Polizei@X=9904773@Y=46489423@U=104@L=980045242@B=1@p=1603115030@"}`
-* `{"type":"COORDINATES","value":"7.437406,46.948658"}`~~
+* `{"type":"StopPlace","placeId":"8507000"}`
+* `{"placeId":"8507000"}` will be interpreted as StopPlace
+* `{"type":"AddressPlace","placeId":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
+* `{"type":"PoiPlace","placeId":"A=4@O=Pontresina, Polizei@X=9904773@Y=46489423@U=104@L=980045242@B=1@p=1603115030@"}`
+* `{"type":"COORDINATES","placeId":"7.437406,46.948658"}`~~
 
 ### PTViaReference
     {
-      stopPlaceValue: <StopPlace::id(mandatory)>,
+      stopPlaceId: <StopPlace::id(mandatory)>,
       status: "BOARDING_ALIGHTING_NECESSARY" (default and may be omitted) | "BOARDING_NOT_NECESSARY" | "ALIGHTING_NOT_NECESSARY" | "BOARDING_ALIGHTING_NOT_NECESSARY",
       vehicleModes:[<list of VehicleMode>],
       waittime: <Integer (in min. >=0)>,
@@ -154,17 +147,23 @@ Examples:
     }
 
 Examples:
-* `{"stopPlaceValue":"8507000"}`
-* `{"stopPlaceValue":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
+* `{"stopPlaceId":"8507000"}`
+* `{"stopPlaceId":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
+
+### PTViaNoChangeAtReference
+TODO
+
+### PTViaNotReference
+TODO
 
 ### ScheduledStopPointReference
     {
-        "stopPlaceValue: "<StopPlace::id(mandatory)>",
+        "stopPlaceId: "<StopPlace::id(mandatory)>",
         "dateTime":"<OffsetDateTime>
     }
     
 Examples:
-* `{"stopPlaceValue":"8507000","2021-06-14T15:01:00+02:00"}`
+* `{"stopPlaceId":"8507000","2021-06-14T15:01:00+02:00"}`
 
 # J-S API Response Params
 ## J-S  v2
