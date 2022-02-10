@@ -5,7 +5,9 @@ Unfortunately relating to Transmodel comes with some serious breaking model chan
 see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-principles/) enforce [Zalando API Guidelines](https://opensource.zalando.com/restful-api-guidelines/), therefore some implementations aspects of v2 are refactored in v3:
 * **Enum's** are consequently modeled as plain String's
     * request enforces @Schema(allowableValues) closed list Enum
-    * response open (extensible-enum-list) where null might be possible (in cases like irrelevant or not further distinguishable yet)
+    * response 
+    *    v2 declares Enum type
+    *    v3 declares open list (extensible-enum-list) where null might be possible (in cases like irrelevant or not further distinguishable yet)
 * **Boolean** won't be used as tri-state with null as valid option anymore [Zalando rule](https://opensource.zalando.com/restful-api-guidelines/#122)
 * no more List<> are returned -> proper Response Object always
 
