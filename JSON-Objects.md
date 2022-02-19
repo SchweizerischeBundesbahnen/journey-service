@@ -112,7 +112,7 @@ Examples:
 As given in **AbstractPlace::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses:
 
 Examples:
-* `"8507000"` (official station UIC)
+* `"8507000"` as returned by StopPlace::id (official station UIC)
 * `"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"` as returned by J-S `AddressPlace::id` or `PoiPlace::id`
 
 Or **[GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) `Point`** given _`"[<lon>,<lat>]"`_ in WGS84 decimal-degrees:
