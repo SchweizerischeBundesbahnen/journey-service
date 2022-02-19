@@ -118,22 +118,6 @@ Examples:
 Or **[GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) `Point`** given _`"[<lon>,<lat>]"`_ in WGS84 decimal-degrees:
 * `"[7.43519,46.94567]"` ~Bern, CH
 
-#### DEPRECATED ~~Explicite JSON Object `PlaceReference`~~
-    {
-      "type":"StopPlace"|"PoiPlace"|"AddressPlace"|"COORDINATES",
-      "placeId":"<AbstractPlace::id>"|"<longitude>,<latitude>"
-    }
-    
-Remark:
-* For COORDINATES **GeoJSON lon/lat order** is evaluated (unfortunately vice versa of J-S v2!).
-* type "StopPlace" is default, specification is optional
-  
-Examples:
-* `{"type":"StopPlace","placeId":"8507000"}`
-* `{"placeId":"8507000"}` will be interpreted as StopPlace
-* `{"type":"AddressPlace","placeId":"A=2@O=3008 Bern, Effingerstrasse 15@X=7435194@Y=46945679"}`
-* `{"type":"PoiPlace","placeId":"A=4@O=Pontresina, Polizei@X=9904773@Y=46489423@U=104@L=980045242@B=1@p=1603115030@"}`
-* `{"type":"COORDINATES","placeId":"7.437406,46.948658"}`~~
 
 ### PTViaReference
     {
