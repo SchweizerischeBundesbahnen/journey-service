@@ -5,6 +5,7 @@ The underlying Public-Transportation Router may distinct 10 Product categories w
 Important:
 * relates to [v580 de:06 Harmonisierung Verkehrsmittel](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1) resp.  [FIScommun 06 Harmonisierung Verkehrsmittel (download)](https://www.allianceswisspass.ch/de/asp/Downloadsindex.php?section=downloads&download=14462)
 * relates to Opentransportdata.swiss [**Transportmodes** (de:Verkehrsmittel) and **Transport Subomodes**](https://opentransportdata.swiss/de/dataset/verkehrsmittellisten)
+* relates to [**Service-Brands**](https://unioninternationalcheminsdefer.github.io/OSDM/spec/catalog-of-code-lists/) resp. [Service Brand code List](https://uic.org/passenger/passenger-services-group/article/service-brand-code-list) also related to TAP-TSI, Merits.
 
 ## Routable Product-categories
 Allocation to the different classes:
@@ -13,7 +14,7 @@ Allocation to the different classes:
 v580 de:Verkehrsträger Schiene
 
 #### Class "ICE/TGV/RJX" (SBB class=0)
-Contains Transport Submodes:
+Contains Transport "Service-Brands":
 * ARC - Arco
 * ATR - Altaria
 * AVE - Alta Velocidad ES
