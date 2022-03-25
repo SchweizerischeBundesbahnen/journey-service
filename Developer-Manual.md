@@ -3,7 +3,7 @@
 Support: journey-service@sbb.ch
 
 ## Abstract
-The Journey-Service is a RESTful facade abstracting **public transportation routing and planning** for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, FOS, PLABE, OccupancyPrognosis.
+The Journey-Service is a RESTful facade abstracting **public transportation routing and planning** for a set of underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis and a little of NOVA.
 
 The main **use cases** are:
 * Finding locations, such as Stations (trains, busses, tramways, ..), Addresses and Points of Interest (POI).
