@@ -24,7 +24,6 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 ### About J-S versions
 
 #### v1 and v2 (DEPRECATED)
-**DEPRECATED** though still used
 * v1 is for ONE consumer only [SBB Webshop](https://www.sbb.ch/en/home.html) DO NOT use it!
 * v2 is still functional until END of 2022
     * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
