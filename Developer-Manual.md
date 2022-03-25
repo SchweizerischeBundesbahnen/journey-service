@@ -11,15 +11,37 @@ The main **use cases** are:
 * Finding concrete Transport-Product journeys
 * Providing details about Trainformations, sections, wagons and their occupancy
 
-A set of implemented **Business Rules** (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
+A set of implemented **SBB Business Rules** (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
 
-Lots of convenient utilities provide **easy interpretable models**.
-
-Journey-Service logic and backend interfering is heavily based on the (SBB internal) library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
 
 If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx) Standard** might give you a broader picture, what commonly is understood by this context.
 
+### Design Goals
+* Strategic usage for SBB and partners: **Journey-Planner** systems are a business critical core functionality at SBB. Plenty of Consumer applications use it (like [sbb.ch](https://www.sbb.ch/en/home.html), [SBB Mobile](https://www.sbb.ch/de/fahrplan/mobile-fahrplaene/sbb-mobile.html), [SBB Ticket vending machines](https://www.sbb.ch/de/bahnhof-services/am-bahnhof/services-am-billettautomat/sbb-billettautomat.html), [SBB Group reservation and Capacity management](https://company.sbb.ch/de/sbb-als-geschaeftspartner/dienstleistungen/vertriebsmanagement-ktu/produkte/capre.html), [SBB B2P](https://company.sbb.ch/content/dam/sbb/de/pdf/sbb-konzern/sbb-als-geschaeftspartner/partnervertrieb/webserviceB2P_factsheet_d.pdf) and many others.
+* Business Data consistency: all consumer get the same information (we work enhance quality and speed continuously).
+* Easy usage by consumer developers: Our APIs are RESTful, well documented, [Openapi 3](https://oai.github.io/Documentation/) client capable. We try to design for self explaining usage.
+
+### About J-S versions
+
+#### v1 and v2 (DEPRECATED)
+**DEPRECATED** though still used
+* v1 is for ONE consumer only [SBB Webshop](https://www.sbb.ch/en/home.html) DO NOT use it!
+* v2 is still functional until END of 2022
+    * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
+
+### v3 (STRATEGIC)
+v3 replaces v2 completely and extends new functionality.
+
+Standards:
+* **CEN EUROPEAN REFERENCE DATA MODEL FOR PUBLIC TRANSPORT INFORMATION [EN 12896](https://en.wikipedia.org/wiki/Transmodel)**
+* J-S v3 is heavily based on the **conceptual [Transmodel](https://www.transmodel-cen.eu/) TRM6-v56**. See [Model download, Glossary, Tutorials](https://www.transmodel-cen.eu/downloads/).
+
 ## Technical aspects
+
+J-S v3 follows [SBB API Principles - RESTful APIs](https://schweizerischebundesbahnen.github.io/api-principles/restful) which is very alike to [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/).
+
+Journey-Service logic and backend interfering is heavily based on the (SBB internal) library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
+
 ### URLs
 We currently support **3 APIM accessible Openshift environments** for `Customer information/journey`
  * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
