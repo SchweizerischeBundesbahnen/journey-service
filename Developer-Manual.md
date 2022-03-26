@@ -28,10 +28,10 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 * v2 is still functional until END of 2022
     * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
 
-### v3 (STRATEGIC)
+#### v3 (STRATEGIC)
 v3 replaces v2 completely and extends new functionality.
 
-Standards:
+**Standards** considered:
 * **CEN EUROPEAN REFERENCE DATA MODEL FOR PUBLIC TRANSPORT INFORMATION [EN 12896](https://en.wikipedia.org/wiki/Transmodel)**
 * J-S v3 is heavily based on the **conceptual [Transmodel](https://www.transmodel-cen.eu/) TRM6-v56**. See [Model download, Glossary, Tutorials](https://www.transmodel-cen.eu/downloads/), mainly on the following parts:
     * Part 1: Commons Concepts
@@ -47,6 +47,10 @@ Beyond Transmodel Standard yet:
 * See [Tutorial Part 8, chapter 6](https://www.transmodel-cen.eu/wp-content/uploads/2015/01/TUTORIAL_Part8_v2.1-1.pdf)
     * Service safety: this function considers all the information to evaluate the safety of the PT service in terms of accidents occurred, etc;
     * Service pollution emissions: this function considers all the information to evaluate environment impacts due to the emission of pollutants;
+
+Comparison to [OpenJourneyPlaner OJP](https://www.transmodel-cen.eu/ojp-standard/ojp/):
+* J-S v3 provides similar functionality as OJP (places, trips, ..), but J-S v3 references the newer terminology and model in TRM6-v56 and is simplified according to SBB Personenverkehr experience, therefore bridging/adapting between these 2 API sets is possible but needs some mapping effort.
+* J-S is rather SBB private, but Swiss SKI OJP is for public use, see [OJP Switzerland](https://opentransportdata.swiss/de/cookbook/open-journey-planner-ojp/).
 
 
 ## Technical aspects
