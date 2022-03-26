@@ -51,7 +51,10 @@ Beyond Transmodel Standard yet:
 Comparison to [OpenJourneyPlaner OJP](https://www.transmodel-cen.eu/ojp-standard/ojp/):
 * J-S v3 provides similar functionality as OJP (places, trips, ..), but J-S v3 references the newer terminology and model in TRM6-v56 and is simplified according to SBB Personenverkehr experience, therefore bridging/adapting between these 2 API sets is possible but needs some mapping effort.
 * J-S is rather SBB private, but Swiss SKI OJP is for public use, see [OJP Switzerland](https://opentransportdata.swiss/de/cookbook/open-journey-planner-ojp/).
-
+* Classic Standards in J-S are more abstracted, where the following are more obvious for e.g. by OJP schema references or namespaces:
+    * [NeTex](https://www.transmodel-cen.eu/netex-standard/): Network Timetable Exchange (Fare Management & Passenger Information)
+    * [Siri](https://www.transmodel-cen.eu/siri-standard/): Realtime Information
+    * [IFOPT](https://www.transmodel-cen.eu/ifopt-standard/): Identification of fixes Objects in Public Transport
 
 ## Technical aspects
 
