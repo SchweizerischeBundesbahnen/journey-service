@@ -56,6 +56,11 @@ Comparison to [OpenJourneyPlaner OJP](https://www.transmodel-cen.eu/ojp-standard
     * [Siri](https://www.transmodel-cen.eu/siri-standard/): Realtime Information
     * [IFOPT](https://www.transmodel-cen.eu/ifopt-standard/): Identification of fixes Objects in Public Transport
 
+Comparison to [ODSM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0)
+* ODSM is an OJP orientied Ticketing specification among european members and UIC.
+* ODSM also has Journey-Planner API's with to focus to distribute international tickets (for e.g. among brokers).
+* ODSM is a planned facade in front of NOVA (Switzerland).
+
 ## Technical aspects
 
 J-S v3 follows [SBB API Principles - RESTful APIs](https://schweizerischebundesbahnen.github.io/api-principles/restful) which is very alike to [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/).
