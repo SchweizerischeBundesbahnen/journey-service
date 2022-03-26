@@ -33,7 +33,21 @@ v3 replaces v2 completely and extends new functionality.
 
 Standards:
 * **CEN EUROPEAN REFERENCE DATA MODEL FOR PUBLIC TRANSPORT INFORMATION [EN 12896](https://en.wikipedia.org/wiki/Transmodel)**
-* J-S v3 is heavily based on the **conceptual [Transmodel](https://www.transmodel-cen.eu/) TRM6-v56**. See [Model download, Glossary, Tutorials](https://www.transmodel-cen.eu/downloads/).
+* J-S v3 is heavily based on the **conceptual [Transmodel](https://www.transmodel-cen.eu/) TRM6-v56**. See [Model download, Glossary, Tutorials](https://www.transmodel-cen.eu/downloads/), mainly on the following parts:
+    * Part 1: Commons Concepts
+    * Part 2: Public Transport Network
+    * Part 3: Timing Information and Vehicle Scheduling
+    * Part 4: Operations and Monitoring Control
+    * (Part 5: Fare Management)
+    * Part 6: Passenger Information
+    * (Part 7: Driver Management)
+    * (Part 8: Management Information & Statistics)
+
+Beyond Transmodel Standard yet:
+* See [Tutorial Part 8, chapter 6](https://www.transmodel-cen.eu/wp-content/uploads/2015/01/TUTORIAL_Part8_v2.1-1.pdf)
+    * Service safety: this function considers all the information to evaluate the safety of the PT service in terms of accidents occurred, etc;
+    * Service pollution emissions: this function considers all the information to evaluate environment impacts due to the emission of pollutants;
+
 
 ## Technical aspects
 
