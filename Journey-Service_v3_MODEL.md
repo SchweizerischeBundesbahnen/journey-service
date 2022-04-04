@@ -4,12 +4,11 @@ This is about the **implemented routing exchange model** provided by **J-S v3**.
 
 ## Routing Standards
 
-The main reference is Transmodel [**TRM6-v56** (downloads and tutorials)](https://www.transmodel-cen.eu/downloads/), though Transmodel is rather a **conceptual specification** and the J-S Team did not find a satisfying reference-implementation yet. 
+The main reference is **Transmodel [TRM6-v56 (downloads and tutorials)](https://www.transmodel-cen.eu/downloads/)**, though Transmodel is rather a _conceptual specification_ and the J-S devOps Team did not find a satisfying reference-implementation yet. 
 
-However our team is convinced to take this as the main guideline for J-S v3, even with the risk, that might have added some simplifications or added our own flavor (based at Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
+However our team is convinced to take TRM as the main guideline for J-S v3, even with the risk, that we might have added some simplifications or our own flavor (based on Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
+
 ### Transmodel
-
-
 
 **Standards** considered:
 * **CEN EUROPEAN REFERENCE DATA MODEL FOR PUBLIC TRANSPORT INFORMATION [EN 12896](https://en.wikipedia.org/wiki/Transmodel)**
@@ -28,15 +27,22 @@ Beyond Transmodel Standard yet:
     * Service safety: this function considers all the information to evaluate the safety of the PT service in terms of accidents occurred, etc;
     * Service pollution emissions: this function considers all the information to evaluate environment impacts due to the emission of pollutants;
 
-Comparison to [OpenJourneyPlaner OJP](https://www.transmodel-cen.eu/ojp-standard/ojp/):
-* J-S v3 provides similar functionality as OJP (places, trips, ..), but J-S v3 references the newer terminology and model in TRM6-v56 and is simplified according to SBB Personenverkehr experience, therefore bridging/adapting between these 2 API sets is possible but needs some mapping effort.
+#### OJP
+J-S v3 is not an OJP implementation, however OJP is also covered by Transmodel, see [OpenJourneyPlaner (OJP)](https://www.transmodel-cen.eu/ojp-standard/ojp/) _CEN certificated_:
+* J-S v3 provides similar APIs as OJP (places, trips, ..), but J-S v3 uses the newer terminology and model in TRM6-v56 and is simplified according to SBB Personenverkehr experience
 * J-S is rather SBB private, but Swiss SKI OJP is for public use, see [OJP Switzerland](https://opentransportdata.swiss/de/cookbook/open-journey-planner-ojp/).
 * Classic Standards in J-S are more abstracted, where the following are more obvious for e.g. by OJP schema references or namespaces:
     * [NeTex](https://www.transmodel-cen.eu/netex-standard/): Network Timetable Exchange (Fare Management & Passenger Information)
     * [Siri](https://www.transmodel-cen.eu/siri-standard/): Realtime Information
     * [IFOPT](https://www.transmodel-cen.eu/ifopt-standard/): Identification of fixes Objects in Public Transport
 
-Comparison to [ODSM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0)
+#### ODSM
+J-S v3 is not an ODSM [ODSM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0) implementation, but may serve as an underlying routing facade for places and trips.
 * ODSM is an OJP orientied Ticketing specification among european members and UIC.
 * ODSM also has Journey-Planner API's with to focus to distribute international tickets (for e.g. among brokers).
 * ODSM is a planned facade in front of NOVA (Switzerland).
+
+#### Mapping between Journey-Planner implementations
+Bridging/adapting between J-S v3 and
+* **[OJP Switzerland](https://opentransportdata.swiss/de/cookbook/open-journey-planner-ojp/)**: J-S is developing an experimental OJP-Adapter to call SKI OJP's XML implementation
+* **[ODSM](https://github.com/UnionInternationalCheminsdeFer/OSDM/wiki)**: is a newer specification based on OJP 1.0 extendind ticketing based on Journey-Planner systems, such as J-S v3 or OJP
