@@ -22,7 +22,7 @@ Legend:
 ![image](J-S_v3_Legend.png)
 
 #### Place MODEL
-![image](J-S_v3_Place.png)
+![image](J-Sv3_Place.png)
 #### ServiceJourney MODEL
 
 #### Trip MODEL
