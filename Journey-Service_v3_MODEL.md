@@ -19,10 +19,10 @@ API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/
 
 Legend:
 
-![image](J-S_v3_Legend.png)
+![image](J-Sv3_Legend.png)
 
 #### Place MODEL
-![image](J-Sv3_Place.png)
+![image](J-S_v3_Place.png)
 #### ServiceJourney MODEL
 
 #### Trip MODEL
