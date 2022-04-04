@@ -18,6 +18,7 @@ API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/
 * check for v3/* API classes (ignore deprecated v1 and v2 classes there)
 
 Legend:
+
 ![image](https://user-images.githubusercontent.com/25552670/161599012-ee48cff9-9421-46df-acb4-bba39083373e.png)
 
 #### Place MODEL
