@@ -22,7 +22,12 @@ Legend:
 ![image](J-Sv3_Legend.png)
 
 #### Place MODEL
+Developer simplified view:
 ![image](J-S_v3_Place.png)
+
+Transmodel realization view:
+![image](J-S_v3_Place_TRM.png)
+
 #### ServiceJourney MODEL
 
 #### Trip MODEL
