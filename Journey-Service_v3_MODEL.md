@@ -8,20 +8,22 @@ The main reference is **Transmodel [TRM6-v56 (downloads and tutorials)](https://
 
 However our team is convinced to take TRM as the main guideline for J-S v3, even with the risk, that we might have added some simplifications or our own flavor (based on Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
 
-### REST-API
+### REST-API (technical context)
 J-S v3 comes as a RESTful implementation according to:
  * [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
  * [OpenApi 3 specification](https://swagger.io/specification/)
- * final model see [Generated Model classes](https://developer.sbb.ch/apis/journey-service/documentation)
-     * check for v3/* API classes (ignore deprecated v1 and v2 classes there)
      
-### Place MODEL
+### Journey-Planner context
+API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/documentation)
+* check for v3/* API classes (ignore deprecated v1 and v2 classes there)
 
-### ServiceJourney MODEL
+#### Place MODEL
 
-### Trip MODEL
+#### ServiceJourney MODEL
 
-### Schedule MODEL
+#### Trip MODEL
+
+#### Schedule MODEL
 
 ## Routing Standards in "Public Transport"
 ### Transmodel
