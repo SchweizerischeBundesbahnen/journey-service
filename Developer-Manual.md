@@ -16,7 +16,7 @@ If you are new to journey-planning with SBB, consider general standards as menti
 
 ### Design Goals
 * Strategic usage for SBB and partners: **Journey-Planner** systems are a business critical core functionality at SBB. Plenty of Consumer applications use it (like [sbb.ch](https://www.sbb.ch/en/home.html), [SBB Mobile](https://www.sbb.ch/de/fahrplan/mobile-fahrplaene/sbb-mobile.html), [SBB Ticket vending machines](https://www.sbb.ch/de/bahnhof-services/am-bahnhof/services-am-billettautomat/sbb-billettautomat.html), [SBB Group reservation and Capacity management](https://company.sbb.ch/de/sbb-als-geschaeftspartner/dienstleistungen/vertriebsmanagement-ktu/produkte/capre.html), [SBB B2P](https://company.sbb.ch/content/dam/sbb/de/pdf/sbb-konzern/sbb-als-geschaeftspartner/partnervertrieb/webserviceB2P_factsheet_d.pdf) and many others.
-* Business Data consistency: all consumer get the same information (we work hard to enhance quality and continuous feature innovation).
+* [Business aspects](BusinessAspects.md): all consumer get the same information (we work hard to enhance quality and continuous feature innovation).
 * Easy usage by consumer developers: Our APIs are **RESTful** and documented, [Openapi 3](https://oai.github.io/Documentation/) **generated ApiClient** capable.
 
 ### About J-S versions
@@ -113,15 +113,15 @@ Remark:
 
 ![Version JSON-definition](resources/J-S_version.png)
 
-| Aspect | /v2 (current version) |
-|--------|-----------------------|
-|API-Path|/b2c/v2/*              |
-|Request-Header	|like "Accept-Language" is used for standard or meta aspects (which are not in)|
-|Request-Params|GET ?param1=..&param2=..
-|Response-Header|like "Content-Language" (relates to "Accept-Language" or fallback-language by J-S)
-|Response-Body|returns HttpStatus and declared model|
-|arg defaulting|better defaulting (for minimal performance)|
-|Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|
+| Aspect | /v2 (current version) | /v3 |
+|--------|-----------------------|-----|
+|API-Path|/b2c/v2/*              | /v3 |
+|Request-Header	|like "Accept-Language" is used for standard or meta aspects (which are not in)|dito|
+|Request-Params|GET ?param1=..&param2=..|dito|
+|Response-Header|like "Content-Language" (relates to "Accept-Language" or fallback-language by J-S)|dito|
+|Response-Body|returns HttpStatus and declared model or `Problem`|dito|
+|arg defaulting|better defaulting (for minimal performance)|dito|
+|Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|dito
 
 ### End-user consistency
 According to **SBB KI strategy (de:Kundeninformation)** it is a **declared goal to communicate consistent public transport information**! 
@@ -142,51 +142,3 @@ A word about GET and POST:
 ### Response
 #### Error-handling
 See [Problem-Manual](Problem-Manual.md)
-
-#### Business data aspects
-Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
-* Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
-* v3.Notice::value or v2.Note::value are sometimes translated by SBB P Data-Mgmt
-* Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
-* other texts are translated by SBB Business Rules, like StopV2::*DelayText
-
-J-S uses some Enum's which relate typically to business defined values, for e.g.:
-* v2.TransportProductV2::category
-* v2.VehicleType
-* v2.LegType
-* v3 only supports x-tensible enums in Request, in response are enum's are returned as String's
-
-There are also specific extensions for developer convenience, such as:
-* TransportProductV2::vehicleIconName showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
-* the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType or uses the J-A given short cut to ::vehicleIconName
-
-#### Business logic aspects
-##### Formatted fields
-J-S sometimes provides fields with a "*Formatted" suffix which contain values, that must be showed to public end-users instead of alternatively declared field without the suffix for SBB internal usage only, for e.g.
-* TransportProductV2::number → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
-* TransportProductV2::number**Formatted** → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
-
-##### Realtime analysis
-The SBB underlying systems may **provide realtime-data, typically TODAY only (~ NOW..+4h)**.
-
-Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
-
-StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
-* ::boardingAlightingStatus
-* ::stopStatus s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
-
-About any ***Rt** properties:
-* Ideally these fields are always null, means transport organisations are operating as planned
-* If any vehicle (TransportProductV2) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
-* *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
-* If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
-
-Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
-
-Remark:
-* SBB staff see [StopPlace/Station state]( based on /display/FAHRPLAN/Haltestellen-Status)
-
-### Most typical use cases
-Most consumers will probably be interested in a simple train-connection from A to B. This scenario is supported in 2 steps usually:
-* see [v2 APIs](v2/V2_APIs.md)
-* see v3 TODO
