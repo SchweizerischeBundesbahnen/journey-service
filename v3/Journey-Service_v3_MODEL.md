@@ -66,6 +66,7 @@ J-S v3 is not an OJP implementation, however OJP is also covered by Transmodel, 
     * [NeTex](https://www.transmodel-cen.eu/netex-standard/): Network Timetable Exchange (Fare Management & Passenger Information)
     * [Siri](https://www.transmodel-cen.eu/siri-standard/): Realtime Information
     * [IFOPT](https://www.transmodel-cen.eu/ifopt-standard/): Identification of fixes Objects in Public Transport
+* [OpenJourneyPlanner VDV](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx)
 
 ### ODSM
 J-S v3 is not an ODSM [ODSM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0) implementation, but may serve as an underlying routing facade for places and trips.
