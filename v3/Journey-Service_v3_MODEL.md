@@ -30,7 +30,10 @@ Transmodel realization view:
 
 #### ServiceJourney MODEL
 
-#### Trip MODEL
+Developer simplified view:
+
+Transmodel realization view:
+![image](resources/J-S_v3_ServiceJourney_TRM.png)
 
 #### Schedule MODEL
 

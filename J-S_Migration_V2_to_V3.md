@@ -12,13 +12,12 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 * no more List<> are returned -> proper Response Object always
 
 ## Header
-* Obsolete and proprietary "Log-Context" is replaced by **Request-ID** **OpenTelemetry/W3C Standard Header** and supported by Instana tracing
+* Obsolete and proprietary "Log-Context" is replaced by **Request-ID** (supported by Instana tracing).
 
 ## Type mappings
 
 Remark:
-* Obvious (quiet similar named) mappings are not mentioned explicitely below.
-
+* Obvious (quiet similar named) mappings are not mentioned explicitely below:
 
 | J-S v3                   | J-S v2                          | J-A                           |
 | ------------------------ | ------------------------------- |-----------------------------  |
@@ -27,13 +26,13 @@ Remark:
 | GeometryObject (GeoJSON) | see J-A                         | CoordinatesWGS84              |
 | ServiceJourneyPattern    | see J-A                         | JourneySegment                |
 | PTRideLeg                | LegV2 (::type=PUBLIC_TRANSPORT) | Leg (::type=PUBLIC_TRANSPORT) |
-| AccessLeg                | LegV2 (::type=FOOTPATH)         | Leg (::type=FOOTPATH)         |
+| AccessLeg                | LegV2 (::type=FOOTPATH)         | Leg (::type=FOOTPATH or CAR)  |
 | PTConnectionLeg          | LegV2 (::type=TRANSFER)         | Leg (::type=TRANSFER)         |
 | TripPattern              | TripSummaryV2                   | TripSummary                   |
 | Notice                   | see J-A                         | Note                          |
 | PTSituationMessage       | HimMessageV2                    | Message                       |
-| Line + Operator          | TransportProductV2              | ProductType                   |
-| ServiceCalendar          | ServiceDaysV2                   | ServiceDays                   |
+| ServiceProduct           | TransportProductV2              | ProductType                   |
+| OperatingPeriod          | ServiceDaysV2                   | ServiceDays                   |
 | Problem + HttpStatus     | Error + HttpStatus              | Throwable/Exception           |
 
 ## API's
@@ -41,11 +40,11 @@ Remark:
 | ------------------------ | ------------------------------- |-----------------------------  |
 | /places                  | /locations                      | LocationAssistant             |
 | /trips                   | /trips                          | TripAssistant                 |
-|                          | /departures, /arrivals          | StationboardAssistant         |
-|                          | /routes                         | RouteAssistant                |
-|                          | /traffic                        | HimAssistant                  |
-|                          | /info                           | TimetableAssistant            |
-| see /trips               | /trainFormation                 | TrainFormationFacade          |
+| /vehicle-journeys        | /departures, /arrivals          | StationboardAssistant         |
+|    "                     | /routes                         | RouteAssistant                |
+| /situations              | /traffic                        | HimAssistant                  |
+| /schedules               | /info                           | TimetableAssistant            |
+|                          | /trainFormation                 | TrainFormationFacade          |
 
 
 ## Generated ApiClient

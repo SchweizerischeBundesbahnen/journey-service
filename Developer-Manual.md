@@ -1,5 +1,5 @@
 
-# Journey-Service::B2C Developer Manual
+# Journey-Service - Developer Manual
 Support: journey-service@sbb.ch
 
 ## Abstract
