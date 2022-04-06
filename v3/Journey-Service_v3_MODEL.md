@@ -31,11 +31,14 @@ Transmodel realization view:
 #### ServiceJourney MODEL
 
 Developer simplified view:
+![image](resources/J-S_v3_ServiceJourney.png)
 
 Transmodel realization view:
 ![image](resources/J-S_v3_ServiceJourney_TRM.png)
 
 #### Schedule MODEL
+Transmodel realization view:
+![image](resources/J-S_v3_ServiceCalendar_TRM.png)
 
 ## Routing Standards in "Public Transport"
 
