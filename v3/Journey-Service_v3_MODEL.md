@@ -5,7 +5,7 @@
 This is about the **implemented routing exchange model** provided by **J-S v3**.
 
 The main reference is **Transmodel [TRM6-v56 (downloads and tutorials)](https://www.transmodel-cen.eu/downloads/)**, though Transmodel is rather a _conceptual specification_ and the J-S devOps Team did not find a satisfying reference-implementation yet. 
-Xxy
+
 However our team is convinced to take TRM as the main guideline for J-S v3, even with the risk, that we might have added some simplifications or our own flavor (based on Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
 
 ### REST-API (technical context)
@@ -19,14 +19,14 @@ API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/
 
 Legend:
 
-![image](J-Sv3_Legend.png)
+![image](resources/J-S_v3_Legend.png)
 
 #### Place MODEL
 Developer simplified view:
-![image](J-S_v3_Place.png)
+![image](resources/J-S_v3_Place.png)
 
 Transmodel realization view:
-![image](J-S_v3_Place_TRM.png)
+![image](resources/J-S_v3_Place_TRM.png)
 
 #### ServiceJourney MODEL
 

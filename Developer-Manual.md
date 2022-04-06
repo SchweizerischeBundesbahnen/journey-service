@@ -31,7 +31,7 @@ If you are new to journey-planning with SBB, the **[OpenJourneyPlanner](https://
 #### v3 (STRATEGIC)
 v3 replaces v2 completely and extends new functionality.
 
-See [**Standards considered** and its **Data Model**](Journey-Service_v3_MODEL.md)
+See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODEL.md)
 
 ## Technical aspects
 
@@ -169,7 +169,7 @@ Remark:
 * If accessing by APIM, some APIs may not be visible (compared to SBB internal access) or accessable (based on your "plan per API").
 * v1 is deprecated and for reserved SBB internal usage
 
-![Version JSON-definition](J-S_version.png)
+![Version JSON-definition](resources/J-S_version.png)
 
 | Aspect | /v2 (current version) |
 |--------|-----------------------|
