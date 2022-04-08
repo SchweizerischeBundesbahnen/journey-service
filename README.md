@@ -1,4 +1,4 @@
-This project contains the official **SBB Journey-Service** PUBLIC documentation, which is a **Journey-Planner* available for properly registered users by:
+This project contains the official **SBB Journey-Service** PUBLIC documentation, which is a **Journey-Planner** available for properly registered users by:
 * [PRODuction API](https://developer.sbb.ch/apis/journey-service)
 
 See the following resources for further details:

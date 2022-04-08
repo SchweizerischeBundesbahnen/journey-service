@@ -5,9 +5,9 @@
 ## Abstract
 The Journey-Service is a RESTful **"Journey-Planner"** facade abstracting **public transportation routing and planning** for a set of **SBB Switzrland** relevant underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis, NOVA etc.
 
-The main **use cases** are:
-* Finding **`Place`s** (OJP Location), such as `StopPlace`s resp. (stations for public transport trains, busses, tramways, ..), `AddressPlace`s and `PoiPlace`s (Points of Interest (POI)).
-* Finding concrete journeys (`Trip`s, `DatedVehicleJourney`s) as passenger-information.
+The main **Use Cases** are:
+* Finding **`Place`** (aka OJP `Location`), such as `StopPlace` resp. (stations for public transport trains, busses, tramways, ..), `AddressPlace` and `PoiPlace` (Points of Interest (POI)).
+* Finding concrete journeys (`Trip`, `DatedVehicleJourney`) as passenger-information.
 * Finding some SBB specific additional info (such as `Trainformation`s, Realtime monitoring etc)
 
 A set of implemented **SBB Business Rules** (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
@@ -19,60 +19,8 @@ If you are new to journey-planning with SBB, consider general standards as menti
 * [Business aspects](BusinessAspects.md): all consumer get the same information (we work hard to enhance quality and continuous feature innovation).
 * Easy usage by consumer developers: Our APIs are **RESTful** and documented, [Openapi 3](https://oai.github.io/Documentation/) **generated ApiClient** capable.
 
-### About J-S versions
-
-#### v1 and v2 (DEPRECATED)
-* v1 is OBSOLETE, do not use it!
-* v2 is still functional until END of ~2022
-    * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
-
-#### v3 (STRATEGIC)
-v3 replaces v2 completely and extends new functionality.
-
-See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODEL.md)
-
-## Technical aspects
-
-J-S v3 follows [SBB API Principles - RESTful APIs](https://schweizerischebundesbahnen.github.io/api-principles/restful) which is very alike to [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/).
-
-Journey-Service logic and backend interfering is heavily based on the (SBB internal) library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
-
-### URLs
-We currently support **3 APIM accessible Openshift environments** for `Customer information/journey`
- * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
- * **INT** via APIM https://developer-int.sbb.ch/apis/journey-service (solid state, release-candidates)
- * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
-
-Important:
-* All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM. We recommend to **register for AzureAD** (SBB IAM confirmed high availability) as a primary SSO Token Service Provider. It is up to you if you register additionally for "redHat-SSO" (there were some known incidents in the past) as a fallback Token-Provider if AzureAD should fail temporarily (might be a good scenario for extremely business critical applications).
-* **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
-
-### Backward compatibility
-Considering [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md): 
-We have different concepts to maintain backward compatibility:
-
-#### URL versioning
-All APIs **without** `INCUBATOR` in their URL may be considered as **stable**. Any breaking changes will be leaded by our consumer-management (to the e-Mail you registered at APIM registration process)!
-
-Any **APIs with `/v*/INCUBATOR/*` in their URL are highly @Experimental and might be changed breakingly on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with us).
-
-#### Deprecated stuff
-Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
-
-Some **properties in response models might have a "description" like "@Deprecated use ... instead"**, to lead you into correcting steps.
-
-Important:
-* The **generated journey-service-client (see below) does not show any `@Deprecated` fields**, therefore you have to check the Swagger Doc carefully for your cases.
-* Such deprecated code will be removed in future versions finally
-
-### Testing your APIM access
-See: [getting started](https://developer-int.sbb.ch/getting-started)
-[Getting started with APIM (for Intranet users only)](https://confluence.sbb.ch/pages/viewpage.action?spaceKey=AITG&title=Getting+started+with+APIM)
-
-Please check our [Testing hints](Test%20your%20access.pdf)
-
-### Generated ApiClient's
-See [Using OpenApi 3 ApiClient](ApiClient.md)
+### Technical aspects
+See [Technical Aspects](TechnicalAspects.md)
 
 ### Good to know
 #### Release Notes
@@ -84,25 +32,8 @@ Check the blog: https://developer.sbb.ch/apis/journey-service/blog
 
 To stay up to date about new features or adjustments we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
 
-#### Model with version suffix
-Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ArrivalV3,..?
-
-Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version or namespace) though Swagger would support such a concept by grouping.
-Therefore we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
-
-#### About parameter encoding
-* Post body does not need encoded String's
-* TripV2::reconstructionContext must not be encoded -> pass it as received
-* do not encode JSON Lists resp. '[' or ']'
-* OffsetDateTime 
-See  [Support stricter encoding](https://github.com/spring-projects/spring-framework/issues/21577)
-400: ..?dateTime=2019-04-23T14:56:14+00:00
-OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
-
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v2 API understanding in most cases.
-
-Further on consider our [Routing-basics](https://github.com/SchweizerischeBundesbahnen/journey-service-b2c/blob/master/Journey-Service_Routing-Basics.pdf)
 
 ### Choosing the right service definition
 Select the version of J-S REST-API: currently **v3** and some **v2**.
