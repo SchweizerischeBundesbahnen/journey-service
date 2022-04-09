@@ -11,8 +11,18 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 * **Boolean** won't be used as tri-state with null as valid option anymore [Zalando rule](https://opensource.zalando.com/restful-api-guidelines/#122)
 * no more List<> are returned -> proper Response Object always
 
+## Versioned URL
+| Aspect | /v2 | /v3 |
+|--------|-------|-----|
+|API-Path|/b2c/v2/* | /v3/* |
+
 ## Header
-* Obsolete and proprietary "Log-Context" is replaced by **Request-ID** (supported by Instana tracing).
+
+| Aspect | /v2 | /v3 |
+|--------|-----------------------|-----|
+|Request-Header	|like `Accept-Language` is used for standard or meta aspects (which are not in)|dito|
+|Response-Header|like `Content-Language` (relates to `Accept-Language` or fallback-language by J-S)|dito|
+|Tracing|`Request-Id` allows SBB internal Instana tracing|dito|
 
 ## Type mappings
 
@@ -45,7 +55,6 @@ Remark:
 | /situations              | /traffic                        | HimAssistant                  |
 | /schedules               | /info                           | TimetableAssistant            |
 |                          | /trainFormation                 | TrainFormationFacade          |
-
 
 ## Generated ApiClient
 OpenApi 3 based, see [Swagger2 -> OpenAPI 3](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/SwitchingSwagger2ToOpenApi3.md)

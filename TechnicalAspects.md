@@ -3,18 +3,6 @@ J-S v3 follows [SBB API Principles - RESTful APIs](https://schweizerischebundesb
 
 Journey-Service logic and backend interfering is heavily based on the (SBB internal) library Journey-Assistant (J-A), therefore J-A documentation or even J-A Javadoc might be helpful as well, if you need to dig in deeper.
 
-## About J-S versions
-
-### ~~v1~~ and v2 (DEPRECATED)
-* ~~v1~~ is OBSOLETE, do not use it!
-* v2 is still functional until END of ~2022, but some APIs are migrated to v3
-    * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
-
-### v3 (STRATEGIC)
-v3 replaces v2 completely and extends new functionality.
-
-See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODEL.md)
-
 ## URLs
 We currently support **3 APIM accessible Openshift environments** for `Customer information/journey`
 * **TEST** via APIM https://developer-int.sbb.ch/apis/journey-service-test (early tests of newest features)
@@ -25,12 +13,48 @@ Important:
 * All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM. We recommend to **register for AzureAD** (SBB IAM confirmed high availability) as a primary SSO Token Service Provider. It is up to you if you register additionally for "redHat-SSO" (there were some known incidents in the past) as a fallback Token-Provider if AzureAD should fail temporarily (might be a good scenario for extremely business critical applications).
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
+## About J-S versions
+### ~~v1~~ and v2 (DEPRECATED)
+* ~~v1~~ is OBSOLETE, do not use it!
+* v2 is still functional until END of ~2022, but some APIs are migrated to v3
+    * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
+
+### v3 (STRATEGIC)
+v3 replaces v2 completely and extends new functionality.
+
+See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODEL.md)
+
+## Request and Response
+
+See [v3 REST-API standards](v3/Journey-Service_v3_MODEL.md)
+
+### Request
+For each Request to J-S set the header-fields (especially `Authorization`, `Request-Id`, `Accept-Language`) and GET or POST-body parameters as given in the [Service-Contract per API](https://developer.sbb.ch/apis/journey-service/documentation).
+
+A word about GET and POST:
+* J-S offers **genererally idempotent GET** requests (since "Journey-Planners" are mostly information providing systems). However for technical reasons (like very long URL) a few APIs are specificied according to [SBB RESTful Principles: GET with BODY](https://schweizerischebundesbahnen.github.io/api-principles/restful/principles/#get-with-body) or [Zalando RESTful](https://opensource.zalando.com/restful-api-guidelines/#get-with-body). Both variants are implemented according to this rule:
+1. **GET** with **complex parameters enforce JSON-Objects** (as consumer you will have to URL encode such JSON objects to prevent transmitting marshalling faults)
+2. **POST** replacements like /v3/trips/* are still to be understood as an **idempotent** GET request, the API description contains a hint like _Idempotent GET with Body_.
+
+| Aspect | /v2 | /v3 |
+|--------|-----------------------|-----|
+|arg defaulting|better defaulting (for minimal performance)|dito|
+|Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|dito
+
+### Response
+#### Error-handling
+See [Problem-Manual](Problem-Manual.md)
+
 ## Backward compatibility
 See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
 
 We have different concepts to maintain backward compatibility:
 
 ### URL versioning
+Yes, we DO url versioning because of some reasons:
+* technical: our APIM solution allows ONE JSON-specification without namespaces only
+* historical standard changes: we prefer real breaking changes instead of semantic "overlaying" sometimes (and keep different versions parallel as compatible as possible)
+
 All APIs **without** `INCUBATOR` in their URL may be considered as **stable**. Any breaking changes will be leaded by our consumer-management (to the e-Mail you registered at APIM registration process)!
 
 Any **APIs with `/v*/INCUBATOR/*` in their URL are highly @Experimental and might be changed breakingly on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with us).

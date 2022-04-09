@@ -1,17 +1,25 @@
 # Business Aspects
 
+Some important links:
+* [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
+* [v580 FIScommun](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1)
+* [Open-Data Plattform Monility Switzerland](https://opentransportdata.swiss/de/)
+* [TransportMode](TransportMode.md)
+
+## End-user consistency
+According to **SBB KI strategy (de:Kundeninformation)** it is a **declared goal to communicate consistent public transport information**!
+**J-S plays an important role** to provide such consistency **to any passengers on any end-user API resp. UI-channel**.
+
+**J-S consumers must be aware that they might violate these SBB business rules by ignoring, manipulating or redefining given values and may impact unwanted end-user or public media critics**.
+
+Some expressions are even related to **conventions by [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html), SBB Infrastructure, SBB Personenverkehr or public transport Switzerland** in general.
+
 ## Translations
 Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
 * Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
 * v3.Notice::value or v2.Note::value are sometimes translated by SBB P Data-Mgmt
 * Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
 * other texts are translated by SBB Business Rules, like StopV2::*DelayText
-
-## Enum's and State's
-J-S uses some Enum's which relate typically to business defined values, for e.g.:
-* v3.ServiceProduct or v2.TransportProductV2::category
-* v2.VehicleType
-* v3 only supports x-tensible enums in Request, in response are enum's are returned as String's
 
 ## About ServiceVehicle
 
