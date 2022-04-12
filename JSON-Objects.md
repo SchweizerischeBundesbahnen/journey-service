@@ -109,7 +109,7 @@ Examples:
 ### PlaceReference
 
 #### Plain value
-As given in **AbstractPlace::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses:
+As given in **Place::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses:
 
 Examples:
 * `"8507000"` as returned by StopPlace::id (official station UIC)
