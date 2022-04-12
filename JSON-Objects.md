@@ -109,7 +109,10 @@ Examples:
 ### PlaceReference
 
 #### Plain value
-As given in **Place::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses:
+As given in **Place::id** (`StopPlace::id`, `AddressPlace::id` or `PoiPlace::id`) returned by J-S responses.
+
+Remark:
+* in v2 we expected a type as well, but in v3 determines according to id, what Place::type is to be found.
 
 Examples:
 * `"8507000"` as returned by StopPlace::id (official station UIC)
