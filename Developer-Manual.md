@@ -6,11 +6,11 @@
 The Journey-Service is a RESTful **"Journey-Planner"** facade abstracting **public transportation routing and planning** for a set of **SBB Switzrland** relevant underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis, NOVA etc.
 
 The main **Use Cases** are:
-* Finding **`Place`** (aka OJP `Location`), such as `StopPlace` resp. (stations for public transport trains, busses, tramways, ..), `AddressPlace` and `PoiPlace` (Points of Interest (POI)).
+* Finding **`Place`** (aka OJP `Location`), such as `StopPlace` resp. (stations for public transport trains, busses, tramways, ...), `AddressPlace` and `PoiPlace` (Points of Interest (POI)).
 * Finding concrete journeys (`Trip`, `DatedVehicleJourney`) as passenger-information.
 * Finding some SBB specific additional info (such as `Trainformation`s, Realtime monitoring etc)
 
-A set of implemented **SBB Business Rules** (such as delays, platform changes,..) guarantees that consuming channels may display consistent data.
+A set of implemented **SBB Business Rules** (such as delays, platform changes,...) guarantees that consuming channels may display consistent data.
 
 If you are new to journey-planning with SBB, consider general standards as mentioned in [chapter "Routing Standards in "Public Transport"](v3/Journey-Service_v3_MODEL.md)
 
@@ -22,7 +22,7 @@ If you are new to journey-planning with SBB, consider general standards as menti
 
 ### Good to know
 #### Release Notes
-See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md)
+See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md).
 Because J-S heavily relies on the Journey-Assistant library, also those [J-A Release-Notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-assistant/browse/ReleaseNotes.md) might reveal some important updates.
 
 #### Blog announcements
