@@ -41,6 +41,10 @@ Transmodel realization view:
 Transmodel realization view:
 ![image](resources/J-S_v3_ServiceCalendar_TRM.png)
 
+#### Situation MODEL
+Transmodel realization view:
+![image](resources/J-S_v3_Situation_TRM.png)
+
 ## Routing Standards in "Public Transport"
 
 ### Transmodel
