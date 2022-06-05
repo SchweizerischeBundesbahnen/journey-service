@@ -16,7 +16,7 @@ Important:
 ## About J-S versions
 ### ~~v1~~ and v2 (DEPRECATED)
 * ~~v1~~ is OBSOLETE, do not use it!
-* v2 is still functional until END of ~2022, but some APIs are migrated to v3
+* v2 is still functional until END of ~2022, but the APIs are migrated to v3
     * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
 
 ### v3 (STRATEGIC)

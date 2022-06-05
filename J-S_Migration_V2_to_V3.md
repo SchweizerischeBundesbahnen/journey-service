@@ -31,19 +31,21 @@ Remark:
 
 | J-S v3                   | J-S v2                          | J-A                           |
 | ------------------------ | ------------------------------- |-----------------------------  |
-| AbstractPlace            | see J-A                         | Location                      |
+| Place                    | see J-A                         | Location                      |
 | ScheduledStopPoint       | StopV2                          | OrigDestType / StopType       |
-| GeometryObject (GeoJSON) | see J-A                         | CoordinatesWGS84              |
+| Point (GeoJSON)          | see J-A                         | CoordinatesWGS84              |
+| LineString (GeoJSON)     | see J-A                         | Polyline                      |
 | ServiceJourneyPattern    | see J-A                         | JourneySegment                |
 | PTRideLeg                | LegV2 (::type=PUBLIC_TRANSPORT) | Leg (::type=PUBLIC_TRANSPORT) |
 | AccessLeg                | LegV2 (::type=FOOTPATH)         | Leg (::type=FOOTPATH or CAR)  |
 | PTConnectionLeg          | LegV2 (::type=TRANSFER)         | Leg (::type=TRANSFER)         |
-| TripPattern              | TripSummaryV2                   | TripSummary                   |
+| TripSummary              | TripSummaryV2                   | TripSummary                   |
 | Notice                   | see J-A                         | Note                          |
 | PTSituationMessage       | HimMessageV2                    | Message                       |
+| DatedVehicleJourney      | see J-A                         | JourneyDetail                 |
 | ServiceProduct           | TransportProductV2              | ProductType                   |
 | OperatingPeriod          | ServiceDaysV2                   | ServiceDays                   |
-| Problem + HttpStatus     | Error + HttpStatus              | Throwable/Exception           |
+| Problem + HttpStatus     | Problem + HttpStatus            | Throwable/Exception           |
 
 ## API's
 | J-S v3                   | J-S v2                          | J-A                           |
@@ -53,8 +55,8 @@ Remark:
 | /vehicle-journeys        | /departures, /arrivals          | StationboardAssistant         |
 |    "                     | /routes                         | RouteAssistant                |
 | /situations              | /traffic                        | HimAssistant                  |
-| /schedules               | /info                           | TimetableAssistant            |
-|                          | /trainFormation                 | TrainFormationFacade          |
+| /service-calendar        | /info                           | TimetableAssistant            |
+| <N/A>                    | /trainFormation                 | TrainFormationFacade          |
 
 ## Generated ApiClient
 OpenApi 3 based, see [Swagger2 -> OpenAPI 3](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-client/SwitchingSwagger2ToOpenApi3.md)
