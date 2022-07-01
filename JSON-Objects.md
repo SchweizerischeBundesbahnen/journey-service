@@ -52,20 +52,18 @@ Be aware:
 
 #### Plain value
 
-Analog returned `Line::name`.
-
-Related to `TransportProductV2` -> `<productCategoryShortName>SPACE<line>SPACE<number>`
+Analog returned `ServiceProduct::name` resp. `::vehicleSubModeShortName`, ::line`, `::number`.
 
 Various content is possible:
-* typically either productCategoryShortName AND (line AND/OR number)
+* typically either vehicleSubModeShortName AND (line AND/OR number)
 * just number
 
 For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.
 Examples:
 
 * `"IC 1 753"`  
-* `"IC 1 -"`     // productCategoryShort - line
-* `"IC - 753"`   // productCategoryShort - line
+* `"IC 1 -"`     // vehicleSubModeShortName - line
+* `"IC - 753"`   // vehicleSubModeShortName - line
 * `"- - 753"`    // number only, in CH unique (implicites time and direction)
 
 #### JSON object
