@@ -72,7 +72,7 @@ Examples:
 #### JSON object
 
 Hint:
-* `name` must be given analog [**ServiceProductReference**](serviceproductreference)
+* `name` must be given analog [**ServiceProductReference**](#serviceproductreference)
 *  `ScheduledStopPointReference` start/end is mandatory.
 
 Examples:
