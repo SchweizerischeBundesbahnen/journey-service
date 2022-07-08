@@ -73,7 +73,7 @@ Examples:
 
 Hint:
 * `name` must be given analog [**ServiceProductReference**](#serviceproductreference)
-*  `ScheduledStopPointReference` start/end is mandatory.
+* `start`, `end` analog [**ScheduledStopPointReference**](#scheduledstoppointreference) and mandatory
 
 Examples:
 * `{"name":"IC 1 711","start":{"stopPlaceId":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceId":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
