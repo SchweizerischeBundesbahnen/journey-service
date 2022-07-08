@@ -69,29 +69,11 @@ Examples:
 
 ### LineReference
 
-#### Plain value
-
-Analog returned `ServiceProduct::name` resp. `::vehicleSubModeShortName`, ::line`, `::number`.
-
-Various content is possible:
-* typically either vehicleSubModeShortName AND (line AND/OR number)
-* just number
-
-For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.
-Examples:
-
-* `"IC 1 753"`  
-* `"IC 1 -"`     // vehicleSubModeShortName - line
-* `"IC - 753"`   // vehicleSubModeShortName - line
-* `"- - 753"`    // number only, in CH unique (implicites time and direction)
-
 #### JSON object
 
 Hint:
-* `name` must be given analog **ServiceProductReference**
-*  `ScheduledStopPointReference` start/end is optional but relevant for e.g.:
-    * &excludeLines params
-    * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
+* `name` must be given analog [**ServiceProductReference**](serviceproductreference)
+*  `ScheduledStopPointReference` start/end is mandatory.
 
 Examples:
 * `{"name":"IC 1 753"}`
