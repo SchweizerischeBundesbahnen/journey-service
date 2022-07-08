@@ -58,7 +58,8 @@ Various content is possible:
 * typically either vehicleSubModeShortName AND (line AND/OR number)
 * just number
 
-For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.
+For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.  
+
 Examples:
 
 * `"IC 1 753"`   // vehicleSubModeShortName line  number
