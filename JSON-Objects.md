@@ -48,6 +48,24 @@ Examples:
 Be aware:
 * Use URL encoding for GET params containing JSON-Objects!
 
+### ServiceProductReference
+
+#### Plain value
+
+Analog to the returned `ServiceProduct::name` resp. its `::vehicleSubModeShortName`, ::line`, `::number`.
+
+Various content is possible:
+* typically either vehicleSubModeShortName AND (line AND/OR number)
+* just number
+
+For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.
+Examples:
+
+* `"IC 1 753"`   // vehicleSubModeShortName line  number
+* `"IC 1 -"`     // vehicleSubModeShortName line (number missing)
+* `"IC - 753"`   // vehicleSubModeShortName (line missing) number
+* `"- - 753"`    // number only, in CH unique (implicit time and direction)
+
 ### LineReference
 
 #### Plain value
@@ -69,7 +87,7 @@ Examples:
 #### JSON object
 
 Hint:
-* `name` must be given
+* `name` must be given analog **ServiceProductReference**
 *  `ScheduledStopPointReference` start/end is optional but relevant for e.g.:
     * &excludeLines params
     * SOT-PathParam /v3/INCUBATOR/trips/{date}/**{line}**/{destination}
