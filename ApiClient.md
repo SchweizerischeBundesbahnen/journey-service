@@ -13,6 +13,7 @@ In case you are using a framework, please check:
     * If you use "Z"(ulu) notation the same samples above would serialize to "2020-12-18T13:55:00**Z**" or "2020-07-21T12:55:00**Z**". In such a case Journey-Service has no chance to determine the intended timezone and as a fallback we interprete all such data as "Europe/Zurich" timezone and might lead to unexpected results on the caller side!
 
 Remark:
+* For internal consumers the [JSON definition may also be downloaded here]8https://journey-service.sbb-cloud.net/v3/api-docs/journey-service-api-management) (instead of developer.sbb.ch) 
 * We customize our Jackson-Mapper for OffsetDateTime like:
   ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_WITH_ZONE_ID}).featuresToDisable(new Object[]{SerializationFeature.WRITE_DATES_AS_TIMESTAMPS}).featuresToDisable(new Object[]{DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE}).build();
 * If you use the generated ApiClient declare something like this:
