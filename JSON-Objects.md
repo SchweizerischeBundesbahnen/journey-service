@@ -52,11 +52,10 @@ Be aware:
 
 #### Plain value
 
-Analog to the returned `ServiceProduct::name` resp. its `::vehicleSubModeShortName`, ::line`, `::number`.
+Analog to the returned `ServiceProduct::name` resp. its `vehicleSubModeShortName`, `line`, `number`.
 
 Various content is possible:
-* typically either vehicleSubModeShortName AND (line AND/OR number)
-* just number
+* at least specify {`number`} OR {`vehicleSubModeShortName` AND `line`}
 
 For semantic parsing, specify always all 3 elements, **if one is unknown use '-'**.  
 
