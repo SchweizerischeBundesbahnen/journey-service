@@ -45,6 +45,26 @@ A word about GET and POST:
 #### Error-handling
 See [Problem-Manual](Problem-Manual.md)
 
+#### Deserialize JSON tolerant
+Make sure you always deserialize J-S JSON responses tolerant (we might release new properties in a steady pace), for e.g. in Java:
+```
+final ObjectMapper mapper = Jackson2ObjectMapperBuilder.json()
+        ..
+        .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+        .build();
+
+// needs jackson-datatype-jsr310
+mapper.registerModule(new JavaTimeModule());
+
+// tolerant (at least on PRODuction environment) !!!
+boolean strict = false; 
+mapper.configure(SerializationFeature.FAIL_ON_SELF_REFERENCES, strict);
+mapper.configure(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS, strict);
+mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, strict);
+mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, strict);
+mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, strict);
+```
+
 ## Backward compatibility
 See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
 
