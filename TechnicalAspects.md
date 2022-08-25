@@ -65,6 +65,21 @@ mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, strict);
 mapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, strict);
 ```
 
+#### Caching
+Several endpoints provide responses which can be cached by the client. The caching is implemented according to [RFC-7232](https://www.rfc-editor.org/rfc/rfc7232) (`ETag`) and [RFC-7234](https://www.rfc-editor.org/rfc/rfc7234) (`Cache-Control`). 
+
+The cacheable responses are recognizable by the `Cache-Control`-header which describes the kind of the cache and how long it endures. The `Cache-Control`-header complies with RFC-7232 and therefore will not be described further here and refer to the official [documentation](https://www.rfc-editor.org/rfc/rfc7234#section-5.2).
+
+Implementation:
+1. Make a request to a cacheable endpoint and read in the `ETag`-header of the response. Store `ETag` and Response.
+
+2. When you request the endpoint again, send your `ETag` in the `If-None-Match`-header.  
+    
+    2.1. When Server responds with `304 - Not Modified`, use your cached version.
+    
+    2.2. When Server returns `200 - Ok`, use response and update your cache.
+
+
 ## Backward compatibility
 See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
 
