@@ -21,14 +21,14 @@ If you are new to journey-planning with SBB, consider general standards as menti
 * Follow existing standards but simplify and adapt to enhance time-to-market of new customer-information features
 
 ### Good to know
-#### Release Notes
-See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md).
-Because J-S heavily relies on the Journey-Assistant library, also those [J-A Release-Notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-assistant/browse/ReleaseNotes.md) might reveal some important updates.
-
 #### Blog announcements
 Check the blog: https://developer.sbb.ch/apis/journey-service/blog
 
 To stay up to date about new features or adjustments we highly advise you to use the RSS feed. Please follow the following instruction to insert the RSS Feed of the Journey-Service Blog: [Instruction RSS Feed](RSS%20Subscription-Instruction.pdf)
+
+#### Release Notes (SBB internal)
+See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/ReleaseNotes.md).
+Because J-S heavily relies on the Journey-Assistant library, also those [J-A Release-Notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-assistant/browse/ReleaseNotes.md) might reveal some important updates.
 
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully not really necessary for v3 (or v2) API understanding in most cases.
