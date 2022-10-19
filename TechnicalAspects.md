@@ -26,6 +26,8 @@ See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODE
 
 ## Request and Response
 
+All APIs are synchroneous Request/Response RESTful APIs.
+
 See [v3 REST-API standards](v3/Journey-Service_v3_MODEL.md)
 
 ### Request
