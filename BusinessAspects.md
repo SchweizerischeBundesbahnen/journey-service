@@ -22,7 +22,9 @@ Some properties resp. their value-expressions might be **translated according to
 * Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
 * other texts are translated by SBB Business Rules, like StopV2::*DelayText
 
-## About ServiceVehicle
+## About VehicleMode (or TransportMode)
+
+v3 `VehicleMode`
 
 See [TransportMode](TransportMode.md)
 
@@ -36,7 +38,7 @@ J-S sometimes provides fields with a "*Formatted" suffix which contain values, t
 * TransportProductV2::number → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
 * TransportProductV2::number**Formatted** → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
 
-### Realtime analysis
+### Realtime behaviour
 The SBB underlying systems may **provide realtime-data, typically TODAY only (~ NOW..+4h)**.
 
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
@@ -58,5 +60,8 @@ Remark:
 
 ## Most typical use cases
 Most consumers will probably be interested in a simple train-connection from A to B. This scenario is supported in 2 steps usually:
+1. find the relevant origin and destination Place
+2. find the `Trip` connection between those
+
 * see [v2 APIs](v2/V2_APIs.md)
 * see v3 TODO
