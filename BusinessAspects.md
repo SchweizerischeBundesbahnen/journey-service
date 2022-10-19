@@ -1,9 +1,10 @@
 # Business Aspects
 
+## Relevant Standards
 Some important links:
 * [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
 * [v580 FIScommun](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1)
-* [Open-Data Plattform Monility Switzerland](https://opentransportdata.swiss/de/)
+* [Open-Data Plattform Mobility Switzerland](https://opentransportdata.swiss/de/)
 * [TransportMode](TransportMode.md)
 
 ## End-user consistency
