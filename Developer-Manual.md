@@ -33,15 +33,13 @@ Because J-S heavily relies on the Journey-Assistant library, also those [J-A Rel
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully rarely necessary for v3 (or v2) API understanding in most cases.
 
+See [Technical Aspects](TechnicalAspects.md)
+
+See [Business Aspects](BusinessAspects.md)
+
 ### Choosing the right service definition
 In [developer.sbb.ch URLs](TechnicalAspects.md) all available APIs over all versions are listed in one mixed group. Some APIs may not be visible or accessable (based on your **API plan** at [registration](User-Registration-Process.md)).
 
 However for internal developers at SBB building their own instance on localhost (or using SBB internal DEV environment), the version can be selected by OpenApi Group:
 
 ![Version JSON-definition](resources/J-S_version.png)
-
-### Further details
-
-See [Technical Aspects](TechnicalAspects.md)
-
-See [Business Aspects](BusinessAspects.md)
