@@ -40,7 +40,8 @@ However for internal developers at SBB building their own instance on localhost 
 
 ![Version JSON-definition](resources/J-S_version.png)
 
-### Request/Response
-All APIs are **synchroneous Request/Response RESTful APIs**.
+### Further details
 
 See [Technical Aspects](TechnicalAspects.md)
+
+See [Business Aspects](BusinessAspects.md)
