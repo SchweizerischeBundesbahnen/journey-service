@@ -19,7 +19,7 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 
 ## Which API-endpoints must be migrated
 All greyed out APIs will be removed soon (~May 2023). Each of them appears deprecated and has a hint where to upgrade to:
-![Version JSON-definition](v2/resources/V2_toMigrate.png)
+![SWITCH hint](v2/resources/V2_toMigrate.png)
 
 ## Header
 
