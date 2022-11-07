@@ -18,8 +18,8 @@ Some expressions are even related to **conventions by [BAV](https://www.bav.admi
 
 ## About specific datatypes
 ### Place
-In J-S `_Place_` is an abstract type and supertype of concrete `StopPlace`, `Address` and `PointOfInterest`.
-All data are rather masterdata, but rare refresh cycles, but they happen, especially for new yearly planning period for StopPlace.
+In J-S `Place` is an abstract type and supertype of concrete `StopPlace`, `Address` and `PointOfInterest`.
+All data are rather masterdata with rare refresh cycles (but they happen, especially for new yearly planning period for StopPlace).
 
 Relevant systems dealing with StopPlace's:
 1. The core system to manage all StopPlace data is **[DiDok](https://developer.sbb.ch/apis/servicepoints/information)** (validity, unique naming, other properties).
