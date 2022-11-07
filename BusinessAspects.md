@@ -18,17 +18,20 @@ Some expressions are even related to **conventions by [BAV](https://www.bav.admi
 
 ## About specific datatypes
 ### Place
+In J-S `_Place_` is an abstract type and supertype of concrete `StopPlace`, `Address` and `PointOfInterest`.
+All data are rather masterdata, but rare refresh cycles, but they happen, especially for new yearly planning period for StopPlace.
+
 Relevant systems dealing with StopPlace's:
-1. The core system to manage all StopPlace data is **[DiDok](https://developer.sbb.ch/apis/servicepoints/information)**.
-2. The system containing all planned journeys for a certain period for known `ServiceProduct's` is **INFO+**. StopPlace's from DiDok are related on planned journeys (for e.g. from Bern to Zürich HB as IC 1 713, where 'Bern' and 'Zürich HB' are such StopPlace's).
+1. The core system to manage all StopPlace data is **[DiDok](https://developer.sbb.ch/apis/servicepoints/information)** (validity, unique naming, other properties).
+2. The system containing all planned journeys for a certain period for known `ServiceProduct's` is **INFO+**. StopPlace's from DiDok are related on planned journeys for a certain period (for e.g. 2022, from Bern to Zürich HB as IC 1 713, where 'Bern' and 'Zürich HB' are such StopPlace's).
 3. The journey-planner system to route `Trip's` is Hafas, based on INFO+ (planned journeys) and **CUS** (realtime changes on planned journeys, see [below](Realtime behaviour).
 
-Important to understand:
+**Important to understand:**
 * v3/places and /v3/trips request on Hafas, therefore the contained Place's`are only those actively routed by Hafas:
     * Some StopPlace's have 2 "equivalent" UICs (for e.g. on geographical border-points like a Swiss UIC and a foreign country UIC), but Hafas knows only ONE of those two, though both ar given by DiDok
     * `PointOfInterest`places are originally provided by [Journey-POIs-Service](https://developer.sbb.ch/apis/journey-pois/information) and 1:1 resused by Hafas routing.
     * `Address` places are based on a postal directory refreshed in regular cycles.
-    *  v3/places are considered independent of their validFrom/To time-frame, by means Hafas might find and route such places, even if they are meant for a future date even if the Trip dateTime is before.
+    *  **v3/places are considered independent of their validFrom/To time-frame**, by means Hafas might find and route such places, even if they are meant for a future date even if the Trip dateTime is before.
     *  **v3/stop-places is a Journey-Service internal subset of actively routed StopPlace's** by Hafas, but **considers validFrom/To according to DiDok** master. But be aware not all DiDok StopPlace's are contained yet.
 
 ### VehicleMode (or TransportMode)
