@@ -1,5 +1,6 @@
 # Journey-Service (J-S) migration v2 to v3
-Unfortunately relating to Transmodel comes with some serious breaking model changes in v3.
+Unfortunately this is a somewhat **time consuming migration**.
+Related to Transmodel in v3, semantic changes and mappings come with some serious breaking API and Model changes in v3.
 
 ## SBB API Principles
 see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-principles/) enforce [Zalando API Guidelines](https://opensource.zalando.com/restful-api-guidelines/), therefore some implementations aspects of v2 are refactored in v3:
@@ -17,6 +18,8 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 |API-Path|/b2c/v2/* | /v3/* |
 
 ## Which API-endpoints must be migrated
+All greyed out APIs will be removed soon (~May 2023). Each of them appears deprecated and has a hint where to upgrade to:
+![Version JSON-definition](v2/resources/V2_toMigrate.png)
 
 ## Header
 
