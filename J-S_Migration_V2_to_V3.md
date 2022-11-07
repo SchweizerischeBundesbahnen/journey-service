@@ -3,7 +3,7 @@ Unfortunately relating to Transmodel comes with some serious breaking model chan
 
 ## SBB API Principles
 see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-principles/) enforce [Zalando API Guidelines](https://opensource.zalando.com/restful-api-guidelines/), therefore some implementations aspects of v2 are refactored in v3:
-* **Enum's** are consequently modeled as plain String's
+* **Enum's** are consequently modeled as plain **x-tensible String's**
     * request enforces @Schema(allowableValues) closed list Enum
     * response 
     *    v2 declares Enum type
