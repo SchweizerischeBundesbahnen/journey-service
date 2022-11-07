@@ -16,6 +16,8 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 |--------|-------|-----|
 |API-Path|/b2c/v2/* | /v3/* |
 
+## Which API-endpoints must be migrated
+
 ## Header
 
 | Aspect | /v2 | /v3 |
@@ -24,18 +26,20 @@ see [SBB API Principles](https://schweizerischebundesbahnen.github.io/api-princi
 |Response-Header|like `Content-Language` (relates to `Accept-Language` or fallback-language by J-S)|dito|
 |Tracing|`Request-Id` allows SBB internal Instana tracing|dito|
 
-## Type mappings
+## Semantic type mappings
+
+V2 was related to older Journey-Planner specifications and more proprietary than v3, which is based on the conceptual [Transmodel (CEN Europe) TRM6](https://www.transmodel-cen.eu/downloads/).
 
 Remark:
 * Obvious (quiet similar named) mappings are not mentioned explicitely below:
 
 | J-S v3                   | J-S v2                          | J-A                           |
 | ------------------------ | ------------------------------- |-----------------------------  |
-| Place                    | see J-A                         | Location                      |
+| _Place_                  | see J-A                         | Location                      |
 | ScheduledStopPoint       | StopV2                          | OrigDestType / StopType       |
 | Point (GeoJSON)          | see J-A                         | CoordinatesWGS84              |
 | LineString (GeoJSON)     | see J-A                         | Polyline                      |
-| ServiceJourneyPattern    | see J-A                         | JourneySegment                |
+| _ServiceJourneyPattern_  | see J-A                         | JourneySegment                |
 | PTRideLeg                | LegV2 (::type=PUBLIC_TRANSPORT) | Leg (::type=PUBLIC_TRANSPORT) |
 | AccessLeg                | LegV2 (::type=FOOTPATH)         | Leg (::type=FOOTPATH or CAR)  |
 | PTConnectionLeg          | LegV2 (::type=TRANSFER)         | Leg (::type=TRANSFER)         |
