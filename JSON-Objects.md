@@ -154,9 +154,9 @@ Examples:
 
 ## J-S v3
 
-## Notice
+## LinkedText
 
-::text (template/arguments) contains a special formattable object to make some values like PHONE, EMAIL, URL linkable with UI capabilities, for e.g. like:
+`Notice::text` for e.g. contains a special formattable `LinkedText` object to make some values like PHONE, EMAIL, URL interactable with UI capabilities, for e.g. like:
 
     public static String formatLinkedText(String template, Map<NoteValue.LinkableType, List<String>> arguments) {
         if (StringUtils.isBlank(template) || CollectionUtils.isEmpty(arguments)) {
