@@ -1,5 +1,7 @@
 # Problems
-**Error-handling** is an important topic.
+**Error-handling** by Journey-Service means, each API will return a **`Problem` object in a failure case with further description** about the resulting error out of a consumer request.
+
+If you need further support about a specific `Problem`, please send a **mail for further support <journey-service@sbb.ch>**.
 
 It is part of the service-contract to define how an underlying system should provide further information in case of an erroneous request or backend action.
 
