@@ -1,7 +1,7 @@
 # Problems
-**Error-handling** by Journey-Service (J-S) means, each API will return a **`Problem` object in a failure case with further description** about the resulting error out of a caller request.
+**Error-handling** by Journey-Service (J-S) means, each API will return a **[`Problem`](https://developer.sbb.ch/apis/journey-service/documentation) object in a failure case with further description**.
 
-**Contact <journey-service@sbb.ch>** for further support about a specific `Problem`.
+**Contact <journey-service@sbb.ch>** for further support about a specific `Problem` **if you don't find the answer below**.
 
 ## Standard used
 
@@ -17,57 +17,55 @@ For example, an HTTP response carrying JSON problem details:
     Content-Language: en
     
     {
-     "type": "https://ki-journey-service.app.ose.sbb-cloud.net/sbb/v2/trips",
+     "status": 400
+     "type": "<explanation>",
      "title": "Not supported: EVA",
      "detail": "The underlying system maintains UIC station codes only.",
-     "instance": "/location"
+     "instance": "v3/places"
     }
+    
+See also:
+* **Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
+* [HttpStatus](https://opensource.zalando.com/restful-api-guidelines/#150)
 
-## J-S::B2C v2
-### Properly handled errors by J-S
-**Error** JSON object
+## J-S HttpStatus explained
 
-See [J-S Swagger2 API](https://developer.sbb.ch/apis/journey-service/documentation) of each API concerning known or expectable HttpStatus (for e.g. 400 BAD_REQUEST).
+Header values:
+* `Content-Type` is set to `application/problem+json`.
+* `Content-Language` is in most cases set to `en` (however might come in rare cases translated).
+* `Request-ID` <your value at request-time replied>.
 
-In most cases the body will contain a detailed error, according to [RFC-7807](https://tools.ietf.org/html/rfc7807):
-* Header: HttpStatus resp. high-level error class
-* Body: finer-grained details of the problem (machine-readable format, the client can treat it appropriately) ** section 3.1 declares members of a Problem Details (problem+json) Object: status, type, title, detail, instance
-Error texts in "title" or "detail" will be given according to "CONTENT-LANGUAGE" (though mostly in english) and:
-* are not meant to display to end-users 1:1, proper error handling and displaying is the responsibility of the UI developer
-* can be used for consumer logging and might be helpful in postponed analysis tasks
-* the contents of such errors relate to underlying system and what J-S thinks is appropriate from the viewpoint of its layer
+Problem properties:
+* In most cases the `title` and `detail` will contain a usefule hint.
+* `instance` should point to the J-S API involved.
 
-For example, an HTTP response carrying JSON problem details:
+
+For example, an HTTP response carrying JSON `Problem`:
     HTTP/1.1 404 Not Found
     Content-Type: application/problem+json
     Content-Language: en
-    Log-Context: <your value replied>
+    Request-ID: ClientId_abc_UseCase27
     {
       "status": 404
-      "type": "<pointer to this manual>",
+      "type": "<pointer to this page>",
       "title": "No entity/resource found (in Backend)",
       "detail": "There was no matching Trip found for your query arguments.",
       "instance": "/v3/trips/{id}"
     }
 
-See also:
-* **Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
-* [HttpStatus](https://opensource.zalando.com/restful-api-guidelines/#150)
-* SBB staff: see also [error-handling](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/V2_Error-Handling.md)
-
-#### 200 for emptyList (V2 DEPRECATED APIs only)
+### 200 for emptyList (V2 DEPRECATED APIs only)
 
 For v2 (mostly deprecated) the following convention was made historically:
 * 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
 
-#### 400
+### 400
 J-S considers this as a caller side problem.    
     
 Remark:
 * **Check the OpenAPI description on each API and its Parameters.** We spend a lot of effort to improve the J-S Service-Contract, which is relevant for validations.
 * Swagger-Users may not even reach the J-S Backend (in such cases no error-body is returned sometimes. Please check the Swagger-UI carefully.)
 
-#### 404 Object not found
+### 404 Object not found
 If an expected object cannot be found, for e.g. /v3/trips/{id} which may not resolve    
     
 ### 500
@@ -94,7 +92,7 @@ J-S defines generally a timeout of about 30s for any underlying backend requests
 Besides timeouts declared by underlying systems are out of control by J-S.
     
 ### Errors given by APIM
-If there is an error by the "security-layer" errors might result directly from APIM.
+If there is an error by the "security-layer" errors might result directly from APIM (J-S is not involved yet).
 
 #### Too many calls
 If the assigned plan limit is reached (requests/minute) an error like this might result:  
