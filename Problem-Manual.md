@@ -97,7 +97,7 @@ J-S defines generally a timeout of about 30s for any underlying backend requests
 Besides timeouts declared by underlying systems are out of control by J-S.
     
 ### Errors given by APIM
-If there is an error by the "security-layer" errors might result directly from APIM (J-S is not involved yet).
+If there is an error by the "security-layer" errors might result directly from APIM (J-S will be behind and therefore not be the direct source of the Problem).
 
 #### Too many calls
 If the assigned plan limit is reached (requests/minute) an error like this might result:  
