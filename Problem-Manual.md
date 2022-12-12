@@ -53,13 +53,18 @@ For example, an HTTP response carrying JSON `Problem`:
       "instance": "/v3/trips/{id}"
     }
 
-### 200 for emptyList (V2 DEPRECATED APIs only)
+### 200 OK
+#### V3
+J-S was able to return a proper single Object.
+    
+#### (V2 DEPRECATED APIs only)
+J-S may return single Object or List.
 
-For v2 (mostly deprecated) the following convention was made historically:
-* 200 with an emptyList body "{}" for API's returning List<T> where no hits were found
+Be aware:
+* For v2 the following convention was made historically: 200 with an emptyList body "[]" for API's returning List<T> where no hits were found.
 
-### 400
-J-S considers this as a caller side problem.    
+### 400 Bad Parameter
+J-S considers this as a caller side problem.
     
 Remark:
 * **Check the OpenAPI description on each API and its Parameters.** We spend a lot of effort to improve the J-S Service-Contract, which is relevant for validations.
@@ -68,25 +73,25 @@ Remark:
 ### 404 Object not found
 If an expected object cannot be found, for e.g. /v3/trips/{id} which may not resolve    
     
-### 500
+### 500 Internal Server Error
     
-### 501
+### 501 Not Implemented
 Possible reasons:
 * Some early INCUBATOR feature is not implemented but forecasted for experimental reasons.
     
 Please keep patient, might work with a next release of J-S.
     
-### 502
+### 502 Bad Gateway
 Possible reasons:
 * Send originally by underlying system.
 * J-S considers a used Backend to have some kind of developer fault.   
     
-### 503
+### 503 Service Unavailable
 Since J-S has a complicated integration-architecture, various Network/IP, Broken-Pipe or Backend-System faults may occur by chance.
 
 Often a retry after a short time might solve the problem.
     
-### 504
+### 504 Timeout
 J-S defines generally a timeout of about 30s for any underlying backend requests, however some routing requests might be tricky for the underlying router and might take longer.
     
 Besides timeouts declared by underlying systems are out of control by J-S.
