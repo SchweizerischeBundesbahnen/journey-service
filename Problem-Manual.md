@@ -33,7 +33,7 @@ See also:
 Header values:
 * `Content-Type` is set to `application/problem+json`.
 * `Content-Language` is in most cases set to `en` (however might come in rare cases translated).
-* `Request-ID` <your value at request-time replied>.
+* `Request-ID` The HTTP request ID can help you diagnose problems by correlating log entries for a given web request across many log files, which otherwise would not contain a common piece of information. Your value in the request should be replied in the J-S response, even in Problem case.
 
 Problem properties:
 * In most cases the `title` and `detail` will contain a usefule hint.
