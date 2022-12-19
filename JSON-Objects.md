@@ -158,7 +158,8 @@ Examples:
 
 `Notice::text` for e.g. contains a special formattable `LinkedText` object to make some values like PHONE, EMAIL, URL interactable with UI capabilities, for e.g. like:
 
-    public static String formatLinkedText(String template, Map<NoteValue.LinkableType, List<String>> arguments) {
+    // LinkableType = {PHONE, EMIAL, URL} where arguments are entries for each LinkedType in proper order matching the template
+    public static String formatLinkedText(String template, Map<LinkableType, List<String>> arguments) {
         if (StringUtils.isBlank(template) || CollectionUtils.isEmpty(arguments)) {
             return template;
         }
