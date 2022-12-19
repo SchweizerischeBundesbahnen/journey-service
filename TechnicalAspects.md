@@ -81,6 +81,8 @@ Implementation:
     
     2.2. When Server returns `200 - Ok`, use response and update your cache.
 
+Sample:
+* see v3/service-calendar
 
 ## Backward compatibility
 See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
