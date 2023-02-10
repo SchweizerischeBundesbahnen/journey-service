@@ -1,5 +1,7 @@
 # Business Aspects
 
+Journey-Service (https://developer.sbb.ch/apis/journey-service/documentation) is a routing service provided by SBB and is widely used by SBB public transportation (train, bus, tram,..) related applications, such as **[sbb.ch](https://www.sbb.ch/en/home.html)** or **SBB Mobile App**.
+
 ## Relevant Standards
 Some important links:
 * [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
@@ -27,7 +29,7 @@ Relevant systems dealing with StopPlace's:
 3. The journey-planner system to route `Trip's` is Hafas, based on INFO+ (planned journeys) and **CUS** (realtime changes on planned journeys, see below [Realtime behaviour](#realtime-behaviour).
 
 **Important to understand:**
-* _v3/places_ and _/v3/trips_ request on Hafas, therefore the contained Place's`are only those actively routed by Hafas:
+* `/v3/places` and `/v3/trips` request on Hafas, therefore the contained Place's`are only those actively routed by Hafas:
     * Some StopPlace's have 2 "equivalent" UICs (for e.g. on geographical border-points like a Swiss UIC and a foreign country UIC), but Hafas knows only ONE of those two, though both ar given by DiDok
     * `PointOfInterest`places are originally provided by [Journey-POIs-Service](https://developer.sbb.ch/apis/journey-pois/information) and 1:1 resused by Hafas routing.
     * `Address` places are based on a postal directory refreshed in regular cycles.
@@ -46,7 +48,7 @@ There are specific extensions for developer convenience, such as:
 
 ## Business logic aspects
 ### Translations
-Some properties resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
+Some properties' resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
 * Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
 * v3.Notice::value or v2.Note::value are sometimes translated by SBB P Data-Mgmt
 * Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
@@ -62,9 +64,10 @@ The SBB underlying systems may **provide realtime-data, typically TODAY only (~ 
 
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
 
-StopV2 for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
-* ::boardingAlightingStatus
+`ScheduledStopStatus` for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
+* ::arrivalTimeAimed/Rt, departureTimeAimed/Rt
 * ::stopStatus s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
+* ::forBoarding, ::forAlighting
 
 About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
