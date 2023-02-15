@@ -50,7 +50,7 @@ On a Leg boarding at origin or alighting at destination will not be possible (re
 
 NOT_SERVICED (de:ausserordentliche Durchfahrt)
 A station which was planned in plan data but for some reason the service-product does not halt any more.
-Condition ::isRedirected == true
+Condition ::isRedirected == true  
 ![Version JSON-definition](resources/StopStatus_NOT_SERVICED.png)
 
 UNPLANNED (de:ausserordentlicher Halt)
