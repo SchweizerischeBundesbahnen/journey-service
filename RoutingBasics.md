@@ -28,7 +28,7 @@ J-S may be distinguished into the following aspects, where routing is related to
 
 ###### Boarding/Alighting
 Each ScheduledStopPoint contains passenger information, whether it is:
-* ::forBoardingboard
+* ::forBoarding
 * ::forAlighting
 
 ###### StopStatus
