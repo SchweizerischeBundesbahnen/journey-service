@@ -39,33 +39,33 @@ J-S implements a reusable structure `ServiceJourney` which contains all public t
 
 ###### Boarding/Alighting
 Each `ScheduledStopPoint` contains passenger information, whether it is:
-* `::forBoardingboard`
+* `::forBoarding`
 * `::forAlighting`
 
 ###### StopStatus
 Each stop-point has a proper **`StopStatus`**, which is impacted by the current realtime-situation and might be visualized on a `DatedVehicleJourney`:
 **PLANNED**
-Stop was planned according to plan-data and behaves as planned yet to the current realtime situation.
+Stop was planned according to plan-data and behaves as planned yet to the current realtime situation.  
 ![Version JSON-definition](v3/resources/StopStatus_PLANNED.png)
 
 **(Partially) CANCELLED** (de:Ausfall)
 A PLANNED stop has a drastic change by realtime, the vehicle might not be able to be boarded or alighted!
 
-Stop was planned in plan data but it is part of cancelled Journey in realtime data:
+Stop was planned in plan data but it is part of cancelled Journey in realtime data:  
 ![Version JSON-definition](v3/resources/StopStatus_CANCELLED.png)
 
-On a Leg boarding at origin or alighting at destination will not be possible (relates to Trip::status::valid=false):
+On a Leg boarding at origin or alighting at destination will not be possible (relates to Trip::status::valid=false):  
 ![Version JSON-definition](v3/resources/StopStatus_PartiallyCancelled.png)
 * BEGIN_PARTIAL_CANCELLATION: Alighting might still be possible, but boarding is not possible.
 * END_PARTIAL_CANCELLATION: Alighting not possible, but boarding might still be possible,
 
 NOT_SERVICED (de:ausserordentliche Durchfahrt)
 A station which was planned in plan data but for some reason the service-product does not halt any more.
-Condition ::isRedirected == true
+Condition ::isRedirected == true  
 ![Version JSON-definition](v3/resources/StopStatus_NOT_SERVICED.png)
 
 UNPLANNED (de:ausserordentlicher Halt)
-A station which was not planned in plan data bus is an additional stop in realtime data.
+A station which was not planned in plan data bus is an additional stop in realtime data.  
 ![Version JSON-definition](v3/resources/StopStatus_UNPLANNED.png)
 
 ### Trips
