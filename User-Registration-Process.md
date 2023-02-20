@@ -46,7 +46,7 @@ See page https://developer.sbb.ch/apis/journey-service/information to find furth
 Note: integrate the TEST and/or INT-environment first and afterwards the PROD environment.  
 
 **Terms of usage:**
-* Always **choose "Azure AD" as primary JWT Token-Service provider**. If you run an extremely business critical Consumer-Application, we recommend you to register also for "redHat-SSO" as an alternate fallback scenario (but that is up to you).
+* Always **choose "Azure AD" as primary JWT Token-Service provider**.
 * **Integrate and test against (TEST)/INT-environment first** and afterwards the PROD environment. If we implement new features and nobody complains after a while on INT, we usually deploy to PROD without further communication in a non-breaking manner. 
 * **NEVER generate stress- or performance against neither TEST nor PROD.** Please let us know in advance if you plan performance-test on INT within a certain time window, thanks!
 
