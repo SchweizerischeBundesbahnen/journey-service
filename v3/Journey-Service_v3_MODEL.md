@@ -37,6 +37,9 @@ Developer simplified view:
 Transmodel realization view:
 ![image](resources/J-S_v3_ServiceJourney_TRM.png)
 
+##### CompoundTrain (aka formation, composition)
+![image](resources/J-S_v3_compoundTrain.png)
+
 #### Schedule MODEL
 Transmodel realization view:
 ![image](resources/J-S_v3_ServiceCalendar_TRM.png)
