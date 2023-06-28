@@ -135,10 +135,25 @@ Examples:
 * `{"stopPlaceId":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
 
 ### PTViaNoChangeAtReference
-TODO
+    {
+      stopPlaceId: <StopPlace::id(mandatory)>,
+      status: "NO_TRANSFER_META_STOPPLACE" (default and may be omitted) | "NO_TRANSFER"
+    }
+    
+Examples:
+* `{"stopPlaceId":"8507000"}`
+* `{"stopPlaceId":"8507000","status":"NO_TRANSFER"}`
 
 ### PTViaNotReference
-TODO
+    {
+      stopPlaceId: <StopPlace::id(mandatory)>,
+      status: "NO_PASS_THROUGH_META_STOPPLACE" (default and may be omitted) | "NO_PASS_THROUGH"
+    }
+
+Examples:
+* `{"stopPlaceId":"8507000"}`
+* `{"stopPlaceId":"8507000","status":"NO_PASS_THROUGH_META_STOPPLACE"}`
+
 
 ### ScheduledStopPointReference
     {
