@@ -83,7 +83,7 @@ For **Switzerland**, see managed Transport-Organsiations in **['Business organis
 * type="NUMBER" corresponds to **column 'NUMMER'**
 * type="TEXT" corresponds **column `BEZEICHNUNG_DE`**, be aware other translations are not supported at request time
 
-For international Transport-Organisations there is no such managed list, check and reuse what J-S returns as `Operator::name`.
+For international Transport-Organisations there is no such managed list, check and reuse whatever J-S returns as `Operator::name`.
 
 #### Plain value
 
@@ -94,14 +94,11 @@ Examples:
 
 #### DEPRECATED ~~Explicite JSON Object `OperatorReference`~~
 
-    {
-        "type":"TEXT"(default) | "NUMBER",
-        "value":"<String>"
-    }
+    {"type":"TEXT"(default) | "NUMBER","value":"<String>"}
 
-Examples:
-* `{"type":"NUMBER","value":"11"}`
-* `{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`
+~~Examples:~~
+* ~~`{"type":"NUMBER","value":"11"}`~~
+* ~~`{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`~~
 
 ### PlaceReference
 
