@@ -69,11 +69,11 @@ Examples:
 * `"- - 753"`    // number only, in CH unique (implicit time and direction)
 
 ### DatedVehicleJourneyReference
-Goal: find 1 concrete DatedVehicleJourney
+Goal: find concrete DatedVehicleJourney
 
 Two variants are possible:
-* by ServiceProduct and first & last ScheduledStopPoint
-* by ServiceProduct and operatingDay and Operator::number
+1. by ServiceProduct and first & last ScheduledStopPoint -> should lead to [0..*] hits (because not restricted to operatingDay)
+2. by ServiceProduct and operatingDay and Operator::number -> should lead to [0..1] hit
 
 #### JSON object
 
