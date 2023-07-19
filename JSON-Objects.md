@@ -49,6 +49,8 @@ Be aware:
 * Use URL encoding for GET params containing JSON-Objects!
 
 ### ServiceProductReference
+Goal: find [0..*] DatedVehicleJourney's matching the given ServiceProduct.
+* the better specified the more accurate the search
 
 #### Plain value
 
@@ -67,15 +69,23 @@ Examples:
 * `"- - 753"`    // number only, in CH unique (implicit time and direction)
 
 ### DatedVehicleJourneyReference
+Goal: find 1 concrete DatedVehicleJourney
+
+Two variants are possible:
+* by ServiceProduct and first & last ScheduledStopPoint
+* by ServiceProduct and operatingDay and Operator::number
 
 #### JSON object
 
 Hint:
 * `name` must be given precisely analog [**ServiceProductReference**](#serviceproductreference)
 * `start`, `end` analog [**ScheduledStopPointReference**](#scheduledstoppointreference) and mandatory
+* `operatingDay` with ISO 8601 String as <yyyy-MM-dd>
+* `operatorNumber` as given by OpentransportData (or String given by J-S with leading '0' like "000011" for SBB)
 
 Examples:
 * `{"name":"IC 1 711","start":{"stopPlaceId":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceId":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
+* `{"name":"IC 1 711", "operatingDay":"2023-07-19", operatorNumber":"000011"}`
 
 ### OperatorReference
 
