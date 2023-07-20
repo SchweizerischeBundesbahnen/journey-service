@@ -69,23 +69,16 @@ Examples:
 * `"- - 753"`    // number only, in CH unique (implicit time and direction)
 
 ### DatedVehicleJourneyReference
-Goal: find concrete DatedVehicleJourney
-
-Two variants are possible:
-1. by ServiceProduct and first & last ScheduledStopPoint -> should lead to [0..*] hits (because not restricted to operatingDay)
-2. by ServiceProduct and operatingDay and Operator::number -> should lead to [0..1] hit
+Goal: find concrete DatedVehicleJourney by ServiceProduct and first and last ScheduledStopPoint -> should lead to [0..*] hits 
 
 #### JSON object
 
 Hint:
 * `name` must be given precisely analog [**ServiceProductReference**](#serviceproductreference)
 * `start`, `end` analog [**ScheduledStopPointReference**](#scheduledstoppointreference) and mandatory
-* `operatingDay` with ISO 8601 String as <yyyy-MM-dd>
-* `operatorNumber` as given by OpentransportData (or String given by J-S with leading '0' like "000011" for SBB)
 
 Examples:
 * `{"name":"IC 1 711","start":{"stopPlaceId":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceId":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
-* `{"name":"IC 1 711", "operatingDay":"2023-07-19", operatorNumber":"000011"}`
 
 ### OperatorReference
 
