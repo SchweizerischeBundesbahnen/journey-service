@@ -32,6 +32,7 @@ See [v3 REST-API standards](v3/Journey-Service_v3_MODEL.md)
 
 ### Request
 For each Request to J-S set the header-fields (especially `Authorization`, `Request-Id`, `Accept-Language`) and GET or POST-body parameters as given in the [Service-Contract per API](https://developer.sbb.ch/apis/journey-service/documentation).
+J-S follows the W3C standard [Trace Context](https://www.w3.org/TR/trace-context) which helps operating in distributed systems.
 
 A word about GET and POST:
 * J-S offers **genererally idempotent GET** requests (since "Journey-Planners" are mostly information providing systems). However for technical reasons (like very long URL) a few APIs are specificied according to [SBB RESTful Principles: GET with BODY](https://schweizerischebundesbahnen.github.io/api-principles/restful/principles/#get-with-body) or [Zalando RESTful](https://opensource.zalando.com/restful-api-guidelines/#get-with-body). Both variants are implemented according to this rule:

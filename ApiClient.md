@@ -55,7 +55,7 @@ Remark:
                                 ${project.basedir}/openapi3/api-docs.json
                             </inputSpec>
                             <generatorName>java</generatorName>
-                            <!-- perhaps do not validate JSON/yml because of ServiceConfiguration "EcoMap" -->
+                            <!-- perhaps do not validate JSON/yml because of B2CApimConfiguration "EcoMap" -->
                             <skipValidateSpec>false</skipValidateSpec>
                             <modelPackage>ch.sbb.ki.journeyservice.client.v3.model</modelPackage>
                             <apiPackage>ch.sbb.ki.journeyservice.client.v3.api</apiPackage>
