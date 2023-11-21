@@ -64,21 +64,22 @@ The SBB underlying systems may **provide realtime-data, typically TODAY only (~ 
 
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
 
-`ScheduledStopStatus` for e.g. contains pre-calculated fields to inform about relevant realtime status of a TransportProductV2 at a specific StopV2:
-* ::arrivalTimeAimed/Rt, departureTimeAimed/Rt
-* ::stopStatus s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
-* ::forBoarding, ::forAlighting
+`ScheduledStopPoint` for e.g. contains pre-calculated fields to inform about relevant realtime status of a `ServiceProduct at a specific stop-point:
+* `ScheduledStopPoint::arrival::timeAimed/Rt`, `ScheduledStopPoint::departure::timeAimed/Rt`
+* `ScheduledStopPoint::stopStatus` s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
+* `ScheduledStopPoint::forBoarding/forAlighting`
+* ...
 
 About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
-* If any vehicle (TransportProductV2) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually max 2h in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
+* If any vehicle (`ServiceProduct`) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually a few hoours in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
 * *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
 * If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
 
 Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
 
 Remark:
-* SBB staff see [StopPlace/Station state]( based on /display/FAHRPLAN/Haltestellen-Status)
+* SBB staff see [StopPlaceDetailed::classification]( based on /display/FAHRPLAN/Haltestellen-Status)
 
 ## Most typical "Use cases"
 ### Trip-Request
