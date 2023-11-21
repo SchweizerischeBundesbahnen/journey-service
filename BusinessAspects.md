@@ -56,15 +56,15 @@ Some properties' resp. their value-expressions might be **translated according t
 
 ### Formatted fields
 J-S sometimes provides fields with a "*Formatted" suffix which contain values, that must be showed to public end-users instead of alternatively declared field without the suffix for SBB internal usage only, for e.g.
-* TransportProductV2::number → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
-* TransportProductV2::number**Formatted** → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
+* `ServiceProduct::number` → B2E only: meant for SBB internal services or employees (for e.g. to display in SBB Casa to be seen by SBB employees only)
+* `ServiceProduct::number**Formatted**` → B2C or B2P: Business Rule impacted value for end-users (for e.g. to display in SBB Webshop, SBB Mobile, ..)
 
 ### Realtime behaviour
 The SBB underlying systems may **provide realtime-data, typically TODAY only (~ NOW..+4h)**.
 
 Getting the right realtime conclusions can be tricky, therefore J-S provides convenience data whenever possible.
 
-`ScheduledStopPoint` for e.g. contains pre-calculated fields to inform about relevant realtime status of a `ServiceProduct at a specific stop-point:
+`ScheduledStopPoint` for e.g. contains pre-calculated fields to inform about relevant realtime status of a `ServiceProduct` at a specific stop-point:
 * `ScheduledStopPoint::arrival::timeAimed/Rt`, `ScheduledStopPoint::departure::timeAimed/Rt`
 * `ScheduledStopPoint::stopStatus` s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
 * `ScheduledStopPoint::forBoarding/forAlighting`
