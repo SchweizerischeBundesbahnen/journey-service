@@ -56,9 +56,6 @@ For example, an HTTP response carrying JSON `Problem`:
 ### 200 OK
 #### V3
 J-S was able to return a proper single Object.
-    
-#### (V2 DEPRECATED APIs only)
-J-S may return single Object or List.
 
 Be aware:
 * For v2 the following convention was made historically: 200 with an emptyList body "[]" for API's returning List<T> where no hits were found.
