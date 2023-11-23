@@ -1,17 +1,20 @@
 # Journey-Service (J-S) MODEL v3
 
-Response-models respectively about the **implemented routing exchange model** provided by **J-S v3**.
+Online API: 
+## The J-S v3 Data-Model
+
+This is about the **implemented routing exchange model** provided by **J-S v3**.
 
 The main reference is **Transmodel [TRM6-v56 (downloads and tutorials)](https://www.transmodel-cen.eu/downloads/)**, though Transmodel is rather a _conceptual specification_ and the J-S devOps Team did not find a satisfying reference-implementation yet. 
 
-However, our team is convinced to take TRM as the main guideline for J-S v3, even with the risk, that we might have added some simplifications or our own flavor (based on Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
+However our team is convinced to take TRM as the main guideline for J-S v3, even with the risk, that we might have added some simplifications or our own flavor (based on Journey-Planner experience within SBB P division in the last 5 years with plenty of strategic consumers).
 
-## REST-API (technical context)
+### REST-API (technical context)
 J-S v3 comes as a RESTful implementation according to:
  * [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
  * [OpenApi 3 specification](https://swagger.io/specification/)
      
-## Journey-Planner context
+### Journey-Planner context
 API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/documentation)
 * check for v3/* API classes (ignore deprecated v1 and v2 classes there)
 
@@ -19,23 +22,31 @@ Legend:
 
 ![image](resources/J-S_v3_Legend.png)
 
-### Place MODEL
+#### Place MODEL
+Developer simplified view:
 ![image](resources/J-S_v3_Place.png)
 
-### Vehicle-Journeys MODEL
+Transmodel realization view:
+![image](resources/J-S_v3_Place_TRM.png)
 
-#### Schedules MODEL
-![image](resources/J-S_v3_ServiceCalendar.png)
+#### ServiceJourney MODEL
 
-#### ServiceJourney
+Developer simplified view:
 ![image](resources/J-S_v3_ServiceJourney.png)
 
-#### CompoundTrain
-Aka Train-Formation
+Transmodel realization view:
+![image](resources/J-S_v3_ServiceJourney_TRM.png)
+
+##### CompoundTrain (aka formation, composition)
 ![image](resources/J-S_v3_CompoundTrain.png)
 
+#### Schedule MODEL
+Transmodel realization view:
+![image](resources/J-S_v3_ServiceCalendar_TRM.png)
+
 #### Situation MODEL
-![image](resources/J-S_v3_Situation.png)
+Transmodel realization view:
+![image](resources/J-S_v3_Situation_TRM.png)
 
 ## Routing Standards in "Public Transport"
 
@@ -68,13 +79,13 @@ J-S v3 is not an OJP implementation, however OJP is also covered by Transmodel, 
     * [IFOPT](https://www.transmodel-cen.eu/ifopt-standard/): Identification of fixes Objects in Public Transport
 * [OpenJourneyPlanner VDV](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx)
 
-#### OSDM
-J-S v3 is not an [OSDM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0) implementation, but may serve as an underlying routing facade for places and trips.
-* OSDM is an OJP orientied Ticketing specification among european members and UIC.
-* OSDM also has Journey-Planner API's with to focus to distribute international tickets (for e.g. among brokers). See chapter OJP related to J-S v3.
-* OSDM is a planned facade in front of NOVA (Switzerland).
+### ODSM
+J-S v3 is not an ODSM [ODSM](https://app.swaggerhub.com/apis-docs/schlpbch/uic-90918_10_osdm/1.4.0) implementation, but may serve as an underlying routing facade for places and trips.
+* ODSM is an OJP orientied Ticketing specification among european members and UIC.
+* ODSM also has Journey-Planner API's with to focus to distribute international tickets (for e.g. among brokers). See chapter OJP related to J-S v3.
+* ODSM is a planned facade in front of NOVA (Switzerland).
 
-#### Mapping between Journey-Planner implementations
+## Mapping between Journey-Planner implementations
 Bridging/adapting between J-S v3 and
 * **[OJP Switzerland](https://opentransportdata.swiss/de/cookbook/open-journey-planner-ojp/)**: J-S is developing an experimental OJP-Adapter to call SKI OJP's XML implementation
-* **[OSDM](https://github.com/UnionInternationalCheminsdeFer/OSDM/wiki)**: is a newer specification based on OJP 1.0 extendind ticketing based on Journey-Planner systems, such as J-S v3 or OJP
+* **[ODSM](https://github.com/UnionInternationalCheminsdeFer/OSDM/wiki)**: is a newer specification based on OJP 1.0 extendind ticketing based on Journey-Planner systems, such as J-S v3 or OJP

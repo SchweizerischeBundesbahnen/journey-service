@@ -49,6 +49,8 @@ Be aware:
 * Use URL encoding for GET params containing JSON-Objects!
 
 ### ServiceProductReference
+Goal: find [0..*] DatedVehicleJourney's matching the given ServiceProduct.
+* the better specified the more accurate the search
 
 #### Plain value
 
@@ -67,6 +69,7 @@ Examples:
 * `"- - 753"`    // number only, in CH unique (implicit time and direction)
 
 ### DatedVehicleJourneyReference
+Goal: find concrete DatedVehicleJourney by ServiceProduct and first and last ScheduledStopPoint -> should lead to [0..*] hits 
 
 #### JSON object
 
@@ -83,7 +86,7 @@ For **Switzerland**, see managed Transport-Organsiations in **['Business organis
 * type="NUMBER" corresponds to **column 'NUMMER'**
 * type="TEXT" corresponds **column `BEZEICHNUNG_DE`**, be aware other translations are not supported at request time
 
-For international Transport-Organisations there is no such managed list, check and reuse what J-S returns as `Operator::name`.
+For international Transport-Organisations there is no such managed list, check and reuse whatever J-S returns as `Operator::name`.
 
 #### Plain value
 
@@ -94,14 +97,11 @@ Examples:
 
 #### DEPRECATED ~~Explicite JSON Object `OperatorReference`~~
 
-    {
-        "type":"TEXT"(default) | "NUMBER",
-        "value":"<String>"
-    }
+    {"type":"TEXT"(default) | "NUMBER","value":"<String>"}
 
-Examples:
-* `{"type":"NUMBER","value":"11"}`
-* `{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`
+~~Examples:~~
+* ~~`{"type":"NUMBER","value":"11"}`~~
+* ~~`{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`~~
 
 ### PlaceReference
 
@@ -135,10 +135,25 @@ Examples:
 * `{"stopPlaceId":"8507000","status":"BOARDING_ALIGHTING_NECESSARY","vehicleModes":["rail"],"waittime":3,"direct":true,"couchette":false,"sleepingCar":false}"`
 
 ### PTViaNoChangeAtReference
-TODO
+    {
+      stopPlaceId: <StopPlace::id(mandatory)>,
+      status: "NO_TRANSFER_META_STOPPLACE" (default and may be omitted) | "NO_TRANSFER"
+    }
+    
+Examples:
+* `{"stopPlaceId":"8507000"}`
+* `{"stopPlaceId":"8507000","status":"NO_TRANSFER"}`
 
 ### PTViaNotReference
-TODO
+    {
+      stopPlaceId: <StopPlace::id(mandatory)>,
+      status: "NO_PASS_THROUGH_META_STOPPLACE" (default and may be omitted) | "NO_PASS_THROUGH"
+    }
+
+Examples:
+* `{"stopPlaceId":"8507000"}`
+* `{"stopPlaceId":"8507000","status":"NO_PASS_THROUGH_META_STOPPLACE"}`
+
 
 ### ScheduledStopPointReference
     {
@@ -150,7 +165,6 @@ Examples:
 * `{"stopPlaceId":"8507000","2021-06-14T15:01:00+02:00"}`
 
 # J-S API Response Params
-## J-S  v2
 
 ## J-S v3
 
