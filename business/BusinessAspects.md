@@ -7,7 +7,7 @@ Some important links:
 * [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
 * [v580 FIScommun](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1)
 * [Open-Data Plattform Mobility Switzerland](https://opentransportdata.swiss/de/)
-* [TransportMode](TransportMode.md)
+* [TransportMode](../TransportMode.md)
 
 ## Design goals
 ### End-user consistency
@@ -40,7 +40,7 @@ Relevant systems dealing with StopPlace's:
 
 v3 `VehicleMode`
 
-See [TransportMode](TransportMode.md)
+See [TransportMode](../TransportMode.md)
 
 There are specific extensions for developer convenience, such as:
 * TransportProductV2::vehicleIconName showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
@@ -66,7 +66,7 @@ Getting the right realtime conclusions can be tricky, therefore J-S provides con
 
 `ScheduledStopPoint` for e.g. contains pre-calculated fields to inform about relevant realtime status of a `ServiceProduct` at a specific stop-point:
 * `ScheduledStopPoint::arrival::timeAimed/Rt`, `ScheduledStopPoint::departure::timeAimed/Rt`
-* `ScheduledStopPoint::stopStatus` s. [Journey-Service_Routing-Basics](https://github.com/SchweizerischeBundesbahnen/journey-service/blob/master/Journey-Service_Routing-Basics.pdf)
+* `ScheduledStopPoint::stopStatus` s. [Routing-Basics](../RoutingBasics.md)
 * `ScheduledStopPoint::forBoarding/forAlighting`
 * ...
 
@@ -78,13 +78,6 @@ About any ***Rt** properties:
 
 Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
 
-Remark:
-* SBB staff see [StopPlaceDetailed::classification]( based on /display/FAHRPLAN/Haltestellen-Status)
-
 ## Most typical "Use cases"
-### Trip-Request
-Most consumers will probably be interested in a simple train-connection from A to B. This scenario is supported in 2 steps usually:
-1. find the relevant origin and destination Place
-2. find the `Trip` connection between those
 
-* see [v2 APIs](v2/V2_APIs.md)
+* see [Use Cases](../business/UseCases.md)

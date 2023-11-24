@@ -86,7 +86,7 @@ Sample:
 * see v3/service-calendar
 
 ## Backward compatibility
-See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
+See [migration to newer versions of J-S](v2/J-S_Migration_V2_to_V3.md).
 
 We have different concepts to maintain backward compatibility:
 
@@ -100,7 +100,7 @@ All APIs **without** `INCUBATOR` in their URL may be considered as **stable**. A
 Any **APIs with `/v*/INCUBATOR/*` in their URL are highly @Experimental and might be changed breakingly on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with us).
 
 ### Deprecated stuff
-Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
+Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible to the suggested new approach).
 
 Some **properties in response models might have a "description" like "@Deprecated use ... instead"**, to lead you into correcting steps.
 
@@ -112,13 +112,13 @@ Important:
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ArrivalV3,..?
 
 Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version or namespace) though Swagger would support such a concept by grouping.
-Therefore we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
+Therefore, we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
   
 ## Generated ApiClient's
-See [Using OpenApi 3 ApiClient](ApiClient.md)
+See [Using OpenApi 3 ApiClient](technical/ApiClient.md)
 
 ## Testing
-Please check our [Testing hints](Test%20your%20access.pdf)
+Please check our[Testing hints](technical/Test your access.pdf)
 
 ### About parameter encoding
 * Post body does not need encoded String's

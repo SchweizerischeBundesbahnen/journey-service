@@ -24,6 +24,9 @@ For example, an HTTP response carrying JSON problem details:
      "instance": "v3/places"
     }
     
+Remarks:
+* J-S extension Problem::traceId (makes it easier to find logged references)
+
 See also:
 * **Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
 * [HttpStatus](https://opensource.zalando.com/restful-api-guidelines/#150)

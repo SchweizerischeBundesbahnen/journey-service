@@ -19,7 +19,7 @@ v580 defines in general the following categories (de:Verkehrsträger):
 * de:Verkehrsträger Wasser
 * de:Verkehrsträger Luft
 
-Each category may has concrete TransportModes and its submodes.
+Each category may have concrete TransportModes and its submodes.
 
 The underlying SBB Public-Transportation router may distinct 10 product-categories (aka de:Gattungen) which are managed by **SBB P Data-Management** (Data may change over time, consider this mapping as a guideline and not as current exact match).
 
