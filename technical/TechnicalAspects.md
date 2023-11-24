@@ -14,9 +14,8 @@ Important:
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ## About J-S versions
-### ~~v1~~ and v2 (DEPRECATED)
-* ~~v1~~ is OBSOLETE, do not use it!
-* v2 is still functional until END of ~2022, those without a DEPRECATED tag remain as is, those with such a tag have a description what v3 API has to be used instead.
+### v2 (DEPRECATED)
+* v2 most APIs are getting removed END of ~2024, those without a DEPRECATED tag remain as is, those with such a tag have a description what v3 API has to be used instead.
     * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
 
 ### v3 (STRATEGIC)
