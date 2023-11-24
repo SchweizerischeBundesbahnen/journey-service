@@ -7,7 +7,7 @@ Some important links:
 * [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
 * [v580 FIScommun](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1)
 * [Open-Data Plattform Mobility Switzerland](https://opentransportdata.swiss/de/)
-* [TransportMode](../TransportMode.md)
+* [TransportMode](TransportMode.md)
 
 ## Design goals
 ### End-user consistency
@@ -40,7 +40,7 @@ Relevant systems dealing with StopPlace's:
 
 v3 `VehicleMode`
 
-See [TransportMode](../TransportMode.md)
+See [TransportMode](TransportMode.md)
 
 There are specific extensions for developer convenience, such as:
 * TransportProductV2::vehicleIconName showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
@@ -66,7 +66,7 @@ Getting the right realtime conclusions can be tricky, therefore J-S provides con
 
 `ScheduledStopPoint` for e.g. contains pre-calculated fields to inform about relevant realtime status of a `ServiceProduct` at a specific stop-point:
 * `ScheduledStopPoint::arrival::timeAimed/Rt`, `ScheduledStopPoint::departure::timeAimed/Rt`
-* `ScheduledStopPoint::stopStatus` s. [Routing-Basics](../RoutingBasics.md)
+* `ScheduledStopPoint::stopStatus` s. [Routing-Basics](RoutingBasics.md)
 * `ScheduledStopPoint::forBoarding/forAlighting`
 * ...
 

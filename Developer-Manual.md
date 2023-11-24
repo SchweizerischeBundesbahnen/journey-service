@@ -33,6 +33,6 @@ Because J-S heavily relies on the Journey-Assistant library, also those [J-A Rel
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully rarely necessary for v3 (or v2) API understanding in most cases.
 
-See [Technical Aspects](TechnicalAspects.md)
+See [Technical Aspects](technical/TechnicalAspects.md)
 
 See [Business Aspects](business/BusinessAspects.md)
