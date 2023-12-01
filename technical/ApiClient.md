@@ -52,6 +52,7 @@ Remark:
                         </goals>
                         <configuration>
                             <inputSpec>
+                                <!-- path depends where downloaded Service-Contract is saved -->
                                 ${project.basedir}/openapi3/spec.json
                             </inputSpec>
                             <generatorName>java</generatorName>

@@ -32,10 +32,10 @@ Returns "PoolInfo":
 * StopPlace data-pools (validity periods of operation)
 
 Remark:
-* For most users this service will not be relevant. J-S will navigate in the current pool automatically or throw errors if your queries do not match the current period.
+* For most users this service will not be relevant. J-S will navigate in the current pool automatically or throw errors if your queries do not match the available periods.
 
 #### Situations APIs
-Allows search for active HIM-Messages about disruptions, construction sites, events,..
+Allows search for active Messages (in a Siri context) about disruptions, construction sites, events,..
 
 Be aware:
 * PTSituation objects are also related to concrete journeys are returned by ServiceJourney::situation.
@@ -62,10 +62,10 @@ Comparing public transportation vs private car or airplane:
 
 ### Mixed functionality
 #### Archive APIs
-Recorded Journey-Planner data back to 60s in the past. Each day is recorded separately for effective public transport.
+Recorded Journey-Planner data back to 60d in the past. Each day is recorded separately for effective public transport.
 
 #### Open Journey Planner APIs
 SBB Personenverkehr relies on Hafas as main router.
 
-However, OJP is an alternate public routed provided by BAV CH.
+However, OJP is an alternate public routed provided by BAV CH (the swiss _Federal Office of Transport_ (en:FOT / de:BAV)).
 The listed APIs behave similar to other APIs, except the router is different and therefore the responses are yet rather experimental.
