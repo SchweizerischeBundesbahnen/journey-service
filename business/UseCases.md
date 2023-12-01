@@ -10,7 +10,7 @@
 
 The most typical use case usually is to get a Passenger Trip, like:
 1. use /v3/places to find A=origin (start) and B=destination (end) Place's → any hit as a StopPlace will have a concrete id (for e.g. UIC standardize for e.g. "8507000" for "Bern").
-2. use /v3/trips to find a set of trips (usually between 4..7 hits) and interprete the best case in your case. The reponse Trip object will contain Leg's (operated by a specific transport-company (for e.g. "SBB") and a list of ScheduledStopPoint's where A=stops[0] and B=stops[last], each StopCall has various data such as timeAimed/Rt, stopStatus, ...
+2. use /v3/trips to find a set of trips (usually between 4..7 hits) and interprete the best case in your case. The reponse Trip object will contain Leg's (operated by a specific transport-company, for e.g. "SBB") and a list of ScheduledStopPoint's where A=stops[0] and B=stops[last], each StopCall has various data such as timeAimed/Rt, stopStatus, ...
 
 ## Capabilities of each API-set
 ### Managed data
