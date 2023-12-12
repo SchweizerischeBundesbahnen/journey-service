@@ -10,7 +10,7 @@ We currently support **3 APIM accessible Openshift environments** for `Customer 
 * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
 
 Important:
-* All consumers must go through a proper [User-Registration-Process](../User-Registration-Process.md) to get granted to APIM. We recommend to **register for AzureAD** (SBB IAM confirmed high availability) as a primary SSO Token Service Provider. It is up to you if you register additionally for "redHat-SSO" (there were some known incidents in the past) as a fallback Token-Provider if AzureAD should fail temporarily (might be a good scenario for extremely business critical applications).
+* All consumers must go through a proper [User-Registration-Process](../User-Registration-Process.md) to get granted to APIM. **Register for AzureAD** as a primary SSO Token Service Provider.
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ## About J-S versions
