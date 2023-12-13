@@ -21,9 +21,13 @@ For example, an HTTP response carrying JSON problem details:
      "type": "<explanation>",
      "title": "Not supported: EVA",
      "detail": "The underlying system maintains UIC station codes only.",
-     "instance": "v3/places"
+     "instance": "v3/places",
+     "traceId: "d262080f1a55f611cfbae7807f4ae7e5"
     }
     
+Remarks:
+* J-S extension Problem::traceId (makes it easier to find logged references)
+
 See also:
 * **Problem** JSON object, see [Zalando Problem schema](https://opensource.zalando.com/problem/schema.yaml)
 * [HttpStatus](https://opensource.zalando.com/restful-api-guidelines/#150)

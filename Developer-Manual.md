@@ -16,7 +16,7 @@ If you are new to journey-planning with SBB, consider general standards as menti
 
 ### Design Goals
 * Strategic usage for SBB and partners: **Journey-Planner** systems are a business critical core functionality at SBB. Plenty of Consumer applications use it (like [sbb.ch](https://www.sbb.ch/en/home.html), [SBB Mobile](https://www.sbb.ch/de/fahrplan/mobile-fahrplaene/sbb-mobile.html), [SBB Ticket vending machines](https://www.sbb.ch/de/bahnhof-services/am-bahnhof/services-am-billettautomat/sbb-billettautomat.html), [SBB Group reservation and Capacity management](https://company.sbb.ch/de/sbb-als-geschaeftspartner/dienstleistungen/vertriebsmanagement-ktu/produkte/capre.html), [SBB B2P](https://company.sbb.ch/content/dam/sbb/de/pdf/sbb-konzern/sbb-als-geschaeftspartner/partnervertrieb/webserviceB2P_factsheet_d.pdf) and many others.
-* [Business aspects](BusinessAspects.md): all consumer get the same information (we work hard to enhance quality and continuous feature innovation).
+* [Business aspects](business/BusinessAspects.md): all consumer get the same information (we work hard to enhance quality and continuous feature innovation).
 * Easy usage by consumer developers: Our APIs are **RESTful** and documented, [Openapi 3](https://oai.github.io/Documentation/) **generated ApiClient** capable.
 * Follow existing standards but simplify and adapt to enhance time-to-market of new customer-information features
 
@@ -33,13 +33,6 @@ Because J-S heavily relies on the Journey-Assistant library, also those [J-A Rel
 ## API in detail
 All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully rarely necessary for v3 (or v2) API understanding in most cases.
 
-See [Technical Aspects](TechnicalAspects.md)
+See [Technical Aspects](technical/TechnicalAspects.md)
 
-See [Business Aspects](BusinessAspects.md)
-
-### Choosing the right service definition
-In [developer.sbb.ch URLs](TechnicalAspects.md) all available APIs over all versions are listed in one mixed group. Some APIs may not be visible or accessable (based on your **API plan** at [registration](User-Registration-Process.md)).
-
-However for internal developers at SBB building their own instance on localhost (or using SBB internal DEV environment), the version can be selected by OpenApi Group:
-
-![Version JSON-definition](resources/J-S_version.png)
+See [Business Aspects](business/BusinessAspects.md)

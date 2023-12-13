@@ -8,40 +8,6 @@ PRO:
 CONTRA:
 * long params -> leads rather to POST 
 * perhaps more coding effort for Consumers
-
-## v2 JSON Request Objects
-### CarReference
-    {
-      "type":"UIC"|"BEACON",
-      "value":"<carUic>"|"<Beacon.MajorId>"
-    }
-    
-  
-Examples:
-* `94 85 123 123 - 2` or `94851231232` is a short convenience form defaulting to type="UIC", variations with or without whitespaces and hyphen
-* `{"type":"UIC","value":"94 85 123 123 - 2"}` or value like "94851231232"
-* `{"type":"BEACON","value":"15011"}`
-
-### ViaStop
-Each ViaStop is a JSON object with the following Structure:  
-
-    {
-      uic: <Integer(mandatory)>,
-      status:"BOARDING_ALIGHTING_NECESSARY" (default and may be omitted) | "BOARDING_NOT_NECESSARY" | "ALIGHTING_NOT_NECESSARY" | "BOARDING_ALIGHTING_NOT_NECESSARY",
-      transportProducts:[<list of TransportProduct-Category>],
-      waittime: <Integer (in min. >=0)>,
-      direct: true|false(default),
-      couchette: true|false(default),
-      sleepingCar: true|false(default)
-    }
-
-
-* transportProducts="All" is default and may be ommited. Be aware that these transport-products will be considered at the start of this via until the next via (if given) or final destination (related to parameter transportProducts between origin and 1. via).
-* Possible status are: "BOARDING_ALIGHTING_NECESSARY" (default and may be omitted), "BOARDING_NOT_NECESSARY", "ALIGHTING_NOT_NECESSARY", "BOARDING_ALIGHTING_NOT_NECESSARY"
-* Direct has an impact from the Via to the next Via or until destination if no more vias.
-
-Examples:
-* `{"value":8507000,"transportProducts":["INTERREGIO"],"waittime":3}`
     
 ## v3 JSON Request Objects
 
@@ -120,6 +86,8 @@ Or **[GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) `Point`** given _`
 
 
 ### PTViaReference
+Optional routing points to be included or avoided for trip requests as a JSON Object parameter:
+
     {
       stopPlaceId: <StopPlace::id(mandatory)>,
       status: "BOARDING_ALIGHTING_NECESSARY" (default and may be omitted) | "BOARDING_NOT_NECESSARY" | "ALIGHTING_NOT_NECESSARY" | "BOARDING_ALIGHTING_NOT_NECESSARY",
@@ -164,9 +132,7 @@ Examples:
 Examples:
 * `{"stopPlaceId":"8507000","2021-06-14T15:01:00+02:00"}`
 
-# J-S API Response Params
-
-## J-S v3
+## v3 JSON Response objects
 
 ## LinkedText
 

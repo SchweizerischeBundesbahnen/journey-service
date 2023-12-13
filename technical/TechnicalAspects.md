@@ -10,25 +10,24 @@ We currently support **3 APIM accessible Openshift environments** for `Customer 
 * **PROD** via APIM https://developer.sbb.ch/apis/journey-service (production state, well scaled and hopefully stable)
 
 Important:
-* All consumers must go through a proper [User-Registration-Process](User-Registration-Process.md) to get granted to APIM. We recommend to **register for AzureAD** (SBB IAM confirmed high availability) as a primary SSO Token Service Provider. It is up to you if you register additionally for "redHat-SSO" (there were some known incidents in the past) as a fallback Token-Provider if AzureAD should fail temporarily (might be a good scenario for extremely business critical applications).
+* All consumers must go through a proper [User-Registration-Process](../User-Registration-Process.md) to get granted to APIM. **Register for AzureAD** as a primary SSO Token Service Provider.
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ## About J-S versions
-### ~~v1~~ and v2 (DEPRECATED)
-* ~~v1~~ is OBSOLETE, do not use it!
-* v2 is still functional until END of ~2022, those without a DEPRECATED tag remain as is, those with such a tag have a description what v3 API has to be used instead.
+### v2 (DEPRECATED)
+* v2 most APIs are getting removed END of ~2024, those without a DEPRECATED tag remain as is, those with such a tag have a description what v3 API has to be used instead.
     * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
 
 ### v3 (STRATEGIC)
 v3 replaces v2 completely and extends new functionality.
 
-See [**Standards considered** and its **Data Model**](v3/Journey-Service_v3_MODEL.md)
+See [**Standards considered** and its **Data Model**](../v3/Journey-Service_v3_MODEL.md)
 
 ## Request and Response
 
 All APIs are synchroneous Request/Response RESTful APIs.
 
-See [v3 REST-API standards](v3/Journey-Service_v3_MODEL.md)
+See [v3 REST-API standards](../v3/Journey-Service_v3_MODEL.md)
 
 ### Request
 For each Request to J-S set the header-fields (especially `Authorization`, `Request-Id`, `Accept-Language`) and GET or POST-body parameters as given in the [Service-Contract per API](https://developer.sbb.ch/apis/journey-service/documentation).
@@ -46,7 +45,7 @@ A word about GET and POST:
 
 ### Response
 #### Error-handling
-See [Problem-Manual](Problem-Manual.md)
+See [Problem-Manual](../Problem-Manual.md)
 
 #### Deserialize JSON tolerant
 Make sure you always deserialize J-S JSON responses tolerant (we might release new properties in a steady pace), for e.g. in Java:
@@ -86,7 +85,7 @@ Sample:
 * see v3/service-calendar
 
 ## Backward compatibility
-See [migration to newer versions of J-S](J-S_Migration_V2_to_V3.md).
+See [migration to newer versions of J-S](v2/J-S_Migration_V2_to_V3.md).
 
 We have different concepts to maintain backward compatibility:
 
@@ -100,7 +99,7 @@ All APIs **without** `INCUBATOR` in their URL may be considered as **stable**. A
 Any **APIs with `/v*/INCUBATOR/*` in their URL are highly @Experimental and might be changed breakingly on a daily basis or might even be deleted without further notice** (if you use it, make sure you keep frequent communication with us).
 
 ### Deprecated stuff
-Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible).
+Any APIs to be removed soon, will have a `@Deprecated` annotation and will be easily visible in the Swagger-UI (check any migration hints given and migrate as soon as possible to the suggested new approach).
 
 Some **properties in response models might have a "description" like "@Deprecated use ... instead"**, to lead you into correcting steps.
 
@@ -112,13 +111,13 @@ Important:
 Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ArrivalV3,..?
 
 Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version or namespace) though Swagger would support such a concept by grouping.
-Therefore we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
+Therefore, we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
   
 ## Generated ApiClient's
 See [Using OpenApi 3 ApiClient](ApiClient.md)
 
 ## Testing
-Please check our [Testing hints](Test%20your%20access.pdf)
+Please check our[Testing hints](Test your access.pdf)
 
 ### About parameter encoding
 * Post body does not need encoded String's

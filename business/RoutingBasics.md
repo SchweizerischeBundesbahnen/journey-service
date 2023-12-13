@@ -35,7 +35,7 @@ J-S implements a reusable structure `ServiceJourney` which contains all public t
     * Be aware, there may be any coupling or decoupling of `Train's` for e.g. in case of wingtrains as illustrated below:
         * The `CompoundTrain` (aka formation, composition) at "Bern" is shown in its departure snapshot
         * The "one-way" symbol shows that passengers may not walk from car to car (`TrainElement`) and in this case some decoupling will happen between the arrival and departure `StopCall` at `StopPlace` "Spiez", which might be guessed by different _direction's_ (namely "Zweisimmen" and "Brig"). However, it is important for the passenger to board the appropriate cars at "Bern" (or before the decoupling stop-point) to not end-up at the wrong destination.
-![Version JSON-definition](v3/resources/StopCall.png)
+![Version JSON-definition](../v3/resources/StopCall.png)
 
 ###### Boarding/Alighting
 Each `ScheduledStopPoint` contains passenger information, whether it is:
@@ -46,27 +46,27 @@ Each `ScheduledStopPoint` contains passenger information, whether it is:
 Each stop-point has a proper **`StopStatus`**, which is impacted by the current realtime-situation and might be visualized on a `DatedVehicleJourney`:
 **PLANNED**
 Stop was planned according to plan-data and behaves as planned yet to the current realtime situation.  
-![Version JSON-definition](v3/resources/StopStatus_PLANNED.png)
+![Version JSON-definition](../v3/resources/StopStatus_PLANNED.png)
 
 **(Partially) CANCELLED** (de:Ausfall)
 A PLANNED stop has a drastic change by realtime, the vehicle might not be able to be boarded or alighted!
 
 Stop was planned in plan data but it is part of cancelled Journey in realtime data:  
-![Version JSON-definition](v3/resources/StopStatus_CANCELLED.png)
+![Version JSON-definition](../v3/resources/StopStatus_CANCELLED.png)
 
 On a Leg boarding at origin or alighting at destination will not be possible (relates to Trip::status::valid=false):  
-![Version JSON-definition](v3/resources/StopStatus_PartiallyCancelled.png)
+![Version JSON-definition](../v3/resources/StopStatus_PartiallyCancelled.png)
 * BEGIN_PARTIAL_CANCELLATION: Alighting might still be possible, but boarding is not possible.
 * END_PARTIAL_CANCELLATION: Alighting not possible, but boarding might still be possible,
 
 NOT_SERVICED (de:ausserordentliche Durchfahrt)
 A station which was planned in plan data but for some reason the service-product does not halt any more.
 Condition ::isRedirected == true  
-![Version JSON-definition](v3/resources/StopStatus_NOT_SERVICED.png)
+![Version JSON-definition](../v3/resources/StopStatus_NOT_SERVICED.png)
 
 UNPLANNED (de:ausserordentlicher Halt)
 A station which was not planned in plan data bus is an additional stop in realtime data.  
-![Version JSON-definition](v3/resources/StopStatus_UNPLANNED.png)
+![Version JSON-definition](../v3/resources/StopStatus_UNPLANNED.png)
 
 ### Trips
 A **`Trip`** represents a complete ride a passenger requested (for e.g. by [sbb.ch](https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml) or _SBB Mobile_ by from/to search criterias) of a traveler/passenger, therefore in the example above it consists of 2 Legs (A->B and B->C) and various other data.
