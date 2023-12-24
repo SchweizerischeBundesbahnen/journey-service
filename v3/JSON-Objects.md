@@ -61,14 +61,6 @@ Examples:
 * `"11"` as `NUMMER`or `"000011"` as returned by J-S `Operator::id` defaults to NUMBER CH (J-S will make a lookup itself to access underlying systems)
 * `LEX`or `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
 
-#### DEPRECATED ~~Explicite JSON Object `OperatorReference`~~
-
-    {"type":"TEXT"(default) | "NUMBER","value":"<String>"}
-
-~~Examples:~~
-* ~~`{"type":"NUMBER","value":"11"}`~~
-* ~~`{"type":"TEXT","value":"Schweizerische Bundesbahnen SBB"}`~~
-
 ### PlaceReference
 
 #### Plain value
