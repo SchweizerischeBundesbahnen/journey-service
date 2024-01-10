@@ -76,7 +76,7 @@ Cache-Control is the most effective and easiest caching approach. For the cachea
 In your implementation, do consider the documented lifetime or the sent `Cache-Control`-header to avoid unneeded traffic if possible. You can typically implement a simple in-memory or in-database cache. 
 
 ##### ETag
-Etag is another caching approach, thus less effective (saving only network traffic but not reducing response time). For the cacheable responses, J-S sends the `ETag`-response-header, which can be given back in the `If-None-Match`-request-header. If the response's ETag matches the given ETag, J-S returns a response without body and with status `304 - Not Modified`. 
+Etag is another caching approach, thus less effective (saving only network traffic but not reducing response time). For the cacheable responses, J-S sends the `ETag`-response-header, which can be applied in the `If-None-Match`-request-header. If the response's ETag matches the given ETag, J-S returns a response without body and with status `304 - Not Modified`. 
 
 Implementation:
 1. Make a request to a cacheable endpoint and read in the `ETag`-header of the response. Store the `ETag` and the response (in memory or database). 
