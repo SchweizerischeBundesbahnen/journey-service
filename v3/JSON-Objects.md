@@ -46,21 +46,6 @@ Hint:
 Examples:
 * `{"name":"IC 1 711","start":{"stopPlaceId":"8501026","dateTime":"2021-06-04T07:32:00+02:00"},"end":{"stopPlaceId":"8506302","dateTime":"2021-06-04T11:35:00+02:00"}}`
 
-### OperatorReference
-
-For **Switzerland**, see managed Transport-Organsiations in **['Business organisations](https://opentransportdata.swiss/en/dataset/goch)**:
-* type="NUMBER" corresponds to **column 'NUMMER'**
-* type="TEXT" corresponds **column `BEZEICHNUNG_DE`**, be aware other translations are not supported at request time
-
-For international Transport-Organisations there is no such managed list, check and reuse whatever J-S returns as `Operator::name`.
-
-#### Plain value
-
-Examples:
-* `"Schweizerische Bundesbahnen SBB"` as `BEZEICHNUNG_DE` in Business Organisation and defaults to TEXT (and can also be found with "NUMMER=11")
-* `"11"` as `NUMMER`or `"000011"` as returned by J-S `Operator::id` defaults to NUMBER CH (J-S will make a lookup itself to access underlying systems)
-* `LEX`or `"___10"` defaults to TEXT (for e.g. foreign value, not managed by opendatatransport.swiss)
-
 ### PlaceReference
 
 #### Plain value
