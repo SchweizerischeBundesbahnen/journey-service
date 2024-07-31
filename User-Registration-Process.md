@@ -63,7 +63,7 @@ Please note that you need to apply separately for each of your journey-planning 
 # Developing your consumer-application
 
 ## Testing token mechanism APIM
-Use Postman or the like to get a bearer token and request a query (/v2/info is any easy API without request parameters)
+Use Postman or the like to get a bearer token and request a query (`/v3/service-calendar` is any easy API without request parameters)
 
 ## Technical Details 
 A good start is our Developer-Manual (see https://github.com/SchweizerischeBundesbahnen/journey-service-b2c/blob/master/Developer-Manual.md).

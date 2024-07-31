@@ -14,12 +14,10 @@ Important:
 * **Data per environment is completely detached from other environment**, by means results on DEV, TEST, INT and PROD **may differ (like different routings, stations, translations, accessibility infos, ..) and are therefore -not comparable among 2 environments-**.
 
 ## About J-S versions
-### v2 (DEPRECATED)
-* v2 most APIs are getting removed END of ~2024, those without a DEPRECATED tag remain as is, those with such a tag have a description what v3 API has to be used instead.
-    * Based on [OpenJourneyPlanner](https://dms.vdv.de/mitglieder/Seiten/ojp.aspx), Hafas and some own flavor.
 
 ### v3 (STRATEGIC)
-v3 replaces v2 completely and extends new functionality.
+v3 is for most users.
+(v2 some special functionally for dedicated consumers may remain by v2.)
 
 See [**Standards considered** and its **Data Model**](../v3/Journey-Service_v3_MODEL.md)
 
@@ -38,10 +36,10 @@ A word about GET and POST:
 1. **GET** with **complex parameters enforce JSON-Objects** (as consumer you will have to URL encode such JSON objects to prevent transmitting marshalling faults)
 2. **POST** replacements like /v3/trips/* are still to be understood as an **idempotent** GET request, the API description contains a hint like _Idempotent GET with Body_.
 
-| Aspect | /v2 | /v3 |
-|--------|-----------------------|-----|
-|arg defaulting|better defaulting (for minimal performance)|dito|
-|Realtime handling|less but well calculated attributes → consumer needs to analyze much less or nothing at all|dito
+| Aspect | (/v2)                                                                                       | /v3 |
+|--------|---------------------------------------------------------------------------------------------|-----|
+|arg defaulting| better defaulting (for minimal performance)                                                 |dito|
+|Realtime handling| less but well calculated attributes → consumer needs to analyze much less or nothing at all |dito
 
 ### Response
 #### Error-handling
@@ -91,7 +89,6 @@ Sample:
 * see v3/service-calendar
 
 ## Backward compatibility
-See [migration to newer versions of J-S](v2/J-S_Migration_V2_to_V3.md).
 
 We have different concepts to maintain backward compatibility:
 
@@ -114,7 +111,7 @@ Important:
 * Deprecated code will be removed in future versions finally.
 
 ### Model with version suffix
-Why do we use some Models with a Version suffix, for e.g. TripV2, StopV2, ArrivalV3,..?
+Why do we use some Models with a Version suffix, for e.g. ArrivalV3,..?
 
 Unfortunately our APIM (3Scale) does not support multiple JSON definitions (multi version or namespace) though Swagger would support such a concept by grouping.
 Therefore, we melt classes sometimes with the same name by adding different version suffixes per Swagger group and publish them as ONE JSON definition file.
@@ -127,12 +124,11 @@ Please check our[Testing hints](Test your access.pdf)
 
 ### About parameter encoding
 * Post body does not need encoded String's
-* TripV2::reconstructionContext must not be encoded -> pass it as received
 * do not encode JSON Lists resp. '[' or ']'
 * OffsetDateTime
   See  [Support stricter encoding](https://github.com/spring-projects/spring-framework/issues/21577)
   400: ..?dateTime=2019-04-23T14:56:14+00:00
-  OK: /b2c/v2/departures?originUIC=8503000&dateTime=2019-04-27T14%3A50%3A37.375%2B02%3A00
+  OK: /v3/vehicle-journeys/departures?..
 
 ### Testing your APIM access
 See: [getting started](https://developer-int.sbb.ch/getting-started)

@@ -16,7 +16,7 @@ J-S v3 comes as a RESTful implementation according to:
      
 ### Journey-Planner context
 API model see [J-S Model classes](https://developer.sbb.ch/apis/journey-service/documentation)
-* check for v3/* API classes (ignore deprecated v1 and v2 classes there)
+* check for v3/* API classes (ignore deprecated classes there)
 
 Legend:
 

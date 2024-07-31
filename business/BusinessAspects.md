@@ -43,16 +43,16 @@ v3 `VehicleMode`
 See [TransportMode](TransportMode.md)
 
 There are specific extensions for developer convenience, such as:
-* TransportProductV2::vehicleIconName showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
-* the developer is still free whether he prefers its own mapping from TransportProductV2::vehicleType
+* VehicMode::corporateIdentityIcon showing the appropriate name in **SBB Corporate-Identity resources** (though the resource itself must be allocated by the consumer)
+* the developer is still free whether he prefers its own mapping from ServiceProduct-properties for e.g.
 
 ## Business logic aspects
 ### Translations
 Some properties' resp. their value-expressions might be **translated according to requested "Accept-language" to german (de), french (fr), italian (it) and english (en)** for e.g.:
-* Station-Names in request accept all 4 languages usually, though the reply (StopV2::name) contains only the local Switzerland translation as a special case (Geneva → Genève)
-* v3.Notice::value or v2.Note::value are sometimes translated by SBB P Data-Mgmt
-* Translations with a standard (TransportProductV2::trackTranslation) and short-translation (TransportProductV2::trackTranslationShort):
-* other texts are translated by SBB Business Rules, like StopV2::*DelayText
+* StopPlace::name's in request accept all 4 languages usually, though the reply contains only the local Switzerland translation as a special case (Geneva → Genève)
+* v3.Notice::value's are sometimes translated
+* Translated object with a standard (::name) and short-translation (::shortName)
+* other texts are translated by SBB Business Rules, like ScheduledStopPoint::delayText
 
 ### Formatted fields
 J-S sometimes provides fields with a "*Formatted" suffix which contain values, that must be showed to public end-users instead of alternatively declared field without the suffix for SBB internal usage only, for e.g.
