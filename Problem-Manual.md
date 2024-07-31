@@ -102,4 +102,4 @@ If there is an error by the "security-layer" errors might result directly from A
 
 #### Too many calls
 If the assigned plan limit is reached (requests/minute) an error like this might result:  
-    {"timestamp":"2021-03-17T06:39:51.654+0000","status":429,"error":"Too Many Requests","message":"Limit exceeded: Path: '/b2c/v2/info', Query: 'null', Method: 'GET'","path":"/b2c/v2/info"}
+    {"timestamp":"2021-03-17T06:39:51.654+0000","status":429,"error":"Too Many Requests","message":"Limit exceeded: Path: '/v3/service-calendar', Query: 'null', Method: 'GET'","path":"/v3/service-calendar"}

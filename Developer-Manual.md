@@ -31,7 +31,7 @@ See [SBB staff release notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/jou
 Because J-S heavily relies on the Journey-Assistant library, also those [J-A Release-Notes](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-assistant/browse/ReleaseNotes.md) might reveal some important updates.
 
 ## API in detail
-All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully rarely necessary for v3 (or v2) API understanding in most cases.
+All Services (short abstract, request-parameters, response-models) are documented directly by swagger-annotations, therefore the documentation below is reduced to the max and is hopefully rarely necessary for v3 API understanding in most cases.
 
 See [Technical Aspects](technical/TechnicalAspects.md)
 
