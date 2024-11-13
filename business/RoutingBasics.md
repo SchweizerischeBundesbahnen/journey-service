@@ -37,16 +37,19 @@ J-S implements a reusable structure `ServiceJourney` which contains all public t
         * The "one-way" symbol shows that passengers may not walk from car to car (`TrainElement`) and in this case some decoupling will happen between the arrival and departure `StopCall` at `StopPlace` "Spiez", which might be guessed by different _direction's_ (namely "Zweisimmen" and "Brig"). However, it is important for the passenger to board the appropriate cars at "Bern" (or before the decoupling stop-point) to not end-up at the wrong destination.
 ![Version JSON-definition](../v3/resources/StopCall.png)
 
-###### Boarding/Alighting
+##### Boarding/Alighting
 Each `ScheduledStopPoint` contains passenger information, whether it is:
 * `::forBoarding`
 * `::forAlighting`
 
-###### StopStatus
+##### StopStatus
 Each stop-point has a proper **`StopStatus`**, which is impacted by the current realtime-situation and might be visualized on a `DatedVehicleJourney`:
 **PLANNED**
 Stop was planned according to plan-data and behaves as planned yet to the current realtime situation.  
 ![Version JSON-definition](../v3/resources/StopStatus_PLANNED.png)
+
+##### Accessibility
+Depending on accessibility, Stop-points may differ for Trip-requests. Some StopPlace, Quay or vehicle offer different convenience levels.
 
 **(Partially) CANCELLED** (de:Ausfall)
 A PLANNED stop has a drastic change by realtime, the vehicle might not be able to be boarded or alighted!

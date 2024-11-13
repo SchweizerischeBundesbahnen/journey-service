@@ -20,20 +20,21 @@ Remark:
 
     ```
     @Bean
-    public ApiClient apiClient() {
-        //TODO replace by WebClient
-        RestTemplate apiClientRestTemplate = new RestTemplate();
-        apiClientRestTemplate.getInterceptors().add(new ApimRequestInterceptor(this));
-        // make sure TIMEZONE offset is not Z(ulu) resp. UTC
-        MappingJackson2HttpMessageConverter mappingConverter = new MappingJackson2HttpMessageConverter();
-        mappingConverter.setObjectMapper(Jackson2ObjectMapperBuilder
-            .json()
-            .featuresToDisable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
-            .build());
-        apiClientRestTemplate.getMessageConverters().add(0, mappingConverter);
-        ApiClient client = new ApiClient(apiClientRestTemplate);
-        client.setBasePath(this.getEndpoint());
-        return client;
+    public ch.sbb.ki.journeyservice.client.v3.ApiClient apiClientClientV3() {
+        final WebClient webClient = ch.sbb.ki.journeyservice.client.v3.ApiClient.buildWebClientBuilder(objectMapper())
+            .filter(createAuthFilter(ssoAuthorizationTokenService))
+            .clientConnector(new ReactorClientHttpConnector(createHttpClient()))
+            //TODO use .exchangeStrategies(createExchangeStrategies())
+            .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(2 * 1024 * 1024))
+            .build();
+        ch.sbb.ki.journeyservice.client.v3.ApiClient apiClient = new ch.sbb.ki.journeyservice.client.v3.ApiClient(webClient,
+            objectMapper(),
+            // UTC OffsetDateTime relevant
+            DateFormat.getDateTimeInstance());
+        apiClient.setBasePath(b2cJourneyServiceConfiguration.getEndpointB2C());
+        // do not transfer null properties in (POST) requests
+        apiClient.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return apiClient;
     }
     ```
 * Sample API generation with a Maven plugin:
@@ -43,7 +44,7 @@ Remark:
                 <groupId>org.openapitools</groupId>
                 <!-- see https://openapi-generator.tech/docs/generators/java/, https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin-->
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.5.0</version>
+                <version>6.6.0</version>
                 <executions>
                     <execution>
                         <id>journey-service-client-v3</id>
@@ -52,17 +53,16 @@ Remark:
                         </goals>
                         <configuration>
                             <inputSpec>
-                                <!-- path depends where downloaded Service-Contract is saved -->
-                                ${project.basedir}/openapi3/spec.json
+                                ${project.basedir}/../journey-service-b2c/target/apim_spec.json
                             </inputSpec>
                             <generatorName>java</generatorName>
-                            <!-- perhaps do not validate JSON/yml because of B2CApimConfiguration "EcoMap" -->
+                            <!-- perhaps do not validate JSON/yml because of B2CApimConfiguration "TripContextMap,TripSearchArgumentsMap" -->
                             <skipValidateSpec>false</skipValidateSpec>
                             <modelPackage>ch.sbb.ki.journeyservice.client.v3.model</modelPackage>
                             <apiPackage>ch.sbb.ki.journeyservice.client.v3.api</apiPackage>
                             <generateApis>true</generateApis>
                             <apisToGenerate>
-                                ArchiveV3,PlacesV3,SchedulesV3,TripsV3,TripsSubscriptionV3,VehicleJourneysV3,SituationsV3,OpenJourneyPlannerV3,ToolSupportV3
+                                ArchiveV3,PlacesV3,SchedulesV3,TripsV3,TripsSubscriptionV3,VehicleJourneysV3,SituationsV3,OpenJourneyPlannerV3,ToolSupportV3,LookupV3
                             </apisToGenerate>
                             <generateApiTests>false</generateApiTests>
                             <!--generateApiDocumentation></generateApiDocumentation-->
@@ -71,7 +71,7 @@ Remark:
                             <generateModels>true</generateModels>
                             <!--generateModelDocumentation></generateModelDocumentation-->
                             <modelsToGenerate>
-                                InheritanceResponse,Problem,TransportModeEnum,VehicleModeEnum,RealtimeModeEnum,NoticeAttributeEnum,PlaceTypeEnum,PlaceResponse,Place,Address,StopPlace,PointOfInterest,PointOfInterestCategory,Position,Point,LineString,Links,StopPlaceDetailedResponse,StopPlaceDetailed,TariffZone,Quay,BorderPosition,VehicleMode,DatedVehicleJourneyResponse,DatedVehicleJourney,TripsByOriginAndDestinationRequestBody,TripsIntervalByOriginAndDestinationRequestBody,TripsByLegRequestBody,TripMobilityFilter,IntermediateStopsEnum,PTViaReference,PTViaNotReference,PTViaNoChangeAtReference,DatedVehicleJourneyReference,ScheduledStopPointReference,OptimisationMethod,TripResponse,Trip,TripStatus,TripSummary,Leg,PTRideLeg,ScheduledStopPoint,StopCall,TrainStopAssignment,TrainStopAssignmentsEnum,NavigationPathAssignment,Connection,AccessLeg,AccessEnd,PTConnectionLeg,ConnectionEnd,AlternativeModeLeg,PersonalLeg,Operator,Notice,SituationResponse,PTSituation,PTSituationMessage,PTSituationAffectedScope,SituationCauseEnum,PublicationWindow,AffectedEdge,AffectedRegion,GeofenceCircle,EcoBalance,ServiceCalendar,OperatingPeriod,Direction,ServiceJourney,ServiceProduct,ServiceAlteration,AccessibilityBoardingAlighting,DepartureResponse,Departure,ArrivalResponse,ArrivalV3,StationboardStopEnum,LinkedText,LinkedTextMap,TripSubscriptionRequestBody,SubscriptionPeriod,Hysteresis,TripSubscriptionResponse,TripSubscriptionStatusResponse,TripSubscriptionDetailsResponse,Subscription,TripSubscription,PTRideLegSubscription,ServiceJourneySubscription,OperatingPeriodSubscription,ServiceProductSubscription,ScheduledStopPointSubscription,StopCallSubscription,StopPlaceSubscription,QuaySubscription,TripSubscriptionDeletionResponse,PaginationCursor,OccupancyAverageEnum,AccessibilityEnum,AlternateMatchEnum,Audience,AudienceEnum,AudienceLink,ArchiveConnectionReliability,ServiceCalendarByOriginAndDestinationRequestBody,ServiceCalendarByOriginAndDestinationDownloadResponse,CompoundTrain,Train,TrainComponent,TrainElement,DeckPlan,LegendItemV3,BoardingPosition,TrainStopAssignmentHint,TrainStopAssignmentsEnum,PostalAddress,Equipment,EquipmentType,EquipmentTypeEnum,PlaceRefByNameWithDistance,FacilityForInfoPortalResponse,StopPlaceClassification,GroupReservationStatusEnum,TrainStopAssignmentResponse,StopPointInterval,DateTimeInterval,StopPointModeEnum,AffectedJourneysRequestBody,AffectedByLinesRequestBody,AffectedJourneysAtStopPlacesRequestBody,AffectedLinesAtStopPlacesRequestBody,AffectedLineReference,ServiceJourneyAffectedResponse,ServiceJourneyAffected,LineAffectedResponse,LineAffected
+                                InheritanceResponse,Problem,TransportModeEnum,VehicleModeEnum,RealtimeModeEnum,NoticeAttributeEnum,PlaceTypeEnum,PlaceResponse,Place,Address,StopPlace,PointOfInterest,PointOfInterestCategory,Position,Point,LineString,Links,StopPlaceDetailedResponse,StopPlaceDetailed,TariffZone,Quay,BorderPosition,VehicleMode,DatedVehicleJourneyResponse,DatedVehicleJourney,TripsByOriginAndDestinationRequestBody,TripsIntervalByOriginAndDestinationRequestBody,TripsByLegRequestBody,TripMobilityFilter,IntermediateStopsEnum,NonPTTripEnum,PTViaReference,PTViaNotReference,PTViaNoChangeAtReference,DatedVehicleJourneyReference,ScheduledStopPointReference,OptimisationMethod,TripResponse,Trip,TripStatus,TripSummary,Leg,PTRideLeg,ScheduledStopPoint,StopCall,TrainStopAssignment,TrainStopAssignmentsEnum,NavigationPathAssignment,Connection,AccessLeg,AccessEnd,PTConnectionLeg,ConnectionEnd,AlternativeModeLeg,PersonalLeg,Operator,Notice,SituationResponse,PTSituation,PTSituationMessage,PTSituationAffectedScope,SituationCauseEnum,PublicationWindow,AffectedEdge,AffectedRegion,GeofenceCircle,EcoBalance,ServiceCalendar,OperatingPeriod,Direction,ServiceJourney,ServiceProduct,ServiceAlteration,CheckConstraint,AccessibilityBoardingAlighting,DepartureResponse,Departure,ArrivalResponse,ArrivalV3,StationboardStopEnum,LinkedText,LinkedTextMap,TripSubscriptionRequestBody,SubscriptionPeriod,Hysteresis,TripSubscriptionResponse,TripSubscriptionStatusResponse,TripSubscriptionDetailsResponse,Subscription,TripSubscription,PTRideLegSubscription,ServiceJourneySubscription,OperatingPeriodSubscription,ServiceProductSubscription,ScheduledStopPointSubscription,StopCallSubscription,StopPlaceSubscription,QuaySubscription,TripSubscriptionDeletionResponse,PaginationCursor,OccupancyAverageEnum,AccessibilityEnum,AlternateMatchEnum,Audience,AudienceEnum,AudienceLink,ArchiveConnectionReliability,CompoundTrain,Train,TrainComponent,TrainElement,DeckPlan,LegendItemV3,BoardingPosition,TrainStopAssignmentHint,TrainStopAssignmentsEnum,PostalAddress,Equipment,EquipmentType,EquipmentTypeEnum,PlaceRefByNameWithDistance,FacilityForInfoPortalResponse,StopPlaceClassification,GroupReservationStatusEnum,TrainStopAssignmentResponse,StopPointInterval,DateTimeInterval,StopPointModeEnum,AffectedJourneysRequestBody,AffectedByLinesRequestBody,AffectedJourneysAtStopPlacesRequestBody,AffectedLinesAtStopPlacesRequestBody,AffectedLineReference,ServiceJourneyAffectedResponse,ServiceJourneyAffected,LineAffectedResponse,LineAffected,TripContext,ExternalTripReference,LegTC,ServiceProductTC,NoticeTC,StopPointTC,TripIdResponse,TripContextResponse,TripContextCreationRequestBody,TripContextRequestBody,ServiceJourneyContext,ServiceJourneyContextElement,StrictnessForTripIdEnum
                             </modelsToGenerate>
                             <generateModelTests>false</generateModelTests>
                             <generateSupportingFiles>true</generateSupportingFiles>
