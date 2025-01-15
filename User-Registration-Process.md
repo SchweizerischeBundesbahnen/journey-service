@@ -27,7 +27,7 @@ The questionnaire contains three sections:
 2. journey-planner use cases by your application. Please think about a unique application-name, to be distinguished by SBB devOps team ("My Journey-Service-Client" would be a bad example).
 3. technical information (non functional requirements)
 
-> We recommend the following pages for private persons, where you can get transportation data:  https://opentransportdata.swiss/de/dataset or https://transport.opendata.ch/ . In most cases these pages are more suitable for your applications.
+> We recommend the following pages for private persons, where you can get transportation data:  https://data.opentransportdata.swiss/de/dataset or https://transport.opendata.ch/ . In most cases these pages are more suitable for your applications.
 > 
 
 
@@ -53,7 +53,7 @@ Note: integrate the TEST and/or INT-environment first and afterwards the PROD en
 For detailed information on getting around on the developer-site, please read the available information in section **Finding your way around on the developer site***  carefully. 
 
 ### Step 3: Submitting the questionnaire to SBB
-When the questionnaire is finalized, please *convert it into a PDF* and send it to journey-service@sbb.ch with the title *“New Consumer Registration request- <YOUR APPLICATION NAME>”*.
+When the questionnaire is finalized, please *convert it into a PDF* and send it to journey-service@sbb.ch with the title *New Consumer Registration request- <YOUR APPLICATION NAME>*.
 
 ### Step 4: Wait for the final approval by SBB
 It might take some time to validate and decide access for Journey-Service on our side (max. 2 weeks). We will communicate asap and inform you about further steps that need to be taken to go live with Journey-Service. 

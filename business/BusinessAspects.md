@@ -6,7 +6,7 @@ Journey-Service (https://developer.sbb.ch/apis/journey-service/documentation) is
 Some important links:
 * [BAV](https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn.html)
 * [v580 FIScommun](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1)
-* [Open-Data Plattform Mobility Switzerland](https://opentransportdata.swiss/de/)
+* [Open-Data Plattform Mobility Switzerland](https://data.opentransportdata.swiss)
 * [TransportMode](TransportMode.md)
 
 ## Design goals
@@ -73,8 +73,8 @@ Getting the right realtime conclusions can be tricky, therefore J-S provides con
 About any ***Rt** properties:
 * Ideally these fields are always null, means transport organisations are operating as planned
 * If any vehicle (`ServiceProduct`) is not operating according to its scheduled plan, *Rt fields may contain correcting values here and there (availability usually a few hoours in the future and may disappear quickly in the past, because irrelevant for the current instant in time)
-* *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express “real-time” behaviour. (However do update your query as less as possible, for performance reasons.)
-* If the *Rt fields are empty, just use the corresponding (same name) fields without “Rt” suffix for properly planned values
+* *Rt fields may update their values for the same trip or journey if repeatedly requested, since they express "real-time" behaviour. (However do update your query as less as possible, for performance reasons.)
+* If the *Rt fields are empty, just use the corresponding (same name) fields without "Rt" suffix for properly planned values
 
 Journey-Service does not know the exact position of a vehicle yet and does not even guarantee that a vehicle has passed a station in reality. (However we have stories to transmit such additional info in the near future.)
 
