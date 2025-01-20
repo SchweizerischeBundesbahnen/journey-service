@@ -3,7 +3,7 @@
 ## About Standardisation
 Important aspects:
 * For Switzerland we consider **[v580 de:06 Harmonisierung Verkehrsmittel](https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht/V580/Produkte-der-V580-FIScommun-1) resp.  [FIScommun 06 Harmonisierung Verkehrsmittel (download)](https://www.allianceswisspass.ch/de/asp/Downloadsindex.php?section=downloads&download=14462)** as master of TransportMode's and Transport-Submodes
-* Opentransportdata.swiss [**Transportmodes** (de:Verkehrsmittel) and **Transport Subomodes**](https://opentransportdata.swiss/de/dataset/vm-liste) implements v580 TransportModes 
+* Opentransportdata.swiss [**Transportmodes** (de:Verkehrsmittel) and **Transport Subomodes**](https://data.opentransportdata.swiss/de/dataset/vm-liste) implements v580 TransportModes 
     * NeTEx related terms are also mapped within those files 
 * [Transmodel](https://www.transmodel-cen.eu/) names `TransportMode` as **`VehicleMode`**
     * therefore **J-S v3 uses `VehicleMode`** as well (for e.g. in `PTRideLeg::mode`)
