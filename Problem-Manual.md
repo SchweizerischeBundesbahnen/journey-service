@@ -9,16 +9,16 @@
 Header values:
 * `Content-Type` is set to `application/problem+json`.
 * `Content-Language` is in most cases set to the one requested in `Accept-Language`.
-* `Request-ID` is set to the one requested. It can help you diagnose problems by correlating log entries for a given web request across many systems and log files.
+* `Request-ID` is set to the one requested. It can help you diagnose problems by correlating traceability and/or log entries for a given web request across many systems and log files.
 
 Problem properties:
-The standard and extended fields are described in the `Problem` object of the [documentation](https://developer.sbb.ch/apis/journey-service/documentation) / API specification. It helps consumers taking understand the problem and possibly correct it or output a user-friendly error message to the end-user.
+The standard and extended fields are described in the `Problem` object of the [documentation](https://developer.sbb.ch/apis/journey-service/documentation) / API specification. It helps consumers to understand the problem and possibly correct it or output a user-friendly error message to the end-user.
 
 HTTP status code:
 Returned according to standards. The [Restful API guidelines of Zalando about HTTP Status](https://opensource.zalando.com/restful-api-guidelines/#150)) were considered.
 
 Example:
-For example, an HTTP response carrying JSON problem details in German looks like
+For example, an HTTP response carrying JSON problem details in german looks like
 
     HTTP/1.1 400 Bad Request
     content-type: application/problem+json
@@ -73,7 +73,7 @@ Possible reasons:
 * J-S considers a used Backend to have some kind of developer fault. 
 
 ### 503 Service Unavailable
-The service has currently availability problem for some requests. Often a retry after a short time might solve the problem. If becoming a lot of this status, then the system is overloaded.
+The service has currently an availability problem for some requests. Often a retry after a short time might solve the problem. If becoming a lot of this status, then the system is overloaded.
 
 Since J-S has a complicated integration-architecture, various Network/IP, Broken-Pipe or Backend-System faults may occur by chance.
 
