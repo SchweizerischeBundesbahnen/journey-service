@@ -12,13 +12,18 @@ Header values:
 * `Request-ID` is set to the one requested. It can help you diagnose problems by correlating traceability and/or log entries for a given web request across many systems and log files.
 
 Problem properties:
-The standard and extended fields are described in the `Problem` object of the [documentation](https://developer.sbb.ch/apis/journey-service/documentation) / API specification. It helps consumers to understand the problem and possibly correct it or output a user-friendly error message to the end-user.
+* The standard and extended fields are described in the `Problem` object of the [documentation](https://developer.sbb.ch/apis/journey-service/documentation) / API specification. It helps consumers to understand the problem and possibly correct it or output a user-friendly error message to the end-user.
+* For the **developers**, the `code`, `title` (deduced from _code_) and `detail` help understand the problem.
+* For **machine** interpretation, the `type` or `code` can be use to take correct countermeasure. The former is much more practical to use for machine. It is hierarchically built, so that a "start with" can be used. The current used codes are listed in [ProblemCode](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/src/main/java/ch/sbb/ki/journeyservice/b2c/error/ProblemCode.java). In the _type_, expect that the e-mail and date can change. 
+* For **end users**, the `displayTitle`, `displayDetail`, `displayResolution` delivers ready messages in some cases. The texts are coordinates with SBB front-ends. For other texts, typically other languages, the `translationKey` is provided. Our current translations are in [German](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/src/main/resources/messages_de.properties) (main language), [French](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/src/main/resources/messages_fr.properties), [Italian](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/src/main/resources/messages_it.properties), [English](https://code.sbb.ch/projects/KI_FAHRPLAN/repos/journey-service/browse/journey-service-b2c/src/main/resources/messages_en.properties) (Italian and German not yet completed).
 
 HTTP status code:
+
 Returned according to standards. The [Restful API guidelines of Zalando about HTTP Status](https://opensource.zalando.com/restful-api-guidelines/#150)) were considered.
 
 Example:
-For example, an HTTP response carrying JSON problem details in german looks like
+
+For example, an HTTP response carrying JSON problem details in German looks like
 
     HTTP/1.1 400 Bad Request
     content-type: application/problem+json
