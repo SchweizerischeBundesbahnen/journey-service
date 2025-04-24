@@ -1,6 +1,6 @@
 
 # Journey-Service - Developer Manual
-[Support Mailbox](mailto:journey-service@sbb.ch)
+[Support Mailbox](mailto:journey@sbb.ch)
 
 ## Abstract
 The Journey-Service is a RESTful **"Journey-Planner"** facade abstracting **public transportation routing and planning** for a set of **SBB Switzrland** relevant underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis, NOVA etc.

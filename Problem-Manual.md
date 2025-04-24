@@ -2,7 +2,7 @@
 
 **Error-handling** in Journey-Service (J-S) is done by returning a **[`Problem`](https://developer.sbb.ch/apis/journey-service/documentation) object in a failure case with further description**, according to [RFC 7807](https://tools.ietf.org/html/rfc7807), with some extensions.
 
-**Contact <journey-service@sbb.ch>** for further support about a specific `Problem` if you don't find the answer below.
+**Contact <journey@sbb.ch>** for further support about a specific `Problem` if you don't find the answer below.
 
 ## Structure
 
@@ -33,7 +33,7 @@ For example, an HTTP response carrying JSON problem details in German looks like
     {
      "status": 400
      "code": "BAD_REQUEST_PARAM_TRIP_BAD_ORIGIN_DESTINATION_VIA_SAME",
-     "type": "tag:journey-service@sbb.ch,2024:Problem:type:BAD_REQUEST_PARAM_TRIP_BAD_ORIGIN_DESTINATION_VIA_SAME",
+     "type": "tag:journey@sbb.ch,2025:Problem:type:BAD_REQUEST_PARAM_TRIP_BAD_ORIGIN_DESTINATION_VIA_SAME",
      "title": "invalid value in a parameter",
      "detail": "Same location used in origin / destination / vias.",
      "instance": "/v3/trips/by-origin-destination",

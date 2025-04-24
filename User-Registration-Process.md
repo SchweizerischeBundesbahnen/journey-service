@@ -11,7 +11,7 @@ This document should help you through the registration process and provide all i
 
 Please study this information carefully!
 
-Contact/support: **journey-service@sbb.ch**
+Contact/support: **journey@sbb.ch**
 
 
 # Registration process
@@ -53,7 +53,7 @@ Note: integrate the TEST and/or INT-environment first and afterwards the PROD en
 For detailed information on getting around on the developer-site, please read the available information in section **Finding your way around on the developer site***  carefully. 
 
 ### Step 3: Submitting the questionnaire to SBB
-When the questionnaire is finalized, please *convert it into a PDF* and send it to journey-service@sbb.ch with the title *New Consumer Registration request- <YOUR APPLICATION NAME>*.
+When the questionnaire is finalized, please *convert it into a PDF* and send it to [journey@sbb.ch](mailto:journey@sbb.ch) with the title *New Consumer Registration request- <YOUR APPLICATION NAME>*.
 
 ### Step 4: Wait for the final approval by SBB
 It might take some time to validate and decide access for Journey-Service on our side (max. 2 weeks). We will communicate asap and inform you about further steps that need to be taken to go live with Journey-Service. 
