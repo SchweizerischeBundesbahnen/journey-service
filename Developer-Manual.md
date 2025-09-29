@@ -3,7 +3,7 @@
 [Support Mailbox](mailto:journey@sbb.ch)
 
 ## Abstract
-The Journey-Service is a RESTful **"Journey-Planner"** facade abstracting **public transportation routing and planning** for a set of **SBB Switzrland** relevant underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis, NOVA etc.
+The Journey-Service is a RESTful **"Journey-Planner"** facade abstracting **public transportation routing and planning** for a set of **SBB Switzerland** relevant underlying systems, such as Hafas, HIM, CUS, INFO+, DiDok, CAPRE, FOS, PLABE, OccupancyPrognosis, NOVA etc.
 
 The main **Use Cases** are:
 * Finding **`Place`** (aka OJP `Location`), such as `StopPlace` resp. (stations for public transport trains, busses, tramways, ...), `AddressPlace` and `PoiPlace` (Points of Interest (POI)).
