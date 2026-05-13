@@ -20,7 +20,7 @@ The registration consists of *two steps*:
 * **register at the API-Management (2 separate credentials: https://developer.sbb.ch/home PRODuction, https://developer-int.sbb.ch/home INTegration)**
 
 ## Step 1: Completion of the questionaire
-==**You can find the Questionnaire [here](https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Operation%20Management/Consumer-Mgmt/Questionnaire-Consumer-Registration.docx?d=w428d517cb852420085a4744662ff7b10&csf=1&e=Plsp0W).**== 
+==**You can find the Questionnaire [here]([https://sbb.sharepoint.com/:w:/r/teams/297/Oeffentlich/S3_Programm/Anwendungen/Oeffentlich/KIP/Journey-Service/Operation%20Management/Consumer-Mgmt/Questionnaire-Consumer-Registration.docx?d=w428d517cb852420085a4744662ff7b10&csf=1&e=Plsp0W](https://sbb.sharepoint.com/:w:/r/sites/journey/Freigegebene%20Dokumente/General/1.%20Administration/3.%20Consumermanagement/Questionnaire/Questionnaire-Consumer-Registration.docx?d=wf81bf1a29b984ad8ab378a238f160ced&csf=1&web=1&e=znwqIP)).**== 
  
 The questionnaire contains three sections:
 1. company/personal information (generally we do not grant access to private persons (such as trial users, students,..) or non-SBB related companies,..)
